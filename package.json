@@ -14,7 +14,9 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "@ai-sdk/amazon-bedrock": "^2.1.6",
     "@ai-sdk/anthropic": "^1.1.19",
+    "@ai-sdk/cohere": "^1.1.18",
     "@ai-sdk/openai": "^1.2.7",
     "@ai-sdk/openai-compatible": "^0.1.17",
     "@ai-sdk/xai": "^1.1.17",
@@ -29,6 +31,8 @@
     "nanoid": "^5.1.5",
     "ollama-ai-provider": "^1.2.0",
     "qwen-ai-provider": "^0.1.0",
+    "workers-ai-provider": "^0.2.0",
+    "zhipu-ai-provider": "^0.1.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
