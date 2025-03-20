@@ -14,7 +14,7 @@ export const mastra = new Mastra({
   serverMiddleware: [
     {
       handler: async (ctx, next) => {
-        console.log(ctx);
+        console.log(ctx.body());
         return new Response('你好', { status: 200 });
       },
       path: '/v1/chat/completions',
