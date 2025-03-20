@@ -11,4 +11,13 @@ export const mastra = new Mastra({
     name: 'Mastra',
     level: 'info',
   }),
+  serverMiddleware: [
+    {
+      handler: async (ctx, next) => {
+        console.log(ctx);
+        return new Response('你好', { status: 200 });
+      },
+      path: '/v1/chat/completions',
+    },
+  ],
 });
