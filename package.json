@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
-    "start": "cd .mastra/output && node ./index.mjs",
+    "start": "cd ./.mastra/output && node ./index.mjs",
+    "clean": "rimraf ./.mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
+    "rimraf": "^6.0.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   }
