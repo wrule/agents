@@ -6,7 +6,7 @@ import { outputSchemaBase } from '../utils/outputSchema';
 import fakeVoid from '../utils/fakeVoid';
 
 export const getTimeNowTool = createTool({
-  id: 'get-time-now',
+  id: 'getTimeNowTool',
   description: `
 当需要直接或间接获取当前时间，调用此工具
   `.trim(),
@@ -21,6 +21,6 @@ export const getTimeNowTool = createTool({
         success: true,
         time: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
       };
-    }, context, 'get-time-now');
+    }, context, 'getTimeNowTool');
   },
 });
