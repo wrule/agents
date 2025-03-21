@@ -1,9 +1,9 @@
-import { openai } from '@ai-sdk/openai';
 import { Agent } from '@mastra/core/agent';
 import { Step, Workflow } from '@mastra/core/workflows';
 import { z } from 'zod';
+import main from '../../models/main';
 
-const llm = openai('gpt-4o');
+const llm = main;
 
 const agent = new Agent({
   name: 'Weather Agent',
