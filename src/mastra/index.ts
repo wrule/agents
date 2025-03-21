@@ -3,6 +3,7 @@ import { Mastra } from '@mastra/core/mastra';
 import { createLogger } from '@mastra/core/logger';
 import { weatherWorkflow } from './workflows';
 import { weatherAgent } from './agents';
+import OpenAICompatibleMiddleware from './middleware/OpenAICompatibleMiddleware';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -13,10 +14,7 @@ export const mastra = new Mastra({
   }),
   serverMiddleware: [
     {
-      handler: async (ctx, next) => {
-        console.log(ctx.body());
-        return new Response('你好', { status: 200 });
-      },
+      handler: OpenAICompatibleMiddleware,
       path: '/v1/chat/completions',
     },
   ],
