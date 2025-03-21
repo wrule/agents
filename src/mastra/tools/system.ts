@@ -16,12 +16,12 @@ export const getTimeNowTool = createTool({
     prompt: z.string().optional().describe(''),
     time: z.string().describe('当前时间').optional(),
   }),
-  execute: async (request) => {
-    return await toolExecute(async ({ context }) => {
+  execute: async ({ context }) => {
+    return await toolExecute(async (context) => {
       return {
         success: true,
         time: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
       };
-    }, request, 'get-time-now');
+    }, context, 'get-time-now');
   },
 });
