@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "mastra dev --port 8091",
     "build": "npm run clean && mastra build",
-    "start": "cd ./.mastra/output && node ./index.mjs",
+    "start": "cd ./.mastra/output && node -r dotenv/config ./index.mjs",
     "clean": "rimraf ./.mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
