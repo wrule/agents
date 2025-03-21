@@ -30,7 +30,7 @@
     "@openrouter/ai-sdk-provider": "^0.4.3",
     "ai": "^4.1.66",
     "axios": "^1.8.4",
-    "dayjs": "^1.11.13",
+    "date-fns": "^4.1.0",
     "langchain": "^0.3.19",
     "mastra": "^0.4.2",
     "nanoid": "^5.1.5",

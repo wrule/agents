@@ -3,7 +3,7 @@ import { z } from 'zod';
 import toolExecute from '../utils/toolExecute';
 import { outputSchemaBase } from '../utils/outputSchema';
 import fakeVoid from '../utils/fakeVoid';
-import dayjs from '../utils/dayjs';
+import { format } from 'date-fns';
 
 export const getTimeNowTool = createTool({
   id: 'getTimeNowTool',
@@ -19,7 +19,7 @@ export const getTimeNowTool = createTool({
     return await toolExecute(async (context) => {
       return {
         success: true,
-        time: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
+        time: format(new Date(), 'yyyy-MM-dd HH:mm:ss.SSS EEEE'),
       };
     }, context, 'getTimeNowTool');
   },
