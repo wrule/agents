@@ -1,6 +1,7 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import dayjs from 'dayjs';
+import toolExecute from '../utils/toolExecute';
 
 export const timeNowTool = createTool({
   id: 'get-time-now',
@@ -11,11 +12,15 @@ export const timeNowTool = createTool({
     a: z.number().min(0).max(1).describe('随机数，0或1'),
   }),
   outputSchema: z.object({
+    success: z.boolean().describe(''),
+    prompt: z.string().optional().describe(''),
     time: z.string().describe('当前时间'),
   }),
-  execute: async ({ context }) => {
+  execute: toolExecute(({ context }) => {
     return {
+      success: true,
+      prompt: '',
       time: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
     };
-  },
+  }, 'get-time-now'),
 });
