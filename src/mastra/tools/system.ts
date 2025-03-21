@@ -13,7 +13,7 @@ export const getTimeNowTool = createTool({
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
-    prompt: z.string().optional().describe(''),
+    prompt: z.string().optional().describe('向用户解释调用结果以及下一步操作的prompt'),
     time: z.string().describe('当前时间').optional(),
   }),
   execute: async ({ context }) => {
