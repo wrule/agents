@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "mastra dev --port 8091",
-    "build": "mastra build",
+    "build": "npm run clean && mastra build",
     "start": "cd ./.mastra/output && node ./index.mjs",
     "clean": "rimraf ./.mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
