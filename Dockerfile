@@ -1,5 +1,9 @@
 FROM ubuntu:24.04
 
+WORKDIR /root/agents
+
+COPY --chown=root:root [".", "."]
+
 RUN apt update && apt install -y \
   curl \
   wget \
@@ -26,8 +30,6 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | b
   && nvm install 20 \
   && nvm alias default 20 \
   && nvm use default \
-  && npm install -g pm2 yarn serve
-
-WORKDIR /root/agents
-
-COPY --chown=root:root [".", "."]
+  && npm install -g pm2 yarn serve \
+  && npm install \
+  && npm run build
