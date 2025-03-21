@@ -1,14 +1,14 @@
 
 export
-interface ToolResult {
+interface ToolExecuteResult {
   success: boolean;
   prompt?: string;
   [key: string]: any;
 }
 
 export default
-async function toolExecute<T>(name: string, t: T, callback: (t: T) => Promise<ToolResult>): Promise<ToolResult> {
-  let result: ToolResult;
+async function toolExecute<T>(name: string, t: T, callback: (t: T) => Promise<ToolExecuteResult>): Promise<ToolExecuteResult> {
+  let result: ToolExecuteResult;
   console.log(name, '->', t);
   try {
     result = await callback(t);
