@@ -6,6 +6,7 @@
     "dev": "mastra dev --port 9091",
     "build": "npm run clean && mastra build && cp ./.env ./.mastra/output",
     "start": "cd ./.mastra/output && node -r dotenv/config ./index.mjs",
+    "serve": "pm2 start npm --name 'agents' -- run start",
     "clean": "rimraf ./.mastra",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
