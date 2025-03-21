@@ -1,9 +1,9 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
-import dayjs from 'dayjs';
 import toolExecute from '../utils/toolExecute';
 import { outputSchemaBase } from '../utils/outputSchema';
 import fakeVoid from '../utils/fakeVoid';
+import dayjs from '../utils/dayjs';
 
 export const getTimeNowTool = createTool({
   id: 'getTimeNowTool',
