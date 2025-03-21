@@ -1,6 +1,7 @@
 import { Agent } from '@mastra/core/agent';
 import { weatherTool } from '../tools';
 import main from '../../models/main';
+import { timeNowTool } from '../tools/system';
 
 export const weatherAgent = new Agent({
   name: 'Weather Agent',
@@ -17,5 +18,5 @@ export const weatherAgent = new Agent({
       Use the weatherTool to fetch current weather data.
 `,
   model: main,
-  tools: { weatherTool },
+  tools: { weatherTool, timeNowTool },
 });
