@@ -1,6 +1,6 @@
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
-import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 import toolExecute from '../utils/toolExecute';
 import { outputSchemaBase } from '../utils/outputSchema';
 import fakeVoid from '../utils/fakeVoid';
@@ -19,7 +19,7 @@ export const getTimeNowTool = createTool({
     return await toolExecute(async (context) => {
       return {
         success: true,
-        time: dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
+        time: new Dayjs().format('YYYY-MM-DD HH:mm:ss.SSS dddd'),
       };
     }, context, 'getTimeNowTool');
   },
