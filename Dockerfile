@@ -27,3 +27,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | b
   && nvm alias default 20 \
   && nvm use default \
   && npm install -g pm2 yarn serve
+
+WORKDIR /root/agents
+
+COPY --chown=root:root [".", "."]
