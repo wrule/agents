@@ -9,8 +9,7 @@ interface ToolExecuteResult {
 export
 type ToolExecuteFunction<T> = (t: T) => Promise<ToolExecuteResult>;
 
-export default
-function toolExecute<T>(callback: ToolExecuteFunction<T>, name = '工具调用'): ToolExecuteFunction<T> {
+const toolExecute = <T>(callback: ToolExecuteFunction<T>, name = '工具调用'): ToolExecuteFunction<T> => {
   return async (t: T) => {
     let result: ToolExecuteResult;
     console.log(name, '->', t);
@@ -26,3 +25,5 @@ function toolExecute<T>(callback: ToolExecuteFunction<T>, name = '工具调用')
     return result;
   };
 }
+
+export default toolExecute;
