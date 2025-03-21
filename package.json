@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "mastra dev --port 8091",
+    "dev": "mastra dev --port 9091",
     "build": "npm run clean && mastra build && cp ./.env ./.mastra/output",
     "start": "cd ./.mastra/output && node -r dotenv/config ./index.mjs",
     "clean": "rimraf ./.mastra",
