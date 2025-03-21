@@ -7,45 +7,15 @@ RUN apt update && apt install -y \
   screen \
   zsh \
   git \
-  nano \
   net-tools \
   telnet \
   iputils-ping \
-  # 编译工具
-  make \
-  gcc \
-  g++ \
-  # 系统监控和诊断工具
-  htop \
-  iotop \
-  atop \
-  ncdu \
-  lsof \
-  # 文件操作工具
   unzip \
   zip \
   tar \
-  rsync \
-  # 网络工具
-  dnsutils \
-  traceroute \
-  nmap \
-  tcpdump \
-  iptables \
-  # 文本处理工具
-  jq \
-  yq \
   grep \
   sed \
-  awk \
-  # 开发工具
-  build-essential \
   python3 \
   python3-pip \
-  # SSH相关
-  openssh-client \
-  # 其他实用工具
-  sudo \
-  tmux \
-  && apt-get clean \
+  && apt clean \
   && rm -rf /var/lib/apt/lists/*
