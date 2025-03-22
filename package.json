@@ -4,10 +4,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "mastra dev --port 9091",
-    "build": "npm run clean && mastra build && cp ./.env ./.mastra/output",
+    "build": "npm run clean && mastra build",
     "start": "cd ./.mastra/output && node -r dotenv/config ./index.mjs",
     "serve": "pm2 start npm --name 'agents' -- run start",
     "clean": "rimraf ./.mastra",
+    "cp_env": "cp ./.env ./.mastra/output",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
