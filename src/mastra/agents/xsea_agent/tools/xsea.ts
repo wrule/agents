@@ -21,7 +21,7 @@ export const XSea对象查询工具 = createTool({
 要查询的对象的类型序号
 ${ObjectTypes.map((type, index) => `${index + 1}. ${type}`).join('\n')}
       `.trim()),
-    query: z.string().describe('根据上下文总结的精准的查询短语'),
+    query: z.string().describe('根据上下文总结的精准的查询短语，需要包含对象的上级信息'),
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
