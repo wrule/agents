@@ -26,7 +26,7 @@ export const 创建目标工具 = createTool({
       incTime: z.number().min(0).describe('递增用时（秒）'),
       duration: z.number().min(0).describe('处在当前并发水平下的维持时长（秒）'),
     })).min(1).describe(`
-压测流量曲线，分为多个并发段，根据用户描述自动生成
+压测流量趋势，为多个并发段构成的曲线，根据用户描述自动生成
 - 确保根据用户描述的场景生成准确的曲线
 - 避免询问用户递增并发值
 - 避免询问用户递增用时
