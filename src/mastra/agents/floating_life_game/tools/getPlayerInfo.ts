@@ -91,3 +91,26 @@ export const getItemsList = createTool({
     }, context, 'getItemsList');
   },
 });
+
+export const buy = createTool({
+  id: 'buy',
+  description: `
+在以下情况调用此工具
+- 需要购买商品时
+  `.trim(),
+  inputSchema: z.object({
+    name: z.string().describe('购买商品名称'),
+    amount: z.number().min(1).describe('购买数量'),
+  }),
+  outputSchema: z.object({
+    ...outputSchemaBase,
+  }),
+  execute: async ({ context }) => {
+    return await toolExecute(async () => {
+      return {
+        success: true,
+      };
+    }, context, 'getItemsList');
+  },
+});
+
