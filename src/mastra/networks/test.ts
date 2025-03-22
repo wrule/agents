@@ -1,4 +1,5 @@
-import { Agent, AgentNetwork } from '@mastra/core';
+import { Agent } from '@mastra/core';
+import { AgentNetwork } from '@mastra/core/network';
 import main from '../../models/main';
 
 // Create specialized agents
@@ -24,6 +25,4 @@ const researchNetwork = new AgentNetwork({
   agents: [webSearchAgent, dataAnalysisAgent],
 });
 
-// Use the network
-const result = await researchNetwork.generate('Research the impact of climate change on agriculture');
-console.log(result.text);
+export default researchNetwork;
