@@ -27,6 +27,7 @@
     "@langchain/core": "^0.3.42",
     "@langchain/langgraph": "^0.2.57",
     "@mastra/core": "^0.6.3",
+    "@mastra/mcp": "^0.3.4",
     "@mastra/memory": "^0.2.4",
     "@mastra/rag": "^0.1.12",
     "@openrouter/ai-sdk-provider": "^0.4.3",
