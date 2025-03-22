@@ -35,3 +35,26 @@ export const getPlayerInfo = createTool({
     }, context, 'getPlayerInfo');
   },
 });
+
+export const sleep = createTool({
+  id: 'sleep',
+  description: `
+在以下情况调用此工具
+- 当游戏之中的一天结束时
+- 玩家主动想睡觉时
+- 玩家被击晕时
+  `.trim(),
+  inputSchema: fakeVoid,
+  outputSchema: z.object({
+    ...outputSchemaBase,
+  }),
+  execute: async ({ context }) => {
+    return await toolExecute(async () => {
+      playInfo.debt = Math.floor(playInfo.debt * 1.01);
+      return {
+        success: true,
+        prompt: '结合上下文简短告诉玩家新的一天过去了',
+      };
+    }, context, 'sleep');
+  },
+});

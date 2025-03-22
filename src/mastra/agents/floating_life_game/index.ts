@@ -1,6 +1,6 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
-import { getPlayerInfo } from './tools/getPlayerInfo';
+import { getPlayerInfo, sleep } from './tools/getPlayerInfo';
 
 export const floating_life_game = new Agent({
   name: '浮生记',
@@ -11,5 +11,6 @@ export const floating_life_game = new Agent({
   model: main,
   tools: {
     getPlayerInfo,
+    sleep,
   },
 });
