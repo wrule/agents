@@ -3,6 +3,9 @@ import main from '../../../models/main';
 
 export const floating_life_game = new Agent({
   name: '浮生记',
-  instructions: ``.trim(),
+  instructions: `
+# 浮生记是一个模拟经营类文字游戏
+# 你是浮生记游戏的服务器，需要模拟游戏的文字用户界面与用户互动
+  `.trim(),
   model: main,
 });
