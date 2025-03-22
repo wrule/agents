@@ -7,10 +7,11 @@ import { touch_fish_agent } from './agents/touch_fish';
 import { jmeter_expert } from './agents/jmeter_expert';
 import { gatling_expert } from './agents/gatling_expert';
 import { shell_expert } from './agents/shell_expert';
+import { user_agent } from './agents/user_agent';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
-  agents: { xsea_agent, jmeter_expert, gatling_expert, shell_expert, touch_fish_agent },
+  agents: { xsea_agent, jmeter_expert, gatling_expert, shell_expert, touch_fish_agent, user_agent },
   logger: createLogger({
     name: 'Mastra',
     level: 'info',
