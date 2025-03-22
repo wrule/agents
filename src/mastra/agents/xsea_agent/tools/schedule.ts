@@ -1,0 +1,33 @@
+import { z } from 'zod';
+import { createTool } from '@mastra/core/tools';
+import { exactSearch } from '../utils';
+import http from '../api/http';
+
+export const 获取定时任务详情工具 = createTool({
+  id: 'get-schedule-detail',
+  description: `
+当需要 查询|解释|分析 某个定时任务的时候调用此工具
+  `.trim(),
+  inputSchema: z.object({
+    query: z.string().describe('定时任务的查询短语，自动生成'),
+  }),
+  outputSchema: z.object({
+    success: z.boolean().describe('调用是否成功'),
+    prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
+    reportDetail: z.any().optional().describe('定时任务的详细信息'),
+  }),
+  execute: async ({ context }) => {
+    console.log('获取定时任务详情工具 ->', context);
+    const report = await exactSearch(context.query, 'SCHEDULE');
+    if (report.confusion) {
+      return {
+        success: false,
+        prompt: report.confusion,
+      };
+    }
+    return {
+      success: true,
+      prompt: '向用户解释此功能暂未开发',
+    };
+  },
+});

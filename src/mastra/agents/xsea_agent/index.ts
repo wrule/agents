@@ -1,0 +1,86 @@
+import { Agent } from '@mastra/core/agent';
+import { Memory } from '@mastra/memory';
+import main from '../../../models/main';
+import { 创建产品工具, 获取产品详情工具 } from './tools/product';
+import { 创建脚本工具, 快速压测工具, 获取脚本详情工具 } from './tools/script';
+import { 创建计划工具, 获取计划详情工具 } from './tools/plan';
+import { 获取当前时间工具 } from './tools/time';
+import { XSea对象查询工具 } from './tools/xsea';
+import { XSea知识库查询工具 } from './tools/knowledge';
+import { 创建目标工具, 压测目标工具, 获取目标详情工具 } from './tools/goal';
+import { 获取压测记录详情工具 } from './tools/record';
+import { 获取测试报告详情工具 } from './tools/report';
+import { 获取定时任务详情工具 } from './tools/schedule';
+
+export const xsea_agent = new Agent({
+  name: 'XSea智能体',
+  instructions: `
+## XSea是一个性能测试平台
+## 你是XSea性能测试平台的AI助手，帮助用户访问XSea，并且解答问题
+
+## XSea性能测试平台中的业务对象层级如下
+- 产品
+  - 脚本
+  - 计划
+    - 目标
+    - 压测记录
+    - 测试报告
+    - 定时任务
+
+## XSea工具调用手册
+
+- 需要获取系统日期时间 -> 获取当前时间工具
+
+- 用户请求解释XSea使用方法或流程 -> XSea知识库查询工具
+- 用户请求解释XSea之中的相关概念 -> XSea知识库查询工具
+- 用户请求解释性能测试的相关概念 -> XSea知识库查询工具
+
+- 用户想创建产品 -> 创建产品工具
+  - 避免不询问用户参数直接调用
+
+- 用户想创建脚本 -> 创建脚本工具
+  - 避免不询问用户参数直接调用
+
+- 用户想创建计划 -> 创建计划工具
+  - 避免不询问用户参数直接调用
+
+- 用户想创建目标 -> 创建目标工具
+  - 避免不询问用户参数直接调用
+
+- 用户想压测某些脚本，或者快速压测 -> 快速压测工具
+
+- 用户想压测目标 -> 压测目标工具
+
+- 当用户希望解释某个脚本时 -> 获取脚本详情工具
+  - 确保精准总结脚本的作用
+  - 避免长篇大论
+  - 避免描述脚本的细节
+  - 如果脚本代码有明显问题，请指出
+  `.trim(),
+  model: main,
+  memory: new Memory({
+    options: {
+      lastMessages: 50,
+    },
+  }),
+  tools: {
+    获取当前时间工具,
+    XSea对象查询工具,
+    XSea知识库查询工具,
+    创建产品工具,
+    创建脚本工具,
+    快速压测工具,
+
+    创建计划工具,
+    创建目标工具,
+    压测目标工具,
+
+    获取产品详情工具,
+    获取脚本详情工具,
+    获取计划详情工具,
+    获取目标详情工具,
+    获取压测记录详情工具,
+    获取测试报告详情工具,
+    获取定时任务详情工具,
+  },
+});
