@@ -1,6 +1,10 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
 
+const createAgent = (...args: ConstructorParameters<typeof Agent>) => {
+  return new Agent(...args);
+}
+
 export const user_agent = new Agent({
   name: '用户智能体',
   instructions: `
