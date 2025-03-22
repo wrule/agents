@@ -58,3 +58,36 @@ export const sleep = createTool({
     }, context, 'sleep');
   },
 });
+
+export const getItemsList = createTool({
+  id: 'getItemsList',
+  description: `
+在以下情况调用此工具
+- 需要查看可购买的商品列表时
+  `.trim(),
+  inputSchema: fakeVoid,
+  outputSchema: z.object({
+    ...outputSchemaBase,
+    itemsList: z.array(z.object({
+      name: z.string().describe('商品名称'),
+      price: z.number().describe('商品价格'),
+    })).describe('商品价格列表').optional(),
+  }),
+  execute: async ({ context }) => {
+    return await toolExecute(async () => {
+      return {
+        success: true,
+        itemsList: [
+          {
+            name: '苹果',
+            price: 12.6,
+          },
+          {
+            name: '橘子',
+            price: 5.33,
+          },
+        ],
+      };
+    }, context, 'getItemsList');
+  },
+});
