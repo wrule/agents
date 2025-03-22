@@ -24,12 +24,12 @@ WORKDIR /root/agents
 
 COPY --chown=root:root [".", "."]
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash \
-  && export NVM_DIR="$HOME/.nvm" \
-  && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
-  && nvm install 20 \
-  && nvm alias default 20 \
-  && nvm use default \
-  && npm install -g pm2 yarn serve \
-  && npm install \
-  && npm run build
+# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash \
+#   && export NVM_DIR="$HOME/.nvm" \
+#   && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+#   && nvm install 20 \
+#   && nvm alias default 20 \
+#   && nvm use default \
+#   && npm install -g pm2 yarn serve \
+#   && npm install \
+#   && npm run build
