@@ -88,15 +88,21 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
     const agent = mastra.getAgent(agentName);
     const stream = body.stream !== false;
     const messages = body.messages ?? [];
+    const json = !!body.json;
     delete body.agentName;
     delete body.stream;
     delete body.messages;
+    delete body.json;
     if (stream) {
       const mastraStream = await agent.stream(messages, body);
       return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
     } else {
-      const result = await agent.generate(messages, body);
-      return ctx.json(result, 200);
+      if (json) {
+
+      } else {
+        const result = await agent.generate(messages, body);
+        return ctx.json(result, 200);
+      }
     }
   } catch (error: any) {
     const code = 500;
