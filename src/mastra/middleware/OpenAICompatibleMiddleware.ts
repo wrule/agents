@@ -103,7 +103,13 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
         const { instructions, parser } = jsonOutputTool(zodSchema);
         const result = await agent.generate(messages, {
           ...body,
-          instructions,
+          instructions: `
+## Make sure to answer only JSON text
+## Avoid answering non-JSON content
+## Avoid explanations
+## Make sure to follow the following rules
+${instructions}
+          `.trim(),
         });
         return ctx.json(await parser(result.text), 200);
       } else {
