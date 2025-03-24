@@ -132,20 +132,32 @@ export const 获取目标详情工具 = createTool({
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
-    reportDetail: z.any().optional().describe('目标的详细信息'),
+    goalDetail: z.any().optional().describe('目标的详细信息'),
+    strategyDetail: z.any().optional().describe('目标绑定的脚本的发压策略信息'),
   }),
   execute: async ({ context }) => {
     console.log('获取目标详情工具 ->', context);
-    const report = await exactSearch(context.query, 'GOAL');
-    if (report.confusion) {
+    const goal = await exactSearch(context.query, 'GOAL');
+    if (goal.confusion) {
       return {
         success: false,
-        prompt: report.confusion,
+        prompt: goal.confusion,
       };
     }
+    const [{ data: goalDetailData }, { data: strategyDetailData }] = await Promise.all([
+      http.post(`xsea/scene/querySceneDetail`, {
+        envId,
+        sceneId: goal.first.sceneId,
+        workspaceId: goal.first.workspaceId,
+      }),
+      http.post(`xsea/scene/script/queryStrategy`, {
+        id: goal.first.goalId,
+      }),
+    ]);
     return {
       success: true,
-      prompt: '向用户解释此功能暂未开发',
+      goalDetail: goalDetailData.object,
+      strategyDetail: strategyDetailData.object,
     };
   },
 });
