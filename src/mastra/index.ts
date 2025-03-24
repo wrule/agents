@@ -20,7 +20,7 @@ export const mastra = new Mastra({
   serverMiddleware: [
     {
       handler: XSeaMiddleware,
-      path: '/v1/chat/completions/xsea/*',
+      path: '/v1/chat/completions/xsea/api/*',
     },
     {
       handler: OpenAICompatibleMiddleware,
