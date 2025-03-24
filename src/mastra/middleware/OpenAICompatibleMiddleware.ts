@@ -99,7 +99,7 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
       return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
     } else {
       if (json) {
-        const zodSchema = dezerialize(JSON.parse(body.output));
+        const zodSchema = dezerialize(body.output);
         delete body.output;
         const { instructions, parser } = jsonOutputTool(zodSchema);
         const result = await agent.generate(messages, {
