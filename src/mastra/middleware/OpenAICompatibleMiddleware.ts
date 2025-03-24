@@ -1,6 +1,7 @@
 import { Context, Next } from 'hono';
 import { StreamTextResult } from 'ai';
 import { mastra } from '../';
+import { dezerialize } from 'zodex';
 import jsonOutputTool from '../utils/jsonOutputTool';
 
 export
@@ -98,7 +99,7 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
       return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
     } else {
       if (json) {
-        const zodSchema = body.output;
+        const zodSchema = dezerialize(JSON.parse(body.output));
         delete body.output;
         const { instructions, parser } = jsonOutputTool(zodSchema);
         const result = await agent.generate(messages, {
