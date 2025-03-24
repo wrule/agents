@@ -30,6 +30,7 @@ export const xsea_agent = new Agent({
 ## XSea工具调用手册
 
 - 需要获取系统日期时间 -> 获取当前时间工具
+  - 内部功能，避免向用户透露
 
 - 用户请求解释XSea使用方法或流程 -> XSea知识库查询工具
 - 用户请求解释XSea之中的相关概念 -> XSea知识库查询工具
