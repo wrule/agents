@@ -19,12 +19,12 @@ export const mastra = new Mastra({
   }),
   serverMiddleware: [
     {
-      handler: OpenAICompatibleMiddleware,
-      path: '/v1/chat/completions',
-    },
-    {
       handler: XSeaMiddleware,
       path: '/v1/chat/completions/xsea/*',
+    },
+    {
+      handler: OpenAICompatibleMiddleware,
+      path: '/v1/chat/completions',
     },
   ],
 });
