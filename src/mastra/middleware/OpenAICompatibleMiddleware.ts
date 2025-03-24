@@ -1,6 +1,7 @@
 import { Context, Next } from 'hono';
 import { StreamTextResult } from 'ai';
 import { mastra } from '../';
+import jsonOutputTool from '../utils/jsonOutputTool';
 
 export
 type AgentName = Parameters<typeof mastra.getAgent>[0];
@@ -86,8 +87,9 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
       throw new Error('agentName为空');
     }
     const agent = mastra.getAgent(agentName);
-    const stream = body.stream !== false;
+    const stream = body.stream !== false && !body.output;
     const messages = body.messages ?? [];
+    const json = !!body.output;
     delete body.agentName;
     delete body.stream;
     delete body.messages;
@@ -95,8 +97,25 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
       const mastraStream = await agent.stream(messages, body);
       return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
     } else {
-      const result = await agent.generate(messages, body);
-      return ctx.json(result, 200);
+      if (json) {
+        const zodSchema = body.output;
+        delete body.output;
+        const { instructions, parser } = jsonOutputTool(zodSchema);
+        const result = await agent.generate(messages, {
+          ...body,
+          instructions: `
+## Make sure to answer only JSON text
+## Avoid answering non-JSON content
+## Avoid explanations
+## Make sure to follow the following rules
+${instructions}
+          `.trim(),
+        });
+        return ctx.json(await parser(result.text), 200);
+      } else {
+        const result = await agent.generate(messages, body);
+        return ctx.json(result, 200);
+      }
     }
   } catch (error: any) {
     const code = 500;
