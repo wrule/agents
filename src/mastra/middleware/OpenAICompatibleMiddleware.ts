@@ -94,24 +94,27 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
     delete body.agentName;
     delete body.stream;
     delete body.messages;
-    if (stream) {
-      const mastraStream = await agent.stream(messages, body);
-      return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
-    } else {
-      if (json) {
-        const zodSchema = dezerialize(body.output);
-        delete body.output;
-        const { instructions, parser } = jsonOutputTool(zodSchema);
-        const result = await agent.generate(messages, {
-          ...body,
-          instructions: `
+    if (json) {
+      const zodSchema = dezerialize(body.output);
+      delete body.output;
+      const { instructions, parser } = jsonOutputTool(zodSchema);
+      body.instructions = `
 ## Make sure to answer only JSON text
 ## Avoid answering non-JSON content
 ## Avoid explanations
 ## Make sure to follow the following rules
 ${instructions}
-          `.trim(),
-        });
+      `.trim();
+      body.parser = parser;
+    }
+    if (stream) {
+      const mastraStream = await agent.stream(messages, body);
+      return vercelStreamToOpenAIResponse(mastraStream, crypto.randomUUID());
+    } else {
+      if (json) {
+        const parser = body.parser;
+        delete body.parser;
+        const result = await agent.generate(messages, body);
         return ctx.json(await parser(result.text), 200);
       } else {
         const result = await agent.generate(messages, body);
