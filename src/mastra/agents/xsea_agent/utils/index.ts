@@ -31,9 +31,9 @@ export const XSeaNameField: { [key in XSeaType]: string } = {
 };
 
 export const exactSearch = async (query: string, type: XSeaType) => {
-  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true });
+  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
   const list = data.object?.map((item: any) => ({
-    ...JSON.parse(item.data),
+    ...item.data,
     score: item.score,
   })) ?? [];
   console.log('exactSearch', query, type, list);
@@ -72,9 +72,9 @@ export const exactSearch = async (query: string, type: XSeaType) => {
 };
 
 export const fuzzySearch = async (query: string, type: XSeaType) => {
-  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false });
+  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
   const list: any[] = data.object?.map((item: any) => ({
-    ...JSON.parse(item.data),
+    ...item.data,
     score: item.score,
   })) ?? [];
   console.log('fuzzySearch', query, type, list);
