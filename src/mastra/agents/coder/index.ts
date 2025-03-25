@@ -10,12 +10,16 @@ export const coder = new Agent({
 \`\`\`json
 [
   {
+    "t": "s",
+    "c": "description of this code change"
+  },
+  {
     "t": "i",
     "n": 2,
     "c": "line content of the line insert before line 2..."
   },
   {
-    "t": "d",
+    "t": "r",
     "n": 31
   },
   {
@@ -26,30 +30,29 @@ export const coder = new Agent({
   ...
   {
     "t": "d",
-    "e": "explanation of this code change"
+    "c": "explanation of this code change"
   }
 ]
 \`\`\`
 
 ## JSON结构解释
 - n为行号
-- c为line content，即为行内容
 - t为i
   - insert操作
   - 在第n行之前插入一个新行
   - c为新的行的内容
-- t为d
-  - delete操作
+- t为r
+  - remove操作
   - 删除第n行
-  - 不需要字段c
 - t为u
   - update操作
   - 更新第n行的内容为c
+- t为s
+  - 代表start，本次代码修改开始
+  - c为本次代码修改的思路介绍，确保介绍准确易于理解
 - t为d
   - 代表done，本次代码修改结束
-  - e为本次代码修改的解释，确保解释准确易于理解
-  - 不需要字段n
-  - 必须要字段c
+  - c为本次代码修改的结果解释，确保解释准确易于理解
 
 ## 工作准则
 - insert操作执行之后，确保该行之后所有行的行号+1
