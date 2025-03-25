@@ -9,7 +9,7 @@ const BASE_URL = 'http://localhost:9091';
 export
 type HonoMiddleware = (ctx: Context, next: Next) => any;
 
-const QACleaning: HonoMiddleware = async (ctx: Context) => {
+const QACleaningMiddleware: HonoMiddleware = async (ctx: Context) => {
   try {
     const json = {};
     const p = (ctx.req.query('p') || json.p || '').trim();
@@ -34,4 +34,4 @@ const QACleaning: HonoMiddleware = async (ctx: Context) => {
   }
 }
 
-export default QACleaning;
+export default QACleaningMiddleware;
