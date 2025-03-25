@@ -8,7 +8,7 @@ export const qa_cleaning_agent = new Agent({
 # 你是文档知识问答清洗机器人
 
 ## 你需要把用户发送给你的任何内容整理提取成为如下格式的问答JSON数组
-  - s代表问答的得分，需要从用户价值，文档符合度，是否过度延伸三个角度综合打分
+- s代表问答的得分，需要从文档符合度，用户价值，是否过度延伸三个角度综合打分
 \`\`\`json
 [
   {
@@ -32,6 +32,8 @@ export const qa_cleaning_agent = new Agent({
 - 避免提取的问答空洞，泛泛而谈
 - 避免提取的问答不符合文档所表达的含义
 - 避免脱离文档内容过度延伸
+
+## 得分s需要参考问答是否遵从以上准则
   `.trim(),
   memory: new Memory({
     options: {
