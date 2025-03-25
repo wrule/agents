@@ -88,7 +88,7 @@ const OpenAICompatibleMiddleware: HonoMiddleware = async (ctx: Context, next: Ne
       throw new Error('agentName为空');
     }
     const agent = mastra.getAgent(agentName);
-    const stream = body.stream !== false && !body.output;
+    const stream = body.stream !== false;
     const messages = body.messages ?? [];
     const json = !!body.output;
     delete body.agentName;
