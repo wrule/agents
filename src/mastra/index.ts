@@ -11,6 +11,7 @@ import { shell_expert } from './agents/shell_expert';
 import { user_agent } from './agents/user_agent';
 import { qa_cleaning_agent } from './agents/qa_cleaning_agent';
 import QACleaningMiddleware from './middleware/QACleaningMiddleware';
+import { coder } from './agents/coder';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -21,6 +22,7 @@ export const mastra = new Mastra({
     shell_expert,
     touch_fish_agent,
     qa_cleaning_agent,
+    coder,
     user_agent,
   },
   logger: createLogger({
