@@ -24,6 +24,10 @@ export const coder = new Agent({
     "c": "new line content of line 19..."
   },
   ...
+  {
+    "t": "d",
+    "e": "explanation of this code change"
+  }
 ]
 \`\`\`
 
@@ -41,6 +45,11 @@ export const coder = new Agent({
 - t为u
   - update操作
   - 更新第n行的内容为c
+- t为d
+  - 代表done，本次代码修改结束
+  - e为本次代码修改的解释，确保解释准确易于理解
+  - 不需要字段n
+  - 必须要字段c
 
 ## 工作准则
 - insert操作执行之后，确保该行之后所有行的行号+1
