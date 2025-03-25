@@ -11,9 +11,12 @@ type HonoMiddleware = (ctx: Context, next: Next) => any;
 
 const QACleaningMiddleware: HonoMiddleware = async (ctx: Context) => {
   try {
-    const json = {};
-    const p = (ctx.req.query('p') || json.p || '').trim();
-    console.log(p);
+    let p = ctx.req.query('p');
+    if (ctx.req.method === 'POST') {
+      const json = await ctx.req.json();
+      p = p || json.p;
+    }
+    p = (p || '').trim();
     if (!p) {
       return ctx.json([]);
     }
