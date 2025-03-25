@@ -12,13 +12,19 @@ type HonoMiddleware = (ctx: Context, next: Next) => any;
 const QACleaningMiddleware: HonoMiddleware = async (ctx: Context) => {
   try {
     let p = ctx.req.query('p');
+    let n = ctx.req.query('n');
     if (ctx.req.method === 'POST') {
       const json = await ctx.req.json();
       p = p || json.p;
+      n = n || json.n;
     }
     p = (p || '').trim();
+    n = (n || '').trim();
     if (!p) {
       return ctx.json([]);
+    }
+    if (!n) {
+      n = '5';
     }
     const { data } = await axios.post(path.join(BASE_URL, '/v1/chat/completions'), {
       messages: p,
@@ -27,7 +33,7 @@ const QACleaningMiddleware: HonoMiddleware = async (ctx: Context) => {
         z.array(z.object({
           q: z.string().describe('问题'),
           a: z.string().describe('回答'),
-        })).length(5).describe('提取的问答列表')
+        })).length(Number(n)).describe('提取的问答列表')
       ),
     });
     return ctx.json(data);
