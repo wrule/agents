@@ -10,6 +10,7 @@ import { gatling_expert } from './agents/gatling_expert';
 import { shell_expert } from './agents/shell_expert';
 import { user_agent } from './agents/user_agent';
 import { qa_cleaning_agent } from './agents/qa_cleaning_agent';
+import QACleaning from './middleware/QACleaning';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -30,6 +31,10 @@ export const mastra = new Mastra({
     {
       handler: XSeaMiddleware,
       path: '/xsea/api/*',
+    },
+    {
+      handler: QACleaning,
+      path: '/qa_cleaning',
     },
     {
       handler: OpenAICompatibleMiddleware,
