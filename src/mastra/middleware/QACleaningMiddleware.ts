@@ -33,6 +33,7 @@ const QACleaningMiddleware: HonoMiddleware = async (ctx: Context) => {
         z.array(z.object({
           q: z.string().describe('问题'),
           a: z.string().describe('回答'),
+          s: z.number().min(0).max(100).describe('得分'),
         })).length(Number(n)).describe('提取的问答列表')
       ),
     });
