@@ -23,7 +23,7 @@ export const ThreadMap = threadMap;
 
 export
 const thttp = (threadId?: string) => {
-  let cookie = 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e';
+  let cookie = '';
   if (threadId) {
     cookie = ThreadMap[threadId] || cookie;
     if (cookie) {
