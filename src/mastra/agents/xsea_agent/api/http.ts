@@ -17,13 +17,19 @@ http.interceptors.response.use((response) => {
   return response;
 });
 
+const threadMap: Record<string, string> = { };
+
+export const ThreadMap = threadMap;
+
 export
 const thttp = (threadId?: string) => {
+  let cookie = 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e';
+  if (threadId) {
+    cookie = ThreadMap[threadId] || cookie;
+  }
   const http = axios.create({
     baseURL: 'http://10.10.30.103:8081/api',
-    headers: {
-      cookie: 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e',
-    },
+    headers: { cookie },
   });
   http.interceptors.response.use((response) => {
     const { data } = response;
