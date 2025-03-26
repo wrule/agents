@@ -33,7 +33,10 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | b
   && nvm use default \
   && npm install -g pm2 yarn serve \
   && npm install \
-  && npm run build
+  && npm run build \
+  && cd NextChatModal \
+  && yarn install \
+  && yarn build
 
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
