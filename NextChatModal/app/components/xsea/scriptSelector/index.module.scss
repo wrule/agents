@@ -1,0 +1,55 @@
+.com {
+  font-size: 14px;
+  width: 330px;
+  :global {
+    .ant-tabs-nav {
+      margin-bottom: 0px!important;
+    }
+    .ant-pagination {
+      margin-bottom: 0px!important;
+    }
+  }
+  .a_product {
+    color: #1677ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .bottom {
+    position: relative;
+    .confirm_buttons {
+      position: absolute;
+      top: -24px;
+      right: 0px;
+    }
+  }
+  .a_name {
+    display: inline-flex;
+    align-items: center;
+  }
+  .J {
+    color: white;
+    font-size: 12px;
+    border-radius: 2px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    background-color: #346fff;
+  }
+  .G {
+    @extend .J;
+    background-color: orange;
+  }
+  .S {
+    color: white;
+    @extend .J;
+    background-color: limegreen;
+  }
+  .name {
+    margin-left: 0.3rem;
+  }
+}

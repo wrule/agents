@@ -1,0 +1,24 @@
+.com {
+  color: var(--primary);
+  font-size: 14px;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  line-height: 14px;
+  display: inline-flex;
+  align-items: center;
+
+  .emoji {
+    margin-right: 0.2rem;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .name {
+    display: inline-flex;
+    align-items: center;
+  }
+}

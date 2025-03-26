@@ -1,0 +1,43 @@
+.com {
+  width: var(--tools-width);
+  padding: 1rem;
+  border-left: var(--border-in-light);
+  transition: width 0.2s;
+  :global {
+    .ant-steps-item-description {
+      margin-top: 0.3rem;
+    }
+  }
+  .ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .his_test {
+    margin-top: 30px;
+    margin-left: 25px;
+  }
+  .test_list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    margin-top: 10px;
+    li {
+      margin-top: 4px;
+      a {
+        color: #1677ff;
+        text-decoration: none;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+    }
+  }
+  .problem {
+    color: rgb(226, 105, 125);
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+}

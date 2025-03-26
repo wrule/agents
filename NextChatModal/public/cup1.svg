@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice 19</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="图标" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="🏆" transform="translate(0.000000, 1.000000)">
+            <path d="M10,11.9170416 L10,14 L12,14 C12.5522847,14 13,14.4477153 13,15 C13,15.5522847 12.5522847,16 12,16 L6,16 C5.44771525,16 5,15.5522847 5,15 C5,14.4477153 5.44771525,14 6,14 L8,14 L8,11.9170416 C5.16228666,11.4409635 3,8.97299629 3,6 L3,2 C3,0.8954305 3.8954305,2.02906125e-16 5,0 L13,0 C14.1045695,-2.02906125e-16 15,0.8954305 15,2 L15,6 C15,8.97299629 12.8377133,11.4409635 10,11.9170416 Z M17,2 C17.5522847,2 18,2.44771525 18,3 L18,7 C18,7.55228475 17.5522847,8 17,8 C16.4477153,8 16,7.55228475 16,7 L16,3 C16,2.44771525 16.4477153,2 17,2 Z M1,2 C1.55228475,2 2,2.44771525 2,3 L2,7 C2,7.55228475 1.55228475,8 1,8 C0.44771525,8 6.76353751e-17,7.55228475 0,7 L0,3 C-6.76353751e-17,2.44771525 0.44771525,2 1,2 Z" id="Combined-Shape" fill="#FFC23B"></path>
+            <rect id="Rectangle-16" fill="#FFFFFF" opacity="0.400000006" x="4" y="2" width="2" height="5" rx="1"></rect>
+        </g>
+    </g>
+</svg>

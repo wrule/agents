@@ -1,0 +1,32 @@
+.com {
+  min-width: 330px;
+  .introduction {
+    margin: 3px 0 5px 0;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+    span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .searcher {
+      width: 200px;
+    }
+  }
+  .bottom {
+    position: relative;
+    .confirm_button {
+      position: absolute;
+      top: -24px;
+      right: 0px;
+    }
+  }
+  :global {
+    .ant-pagination {
+      margin-bottom: 0!important;
+    }
+  }
+}

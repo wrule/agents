@@ -1,0 +1,33 @@
+.com {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 0.8rem;
+  li {
+    color: #888888;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.3rem 0.5rem;
+    border: var(--border-in-light);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    &:not(:last-child) {
+      margin-bottom: 0.3rem;
+    }
+    &:hover {
+      background-color: var(--second);
+      border-color: var(--second);
+    }
+    .cup_span {
+      img {
+        margin-bottom: -0.2rem;
+        margin-right: 0.3rem;
+      }
+      .hidden {
+        visibility: hidden;
+      }
+    }
+  }
+}

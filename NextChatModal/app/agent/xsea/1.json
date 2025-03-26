@@ -1,0 +1,69 @@
+{
+  "runTime": 160,
+  "sceneId": "857994998244077568",
+  "sceneScriptConfModelList": [
+    {
+      "autoIncreaseStartUserNum": 0,
+      "autoIncreaseUserNum": 20,
+      "id": "857994998487347200",
+      "isEnable": true,
+      "percent": 5000,
+      "runTime": 2,
+      "sceneStrategies": [
+        {
+          "createTime": 1740293149023,
+          "index": 0,
+          "modifyTime": 1740293149023,
+          "period": 1,
+          "userNum": 1
+        },
+        {
+          "createTime": 1740293149023,
+          "index": 1,
+          "modifyTime": 1740293149023,
+          "period": 1,
+          "userNum": 0
+        }
+      ],
+      "scriptId": "857207756269441024",
+      "scriptName": "checkout",
+      "scriptType": "JMETER",
+      "scriptTypeVO": "JMETER",
+      "threadName": "Thread Group",
+      "threadNum": "1"
+    },
+    {
+      "autoIncreaseStartUserNum": 0,
+      "autoIncreaseUserNum": 20,
+      "id": "857994998726422528",
+      "isEnable": true,
+      "percent": 5000,
+      "runTime": 160,
+      "sceneStrategies": [
+        {
+          "createTime": 1740293149023,
+          "index": 0,
+          "modifyTime": 1740293149023,
+          "period": 60,
+          "userNum": 10
+        },
+        {
+          "createTime": 1740293149023,
+          "index": 1,
+          "modifyTime": 1740293149023,
+          "period": 100,
+          "userNum": 0
+        }
+      ],
+      "scriptId": "840643028822806528",
+      "scriptName": "C3P0查询单条数据接口",
+      "scriptType": "JMETER",
+      "scriptTypeVO": "JMETER",
+      "threadName": "Thread Group 1",
+      "threadNum": "10"
+    }
+  ],
+  "scriptType": "JMETER",
+  "strategyType": "USER",
+  "threadNum": 10
+}
