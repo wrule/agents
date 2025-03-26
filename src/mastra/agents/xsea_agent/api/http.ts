@@ -24,6 +24,13 @@ const thttp = (threadId: string) => {
       cookie: 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e',
     },
   });
+  http.interceptors.response.use((response) => {
+    const { data } = response;
+    if (data.success === false) {
+      throw new Error(data.message ?? '未知原因');
+    }
+    return response;
+  });
   return http;
 };
 
