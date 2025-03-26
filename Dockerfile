@@ -1,4 +1,5 @@
 # 请在稳定的科学网络环境上构建此镜像，最好是aws，4c16g以上的环境
+# v0.0.1
 FROM ubuntu:24.04
 
 RUN apt update && apt install -y \
