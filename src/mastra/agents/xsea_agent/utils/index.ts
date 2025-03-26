@@ -1,4 +1,4 @@
-import http from '../api/http';
+import http, { thttp } from '../api/http';
 
 export type XSeaType = 'PRODUCT' | 'SCRIPT' | 'PLAN' | 'GOAL' | 'RECORD' | 'REPORT' | 'SCHEDULE';
 export type XSeaName = '产品' | '脚本' | '计划' | '目标' | '压测记录' | '测试报告' | '定时任务';
@@ -30,8 +30,8 @@ export const XSeaNameField: { [key in XSeaType]: string } = {
   'SCHEDULE': 'scheduleName',
 };
 
-export const exactSearch = async (query: string, type: XSeaType) => {
-  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
+export const exactSearch = async (query: string, type: XSeaType, threadId?: string) => {
+  const { data } = await thttp(threadId).post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
   const list = data.object?.map((item: any) => ({
     ...item.data,
     score: item.score,
@@ -71,8 +71,8 @@ export const exactSearch = async (query: string, type: XSeaType) => {
   return { first, confusion };
 };
 
-export const fuzzySearch = async (query: string, type: XSeaType) => {
-  const { data } = await http.post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
+export const fuzzySearch = async (query: string, type: XSeaType, threadId?: string) => {
+  const { data } = await thttp(threadId).post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
   const list: any[] = data.object?.map((item: any) => ({
     ...item.data,
     score: item.score,
