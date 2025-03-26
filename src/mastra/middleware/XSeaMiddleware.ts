@@ -1,5 +1,5 @@
 import { Context, Next } from 'hono';
-import http from '../agents/xsea_agent/api/http';
+import http, { thttp } from '../agents/xsea_agent/api/http';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export
@@ -9,12 +9,13 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
   try {
     const url = new URL(ctx.req.url);
     const fullPath = (url.pathname + url.search).replace(/^\/xsea\/api/, '');
+    const threadId = url.searchParams.get('threadId') ?? undefined;
     if (['GET'].includes(ctx.req.method)) {
-      const res = await http.get(fullPath);
+      const res = await thttp(threadId).get(fullPath);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     } else {
       const body = await ctx.req.json();
-      const res = await http.post(fullPath, body);
+      const res = await thttp(threadId).post(fullPath, body);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     }
   } catch (error: any) {
