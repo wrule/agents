@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
-import http from '../api/http';
+import http, { thttp } from '../api/http';
 
 const envId = '822313712173449216';
 
@@ -38,7 +38,7 @@ export const 创建目标工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新目标在平台上的Url，需要以makrdown的形式呈现链接，并且填入goalName，如[goalName](http://xxx)'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('创建目标工具', context, async (context) => {
       const type = ['BASELINE', 'SINGLE_USER_TREND', 'MIX_USER_TREND', 'STABLE_TIME_TREND'][context.type - 1];
       const plan = await exactSearch(context.planQuery, 'PLAN');
@@ -60,7 +60,7 @@ export const 创建目标工具 = createTool({
         }
         sceneScriptIds.push(script.first.scriptId);
       }
-      const { data } = await http.post(`xsea/plan/goal/save`, {
+      const { data } = await thttp(threadId).post(`xsea/plan/goal/save`, {
         envId,
         name: context.name,
         type: type,
@@ -94,14 +94,14 @@ export const 创建目标工具 = createTool({
         }
       });
 
-      const goalRes = await http.post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
         planId: plan.first.planId,
         pageNum: 1,
         pageSize: 1,
         condition: { name: context.name },
       });
       const targetGoal = goalRes.data.object?.list?.[0] ?? { };
-      const { data: strategyData } = await http.post(
+      const { data: strategyData } = await thttp(threadId).post(
         `xsea/scene/script/queryStrategy`,
         { id: targetGoal.sceneId },
       );
@@ -110,7 +110,7 @@ export const 创建目标工具 = createTool({
         item.sceneStrategies = sceneStrategies;
         item.threadNum = maxConc;
       });
-      await http.post(`xsea/scene/script/modifyStrategy`, object);
+      await thttp(threadId).post(`xsea/scene/script/modifyStrategy`, object);
       //#endregion
 
       return {
@@ -135,7 +135,7 @@ export const 获取目标详情工具 = createTool({
     goalDetail: z.any().optional().describe('目标的详细信息'),
     strategyDetail: z.any().optional().describe('目标绑定的脚本的发压策略信息'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     console.log('获取目标详情工具 ->', context);
     const goal = await exactSearch(context.query, 'GOAL');
     if (goal.confusion) {
@@ -145,12 +145,12 @@ export const 获取目标详情工具 = createTool({
       };
     }
     const [{ data: goalDetailData }, { data: strategyDetailData }] = await Promise.all([
-      http.post(`xsea/scene/querySceneDetail`, {
+      thttp(threadId).post(`xsea/scene/querySceneDetail`, {
         envId,
         sceneId: goal.first.sceneId,
         workspaceId: goal.first.workspaceId,
       }),
-      http.post(`xsea/scene/script/queryStrategy`, {
+      thttp(threadId).post(`xsea/scene/script/queryStrategy`, {
         id: goal.first.goalId,
       }),
     ]);
@@ -175,7 +175,7 @@ export const 压测目标工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('压测执行页的url，需要以markdown url的形式输出给用户，如[点我查看压测执行页面](url)'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('压测目标工具', context, async (context) => {
       const goal = await exactSearch(context.query, 'GOAL');
       if (goal.confusion) {
@@ -185,7 +185,7 @@ export const 压测目标工具 = createTool({
         };
       }
 
-      const goalRes = await http.post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
         planId: goal.first.planId,
         pageNum: 1,
         pageSize: 1,
@@ -195,7 +195,7 @@ export const 压测目标工具 = createTool({
       goal.first.sceneId = targetGoal.sceneId;
 
       console.log(goal.first);
-      const { data: execData } = await http.post(`xsea/sceneExec/start`, {
+      const { data: execData } = await thttp(threadId).post(`xsea/sceneExec/start`, {
         envId,
         flag: false,
         goalId: goal.first.goalId,

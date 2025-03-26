@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
-import http from '../api/http';
+import http, { thttp } from '../api/http';
 
 const envId = '822313712173449216';
 
@@ -22,7 +22,7 @@ export const 创建计划工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新计划在平台上的Url，需要以makrdown的形式呈现链接，并且填入planName，如[planName](http://xxx)'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('创建计划工具', context, async (context) => {
       const product = await exactSearch(context.query, 'PRODUCT');
       if (product.confusion) {
@@ -31,7 +31,7 @@ export const 创建计划工具 = createTool({
           prompt: product.confusion,
         };
       }
-      const { data } = await http.post(`xsea/plan/v2/addPlan`, {
+      const { data } = await thttp(threadId).post(`xsea/plan/v2/addPlan`, {
         name: context.name,
         planPurpose: context.purpose,
         planRange: {

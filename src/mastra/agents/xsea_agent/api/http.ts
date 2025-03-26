@@ -17,7 +17,8 @@ http.interceptors.response.use((response) => {
   return response;
 });
 
-const thttp = (threadId: string) => {
+export
+const thttp = (threadId?: string) => {
   const http = axios.create({
     baseURL: 'http://10.10.30.103:8081/api',
     headers: {

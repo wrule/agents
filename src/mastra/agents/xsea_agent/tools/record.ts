@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
-import http from '../api/http';
+import http, { thttp } from '../api/http';
 
 export const 获取压测记录详情工具 = createTool({
   id: 'get-record-detail',
@@ -16,7 +16,7 @@ export const 获取压测记录详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     recordDetail: z.any().optional().describe('压测记录的详细信息'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('获取压测记录详情工具', context, async (context) => {
       const record = await exactSearch(context.query, 'RECORD');
       if (record.confusion) {
@@ -26,7 +26,7 @@ export const 获取压测记录详情工具 = createTool({
         };
       }
       const [{ data }] = await Promise.all([
-        http.post('xsea/report/query', { id: record.first.recordId, workspaceId: record.first.productId }),
+        thttp(threadId).post('xsea/report/query', { id: record.first.recordId, workspaceId: record.first.productId }),
       ]);
       return {
         success: true,

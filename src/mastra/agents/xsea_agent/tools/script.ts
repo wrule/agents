@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
-import http from '../api/http';
+import http, { thttp } from '../api/http';
 import dayjs from 'dayjs';
 import { exactSearch, toolExecute } from '../utils';
 
@@ -17,7 +17,7 @@ export const 创建脚本工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新脚本在平台上的url，确保输出遵循[scriptName](url)的makrdown格式，确保替换成为真实值'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('创建脚本工具', context, async (context) => {
       let type = context.type.toLowerCase();
       if (type === 'SEAMETER') {
@@ -30,7 +30,7 @@ export const 创建脚本工具 = createTool({
           prompt: product.confusion,
         };
       }
-      const { data } = await http.post(`xsea/script/add`, {
+      const { data } = await thttp(threadId).post(`xsea/script/add`, {
         level: 1,
         parentId: '-1',
         type,
@@ -66,7 +66,7 @@ export const 快速压测工具 = createTool({
     execUrl: z.string().optional().describe('如果压测执行成功，此为压测执行页面的url，需要以markdown url的形式输出给用户，如[点我查看压测执行页面](execUrl)'),
     sceneUrl: z.string().optional().describe('当前压测场景的url，需要以markdown url的形式输出给用户，如[当前压测场景](sceneUrl)'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('快速压测工具', context, async (context) => {
       let productId = '';
       const scriptIds: string[] = [];
@@ -87,7 +87,7 @@ export const 快速压测工具 = createTool({
       const planName = '快速压测归档计划';
       let targetPlan: any = null;
       while (targetPlan?.name !== planName) {
-        const planListRes = await http.post(`xsea/plan/v2/planList`, {
+        const planListRes = await thttp(threadId).post(`xsea/plan/v2/planList`, {
           workspaceId: productId,
           pageNum: 1,
           pageSize: 1,
@@ -96,7 +96,7 @@ export const 快速压测工具 = createTool({
         });
         targetPlan = planListRes.data.object?.list?.[0];
         if (targetPlan?.name !== planName) {
-          await http.post(`xsea/plan/v2/addPlan`, {
+          await thttp(threadId).post(`xsea/plan/v2/addPlan`, {
             name: planName,
             planPurpose: planName,
             planRange: {
@@ -109,7 +109,7 @@ export const 快速压测工具 = createTool({
         }
       }
       const goalName = `快速压测 ${dayjs().format('MM_DD_HH_mm_ss_SSS')}`;
-      await http.post(`xsea/plan/goal/save`, {
+      await thttp(threadId).post(`xsea/plan/goal/save`, {
         type: 'BASELINE',
         name: goalName,
         planId: targetPlan.id,
@@ -122,7 +122,7 @@ export const 快速压测工具 = createTool({
         syncTransactionPercent: false,
         envId,
       });
-      const goalRes = await http.post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
         planId: targetPlan.id,
         pageNum: 1,
         pageSize: 1,
@@ -131,7 +131,7 @@ export const 快速压测工具 = createTool({
       const targetGoal = goalRes.data.object?.list?.[0];
   
       //#region 构造并发曲线
-      const { data: strategyData } = await http.post(
+      const { data: strategyData } = await thttp(threadId).post(
         `xsea/scene/script/queryStrategy`,
         { id: targetGoal.sceneId },
       );
@@ -140,10 +140,10 @@ export const 快速压测工具 = createTool({
         item.sceneStrategies = generateLoadCurve(context.seconds, context.concurrency);
         item.threadNum = context.concurrency;
       });
-      await http.post(`xsea/scene/script/modifyStrategy`, object);
+      await thttp(threadId).post(`xsea/scene/script/modifyStrategy`, object);
       //#endregion
   
-      const { data: execData } = await http.post(`xsea/sceneExec/start`, {
+      const { data: execData } = await thttp(threadId).post(`xsea/sceneExec/start`, {
         envId,
         flag: false,
         goalId: targetGoal.id,
@@ -180,7 +180,7 @@ export const 获取脚本详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     scriptDetail: z.any().optional().describe('脚本详情信息'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     return await toolExecute('获取脚本详情工具', context, async (context) => {
       const script = await exactSearch(context.query, 'SCRIPT');
       if (script.confusion) {
@@ -189,7 +189,7 @@ export const 获取脚本详情工具 = createTool({
           prompt: script.confusion,
         };
       }
-      const { data } = await http.post(`xsea/script/queryDetail`, {
+      const { data } = await thttp(threadId).post(`xsea/script/queryDetail`, {
         workspaceId: script.first.productId,
         scriptId: script.first.scriptId,
       });
