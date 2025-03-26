@@ -24,7 +24,7 @@ export const 创建计划工具 = createTool({
   }),
   execute: async ({ context, threadId }) => {
     return await toolExecute('创建计划工具', context, async (context) => {
-      const product = await exactSearch(context.query, 'PRODUCT');
+      const product = await exactSearch(context.query, 'PRODUCT', threadId);
       if (product.confusion) {
         return {
           success: false,
@@ -62,9 +62,9 @@ export const 获取计划详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     reportDetail: z.any().optional().describe('计划的详细信息'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     console.log('获取计划详情工具 ->', context);
-    const report = await exactSearch(context.query, 'PLAN');
+    const report = await exactSearch(context.query, 'PLAN', threadId);
     if (report.confusion) {
       return {
         success: false,

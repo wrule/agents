@@ -41,7 +41,7 @@ export const 创建目标工具 = createTool({
   execute: async ({ context, threadId }) => {
     return await toolExecute('创建目标工具', context, async (context) => {
       const type = ['BASELINE', 'SINGLE_USER_TREND', 'MIX_USER_TREND', 'STABLE_TIME_TREND'][context.type - 1];
-      const plan = await exactSearch(context.planQuery, 'PLAN');
+      const plan = await exactSearch(context.planQuery, 'PLAN', threadId);
       if (plan.confusion) {
         return {
           success: false,
@@ -51,7 +51,7 @@ export const 创建目标工具 = createTool({
       const sceneScriptIds: string[] = [];
       for (let i = 0; i < context.scriptQueryList.length; ++i) {
         const query = context.scriptQueryList[i];
-        const script = await exactSearch(query, 'SCRIPT');
+        const script = await exactSearch(query, 'SCRIPT', threadId);
         if (script.confusion) {
           return {
             success: false,
@@ -137,7 +137,7 @@ export const 获取目标详情工具 = createTool({
   }),
   execute: async ({ context, threadId }) => {
     console.log('获取目标详情工具 ->', context);
-    const goal = await exactSearch(context.query, 'GOAL');
+    const goal = await exactSearch(context.query, 'GOAL', threadId);
     if (goal.confusion) {
       return {
         success: false,
@@ -177,7 +177,7 @@ export const 压测目标工具 = createTool({
   }),
   execute: async ({ context, threadId }) => {
     return await toolExecute('压测目标工具', context, async (context) => {
-      const goal = await exactSearch(context.query, 'GOAL');
+      const goal = await exactSearch(context.query, 'GOAL', threadId);
       if (goal.confusion) {
         return {
           success: false,

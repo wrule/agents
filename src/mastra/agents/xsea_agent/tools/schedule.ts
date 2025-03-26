@@ -16,9 +16,9 @@ export const 获取定时任务详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     reportDetail: z.any().optional().describe('定时任务的详细信息'),
   }),
-  execute: async ({ context }) => {
+  execute: async ({ context, threadId }) => {
     console.log('获取定时任务详情工具 ->', context);
-    const report = await exactSearch(context.query, 'SCHEDULE');
+    const report = await exactSearch(context.query, 'SCHEDULE', threadId);
     if (report.confusion) {
       return {
         success: false,

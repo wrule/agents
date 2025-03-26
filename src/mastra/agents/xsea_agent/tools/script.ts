@@ -23,7 +23,7 @@ export const 创建脚本工具 = createTool({
       if (type === 'SEAMETER') {
         type = 'XSEA';
       }
-      const product = await exactSearch(context.query, 'PRODUCT');
+      const product = await exactSearch(context.query, 'PRODUCT', threadId);
       if (product.confusion) {
         return {
           success: false,
@@ -72,7 +72,7 @@ export const 快速压测工具 = createTool({
       const scriptIds: string[] = [];
       for (let i = 0; i < context.queryList.length; ++i) {
         const query = context.queryList[i];
-        const target = await exactSearch(query, 'SCRIPT');
+        const target = await exactSearch(query, 'SCRIPT', threadId);
         if (target.confusion) {
           return {
             success: false,
@@ -182,7 +182,7 @@ export const 获取脚本详情工具 = createTool({
   }),
   execute: async ({ context, threadId }) => {
     return await toolExecute('获取脚本详情工具', context, async (context) => {
-      const script = await exactSearch(context.query, 'SCRIPT');
+      const script = await exactSearch(context.query, 'SCRIPT', threadId);
       if (script.confusion) {
         return {
           success: false,
