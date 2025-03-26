@@ -9,6 +9,8 @@
     "serve": "pm2 start npm --name 'agents' -- run start",
     "clean": "rimraf ./.mastra",
     "cp_env": "cp ./.env ./.mastra/output",
+    "install:all": "npm install && cd NextChatModal && yarn install",
+    "build:all": "npm run build && cd NextChatModal && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
