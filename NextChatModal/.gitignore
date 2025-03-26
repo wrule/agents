@@ -25,9 +25,6 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
-.env*.local
-
 # vercel
 .vercel
 
@@ -38,9 +35,6 @@ dev
 
 .vscode
 .idea
-
-# docker-compose env files
-.env
 
 *.key
 *.key.pub
