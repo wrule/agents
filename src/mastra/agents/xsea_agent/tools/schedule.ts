@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch } from '../utils';
-import http from '../api/http';
 
 export const 获取定时任务详情工具 = createTool({
   id: 'get-schedule-detail',

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch } from '../utils';
-import http from '../api/http';
 
 export const 获取测试报告详情工具 = createTool({
   id: 'get-report-detail',
