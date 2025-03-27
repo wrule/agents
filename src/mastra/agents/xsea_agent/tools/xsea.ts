@@ -32,7 +32,7 @@ ${ObjectTypes.map((type, index) => `${index + 1}. ${type}`).join('\n')}
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('XSea对象查询工具', context, async (context) => {
       const type = ObjectTypes[context.type - 1].split('|')[0];
-      const result = await fuzzySearch(context.query || type, XSeaNameType[type as XSeaName], threadId);
+      const result = await fuzzySearch(context.query || type, XSeaNameType[type as XSeaName], cookie);
       return {
         success: true,
         prompt: `

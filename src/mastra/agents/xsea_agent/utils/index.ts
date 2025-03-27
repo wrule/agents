@@ -30,7 +30,7 @@ export const XSeaNameField: { [key in XSeaType]: string } = {
   'SCHEDULE': 'scheduleName',
 };
 
-export const exactSearch = async (query: string, type: XSeaType, threadId?: string) => {
+export const exactSearch = async (query: string, type: XSeaType, cookie?: string) => {
   const { data } = await thttp(cookie).post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
   const list = data.object?.map((item: any) => ({
     ...item.data,
@@ -71,7 +71,7 @@ export const exactSearch = async (query: string, type: XSeaType, threadId?: stri
   return { first, confusion };
 };
 
-export const fuzzySearch = async (query: string, type: XSeaType, threadId?: string) => {
+export const fuzzySearch = async (query: string, type: XSeaType, cookie?: string) => {
   const { data } = await thttp(cookie).post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
   const list: any[] = data.object?.map((item: any) => ({
     ...item.data,
