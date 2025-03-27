@@ -47,7 +47,7 @@ export const 获取产品详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     console.log('获取产品详情工具 ->', context);
-    const report = await exactSearch(context.query, 'PRODUCT', threadId);
+    const report = await exactSearch(context.query, 'PRODUCT', cookie);
     if (report.confusion) {
       return {
         success: false,

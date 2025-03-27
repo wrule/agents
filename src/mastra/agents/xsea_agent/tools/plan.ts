@@ -24,7 +24,7 @@ export const 创建计划工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('创建计划工具', context, async (context) => {
-      const product = await exactSearch(context.query, 'PRODUCT', threadId);
+      const product = await exactSearch(context.query, 'PRODUCT', cookie);
       if (product.confusion) {
         return {
           success: false,
@@ -64,7 +64,7 @@ export const 获取计划详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     console.log('获取计划详情工具 ->', context);
-    const report = await exactSearch(context.query, 'PLAN', threadId);
+    const report = await exactSearch(context.query, 'PLAN', cookie);
     if (report.confusion) {
       return {
         success: false,

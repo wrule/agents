@@ -137,7 +137,7 @@ export const 获取目标详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     console.log('获取目标详情工具 ->', context);
-    const goal = await exactSearch(context.query, 'GOAL', threadId);
+    const goal = await exactSearch(context.query, 'GOAL', cookie);
     if (goal.confusion) {
       return {
         success: false,
@@ -177,7 +177,7 @@ export const 压测目标工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('压测目标工具', context, async (context) => {
-      const goal = await exactSearch(context.query, 'GOAL', threadId);
+      const goal = await exactSearch(context.query, 'GOAL', cookie);
       if (goal.confusion) {
         return {
           success: false,

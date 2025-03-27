@@ -17,7 +17,7 @@ export const 获取定时任务详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     console.log('获取定时任务详情工具 ->', context);
-    const report = await exactSearch(context.query, 'SCHEDULE', threadId);
+    const report = await exactSearch(context.query, 'SCHEDULE', cookie);
     if (report.confusion) {
       return {
         success: false,

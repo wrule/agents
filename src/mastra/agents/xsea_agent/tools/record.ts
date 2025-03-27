@@ -18,7 +18,7 @@ export const 获取压测记录详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('获取压测记录详情工具', context, async (context) => {
-      const record = await exactSearch(context.query, 'RECORD', threadId);
+      const record = await exactSearch(context.query, 'RECORD', cookie);
       if (record.confusion) {
         return {
           success: false,
