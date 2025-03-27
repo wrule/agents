@@ -8,7 +8,7 @@
     "dev": "concurrently -r \"yarn run mask:watch\" \"next dev -p 8091\"",
     "build": "yarn mask && cross-env BUILD_MODE=standalone next build",
     "start": "next start -p 8091",
-    "pm2": "pm2 start npm --name 'perfma-gpt' -- start",
+    "serve": "pm2 start npm --name 'perfma-gpt-ui' -- run start",
     "lint": "next lint",
     "export": "yarn mask && cross-env BUILD_MODE=export BUILD_APP=1 next build",
     "export:dev": "concurrently -r \"yarn mask:watch\"  \"cross-env BUILD_MODE=export BUILD_APP=1 next dev\"",
