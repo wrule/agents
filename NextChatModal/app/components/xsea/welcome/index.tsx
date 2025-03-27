@@ -14,7 +14,7 @@ const Welcome = () => {
     setLoading(true);
     try {
       const topK = 20;
-      const searchParams = { threadId: chatStore.currentSession().id };
+      const searchParams = { resourceId: localStorage.getItem('currentCookie') };
       const [{ data: scriptData }, { data: recordData }] = await Promise.all([
         axios.post(`/xsea/api/xsea/vector/query`, { type: 'SCRIPT', text: Math.random().toString(), topK }, {
           params: searchParams,

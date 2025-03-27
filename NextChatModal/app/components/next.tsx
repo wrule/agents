@@ -88,7 +88,7 @@ const Next = () => {
         messages: prompt,
         agentName: mask.agentName,
         runId: mask.agentName,
-        resourceId: mask.agentName,
+        resourceId: localStorage.getItem('currentCookie'),
         threadId: session.id + nanoid(),
         stream: false,
         output: zerialize(z.tuple([
