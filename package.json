@@ -10,6 +10,7 @@
     "serve": "pm2 start npm --name 'perfma-gpt' -- run start",
     "clean": "rimraf ./.mastra",
     "cp_env": "cp ./.env.template ./.mastra/output/.env",
+    "cp_env_real": "cp ./.env ./.mastra/output",
     "install:all": "npm install && cd NextChatModal && yarn install",
     "build:all": "npm run build && cd NextChatModal && npm run build",
     "serve:all": "npm run serve && cd NextChatModal && npm run serve && pm2 save",
