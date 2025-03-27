@@ -13,6 +13,7 @@ import { qa_cleaning_agent } from './agents/qa_cleaning_agent';
 import QACleaningMiddleware from './middleware/QACleaningMiddleware';
 import { coder } from './agents/coder';
 import { interactive_prompt_agent } from './agents/interactive_prompt_agent';
+import { xsea_guide } from './agents/xsea_guide';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -26,6 +27,7 @@ export const mastra = new Mastra({
     coder,
     interactive_prompt_agent,
     user_agent,
+    xsea_guide,
   },
   logger: createLogger({
     name: 'Mastra',
