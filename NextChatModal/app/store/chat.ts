@@ -311,10 +311,10 @@ export const useChatStore = createPersistStore(
       async newSession(mask?: Mask, messages: ChatMessage[] = []) {
         const session = createEmptySession();
 
-        await axios.post('/xsea/api/xsea/threadCookie', {
-          threadId: session.id,
-          cookie: localStorage.getItem('currentCookie') || 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e',
-        });
+        // await axios.post('/xsea/api/xsea/threadCookie', {
+        //   threadId: session.id,
+        //   cookie: localStorage.getItem('currentCookie') || 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=e335ab0f7b0642c5b43091c30e435f9e',
+        // });
 
         session.messages.push(...messages);
 
