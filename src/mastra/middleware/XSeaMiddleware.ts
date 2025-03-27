@@ -9,7 +9,7 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
   try {
     const url = new URL(ctx.req.url);
     const fullPath = (url.pathname + url.search).replace(/^\/xsea\/api/, '');
-    const threadId = url.searchParams.get('threadId') ?? undefined;
+    const cookie = url.searchParams.get('resourceId') ?? undefined;
     if (['GET'].includes(ctx.req.method)) {
       const res = await thttp(cookie).get(fullPath);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
