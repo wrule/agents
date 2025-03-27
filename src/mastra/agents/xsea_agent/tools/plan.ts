@@ -31,7 +31,7 @@ export const 创建计划工具 = createTool({
           prompt: product.confusion,
         };
       }
-      const { data } = await thttp(threadId).post(`xsea/plan/v2/addPlan`, {
+      const { data } = await thttp(cookie).post(`xsea/plan/v2/addPlan`, {
         name: context.name,
         planPurpose: context.purpose,
         planRange: {

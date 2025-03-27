@@ -31,7 +31,7 @@ export const XSeaNameField: { [key in XSeaType]: string } = {
 };
 
 export const exactSearch = async (query: string, type: XSeaType, threadId?: string) => {
-  const { data } = await thttp(threadId).post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
+  const { data } = await thttp(cookie).post(`xsea/vector/query`, { type, text: query, topK: 2, filterScore: true, filterMap: { } });
   const list = data.object?.map((item: any) => ({
     ...item.data,
     score: item.score,
@@ -72,7 +72,7 @@ export const exactSearch = async (query: string, type: XSeaType, threadId?: stri
 };
 
 export const fuzzySearch = async (query: string, type: XSeaType, threadId?: string) => {
-  const { data } = await thttp(threadId).post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
+  const { data } = await thttp(cookie).post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
   const list: any[] = data.object?.map((item: any) => ({
     ...item.data,
     score: item.score,

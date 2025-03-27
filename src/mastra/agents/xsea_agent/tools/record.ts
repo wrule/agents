@@ -26,7 +26,7 @@ export const 获取压测记录详情工具 = createTool({
         };
       }
       const [{ data }] = await Promise.all([
-        thttp(threadId).post('xsea/report/query', { id: record.first.recordId, workspaceId: record.first.productId }),
+        thttp(cookie).post('xsea/report/query', { id: record.first.recordId, workspaceId: record.first.productId }),
       ]);
       return {
         success: true,

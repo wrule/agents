@@ -30,7 +30,7 @@ export const 创建脚本工具 = createTool({
           prompt: product.confusion,
         };
       }
-      const { data } = await thttp(threadId).post(`xsea/script/add`, {
+      const { data } = await thttp(cookie).post(`xsea/script/add`, {
         level: 1,
         parentId: '-1',
         type,
@@ -87,7 +87,7 @@ export const 快速压测工具 = createTool({
       const planName = '快速压测归档计划';
       let targetPlan: any = null;
       while (targetPlan?.name !== planName) {
-        const planListRes = await thttp(threadId).post(`xsea/plan/v2/planList`, {
+        const planListRes = await thttp(cookie).post(`xsea/plan/v2/planList`, {
           workspaceId: productId,
           pageNum: 1,
           pageSize: 1,
@@ -96,7 +96,7 @@ export const 快速压测工具 = createTool({
         });
         targetPlan = planListRes.data.object?.list?.[0];
         if (targetPlan?.name !== planName) {
-          await thttp(threadId).post(`xsea/plan/v2/addPlan`, {
+          await thttp(cookie).post(`xsea/plan/v2/addPlan`, {
             name: planName,
             planPurpose: planName,
             planRange: {
@@ -109,7 +109,7 @@ export const 快速压测工具 = createTool({
         }
       }
       const goalName = `快速压测 ${dayjs().format('MM_DD_HH_mm_ss_SSS')}`;
-      await thttp(threadId).post(`xsea/plan/goal/save`, {
+      await thttp(cookie).post(`xsea/plan/goal/save`, {
         type: 'BASELINE',
         name: goalName,
         planId: targetPlan.id,
@@ -122,7 +122,7 @@ export const 快速压测工具 = createTool({
         syncTransactionPercent: false,
         envId,
       });
-      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(cookie).post(`xsea/plan/goal/list`, {
         planId: targetPlan.id,
         pageNum: 1,
         pageSize: 1,
@@ -131,7 +131,7 @@ export const 快速压测工具 = createTool({
       const targetGoal = goalRes.data.object?.list?.[0];
   
       //#region 构造并发曲线
-      const { data: strategyData } = await thttp(threadId).post(
+      const { data: strategyData } = await thttp(cookie).post(
         `xsea/scene/script/queryStrategy`,
         { id: targetGoal.sceneId },
       );
@@ -140,10 +140,10 @@ export const 快速压测工具 = createTool({
         item.sceneStrategies = generateLoadCurve(context.seconds, context.concurrency);
         item.threadNum = context.concurrency;
       });
-      await thttp(threadId).post(`xsea/scene/script/modifyStrategy`, object);
+      await thttp(cookie).post(`xsea/scene/script/modifyStrategy`, object);
       //#endregion
   
-      const { data: execData } = await thttp(threadId).post(`xsea/sceneExec/start`, {
+      const { data: execData } = await thttp(cookie).post(`xsea/sceneExec/start`, {
         envId,
         flag: false,
         goalId: targetGoal.id,
@@ -189,7 +189,7 @@ export const 获取脚本详情工具 = createTool({
           prompt: script.confusion,
         };
       }
-      const { data } = await thttp(threadId).post(`xsea/script/queryDetail`, {
+      const { data } = await thttp(cookie).post(`xsea/script/queryDetail`, {
         workspaceId: script.first.productId,
         scriptId: script.first.scriptId,
       });

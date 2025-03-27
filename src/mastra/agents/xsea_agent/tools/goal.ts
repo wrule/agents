@@ -41,7 +41,7 @@ export const 创建目标工具 = createTool({
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('创建目标工具', context, async (context) => {
       const type = ['BASELINE', 'SINGLE_USER_TREND', 'MIX_USER_TREND', 'STABLE_TIME_TREND'][context.type - 1];
-      const plan = await exactSearch(context.planQuery, 'PLAN', threadId);
+      const plan = await exactSearch(context.planQuery, 'PLAN', cookie);
       if (plan.confusion) {
         return {
           success: false,
@@ -51,7 +51,7 @@ export const 创建目标工具 = createTool({
       const sceneScriptIds: string[] = [];
       for (let i = 0; i < context.scriptQueryList.length; ++i) {
         const query = context.scriptQueryList[i];
-        const script = await exactSearch(query, 'SCRIPT', threadId);
+        const script = await exactSearch(query, 'SCRIPT', cookie);
         if (script.confusion) {
           return {
             success: false,
@@ -60,7 +60,7 @@ export const 创建目标工具 = createTool({
         }
         sceneScriptIds.push(script.first.scriptId);
       }
-      const { data } = await thttp(threadId).post(`xsea/plan/goal/save`, {
+      const { data } = await thttp(cookie).post(`xsea/plan/goal/save`, {
         envId,
         name: context.name,
         type: type,
@@ -94,14 +94,14 @@ export const 创建目标工具 = createTool({
         }
       });
 
-      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(cookie).post(`xsea/plan/goal/list`, {
         planId: plan.first.planId,
         pageNum: 1,
         pageSize: 1,
         condition: { name: context.name },
       });
       const targetGoal = goalRes.data.object?.list?.[0] ?? { };
-      const { data: strategyData } = await thttp(threadId).post(
+      const { data: strategyData } = await thttp(cookie).post(
         `xsea/scene/script/queryStrategy`,
         { id: targetGoal.sceneId },
       );
@@ -110,7 +110,7 @@ export const 创建目标工具 = createTool({
         item.sceneStrategies = sceneStrategies;
         item.threadNum = maxConc;
       });
-      await thttp(threadId).post(`xsea/scene/script/modifyStrategy`, object);
+      await thttp(cookie).post(`xsea/scene/script/modifyStrategy`, object);
       //#endregion
 
       return {
@@ -145,12 +145,12 @@ export const 获取目标详情工具 = createTool({
       };
     }
     const [{ data: goalDetailData }, { data: strategyDetailData }] = await Promise.all([
-      thttp(threadId).post(`xsea/scene/querySceneDetail`, {
+      thttp(cookie).post(`xsea/scene/querySceneDetail`, {
         envId,
         sceneId: goal.first.sceneId,
         workspaceId: goal.first.workspaceId,
       }),
-      thttp(threadId).post(`xsea/scene/script/queryStrategy`, {
+      thttp(cookie).post(`xsea/scene/script/queryStrategy`, {
         id: goal.first.goalId,
       }),
     ]);
@@ -185,7 +185,7 @@ export const 压测目标工具 = createTool({
         };
       }
 
-      const goalRes = await thttp(threadId).post(`xsea/plan/goal/list`, {
+      const goalRes = await thttp(cookie).post(`xsea/plan/goal/list`, {
         planId: goal.first.planId,
         pageNum: 1,
         pageSize: 1,
@@ -195,7 +195,7 @@ export const 压测目标工具 = createTool({
       goal.first.sceneId = targetGoal.sceneId;
 
       console.log(goal.first);
-      const { data: execData } = await thttp(threadId).post(`xsea/sceneExec/start`, {
+      const { data: execData } = await thttp(cookie).post(`xsea/sceneExec/start`, {
         envId,
         flag: false,
         goalId: goal.first.goalId,

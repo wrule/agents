@@ -11,7 +11,7 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
     const fullPath = (url.pathname + url.search).replace(/^\/xsea\/api/, '');
     const threadId = url.searchParams.get('threadId') ?? undefined;
     if (['GET'].includes(ctx.req.method)) {
-      const res = await thttp(threadId).get(fullPath);
+      const res = await thttp(cookie).get(fullPath);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     } else {
       const body = await ctx.req.json();
@@ -20,7 +20,7 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
         console.log('XSea threadCookie同步', body);
         return ctx.json(body, 200);
       }
-      const res = await thttp(threadId).post(fullPath, body);
+      const res = await thttp(cookie).post(fullPath, body);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     }
   } catch (error: any) {
