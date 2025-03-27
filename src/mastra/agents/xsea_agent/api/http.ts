@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const threadMap: Record<string, string> = { };
-
-export const ThreadMap = threadMap;
-
 export
 const thttp = (cookie?: string) => {
   const http = axios.create({

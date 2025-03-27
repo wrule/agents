@@ -1,5 +1,5 @@
 import { Context, Next } from 'hono';
-import { ThreadMap, thttp } from '../agents/xsea_agent/api/http';
+import { thttp } from '../agents/xsea_agent/api/http';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export
@@ -15,11 +15,6 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     } else {
       const body = await ctx.req.json();
-      if (fullPath.toLowerCase() === '/xsea/threadcookie' && body.threadId && body.cookie) {
-        ThreadMap[body.threadId] = body.cookie;
-        console.log('XSea threadCookie同步', body);
-        return ctx.json(body, 200);
-      }
       const res = await thttp(cookie).post(fullPath, body);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     }
