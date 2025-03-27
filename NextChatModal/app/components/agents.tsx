@@ -42,6 +42,10 @@ const Agents = () => {
         const mask = CN_MASKS.find((mask) => nameProcess(mask.name) === nameProcess(expertName)) as Mask;
         await chatShore.newSession(mask);
         navigate(Path.Chat);
+        chatShore.AppendRoleMessage({
+          role: "system",
+          content: message.problem,
+        }, true);
         // AgentStore.get(message.expertName).Create(
         //   [
         //     {
