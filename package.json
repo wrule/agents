@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "mastra dev --port 9091",
     "dev:ui": "cd NextChatModal && npm run dev",
-    "build": "npm run clean && mastra build && npm run cp_env",
+    "build": "npm run clean && mastra build",
     "start": "cd ./.mastra/output && node -r dotenv/config ./index.mjs",
     "serve": "pm2 start npm --name 'perfma-gpt' -- run start",
     "clean": "rimraf ./.mastra",
