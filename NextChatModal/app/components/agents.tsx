@@ -32,10 +32,14 @@ const Agents = () => {
       return;
     }
 
+    const nameProcess = (name: string) => {
+      return name.toLowerCase().replaceAll('_', '').replaceAll('-', '');
+    };
+
     if (message.from === "ai_parent" && message.expertName) {
       const expertName = ((message.expertName ?? '') as string).replace('_', '');
       if (message.problem) {
-        const mask = CN_MASKS.find((mask) => mask.name === expertName) as Mask;
+        const mask = CN_MASKS.find((mask) => nameProcess(mask.name) === nameProcess(expertName)) as Mask;
         await chatShore.newSession(mask);
         navigate(Path.Chat);
         // AgentStore.get(message.expertName).Create(
