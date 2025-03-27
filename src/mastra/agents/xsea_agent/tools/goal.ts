@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
-import http, { thttp } from '../api/http';
+import { thttp } from '../api/http';
 
 const envId = '822313712173449216';
 

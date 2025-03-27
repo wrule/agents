@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
-import http, { thttp } from '../api/http';
+import { thttp } from '../api/http';
 import dayjs from 'dayjs';
 import { exactSearch, toolExecute } from '../utils';
 

@@ -1,5 +1,5 @@
 import { Context, Next } from 'hono';
-import http, { ThreadMap, thttp } from '../agents/xsea_agent/api/http';
+import { ThreadMap, thttp } from '../agents/xsea_agent/api/http';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export

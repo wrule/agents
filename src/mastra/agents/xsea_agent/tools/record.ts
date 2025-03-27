@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
-import http, { thttp } from '../api/http';
+import { thttp } from '../api/http';
 
 export const 获取压测记录详情工具 = createTool({
   id: 'get-record-detail',

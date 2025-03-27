@@ -1,4 +1,4 @@
-import http, { thttp } from '../api/http';
+import { thttp } from '../api/http';
 
 export type XSeaType = 'PRODUCT' | 'SCRIPT' | 'PLAN' | 'GOAL' | 'RECORD' | 'REPORT' | 'SCHEDULE';
 export type XSeaName = '产品' | '脚本' | '计划' | '目标' | '压测记录' | '测试报告' | '定时任务';

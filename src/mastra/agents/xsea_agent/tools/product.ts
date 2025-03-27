@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
-import http, { thttp } from '../api/http';
+import { thttp } from '../api/http';
 import { exactSearch, toolExecute } from '../utils';
 
 export const 创建产品工具 = createTool({
