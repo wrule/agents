@@ -15,12 +15,14 @@ import { coder } from './agents/coder';
 import { interactive_prompt_agent } from './agents/interactive_prompt_agent';
 import { xsea_guide } from './agents/xsea_guide';
 import { testma_agent } from './agents/testma_agent';
+import { xsky_agent } from './agents/xsky_agent';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
   agents: {
     xsea_agent,
     testma_agent,
+    xsky_agent,
     jmeter_expert,
     gatling_expert,
     shell_expert,
