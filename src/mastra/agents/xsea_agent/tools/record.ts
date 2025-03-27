@@ -16,7 +16,7 @@ export const 获取压测记录详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     recordDetail: z.any().optional().describe('压测记录的详细信息'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('获取压测记录详情工具', context, async (context) => {
       const record = await exactSearch(context.query, 'RECORD', threadId);
       if (record.confusion) {

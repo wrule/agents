@@ -17,7 +17,7 @@ export const 创建脚本工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新脚本在平台上的url，确保输出遵循[scriptName](url)的makrdown格式，确保替换成为真实值'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('创建脚本工具', context, async (context) => {
       let type = context.type.toLowerCase();
       if (type === 'SEAMETER') {
@@ -66,7 +66,7 @@ export const 快速压测工具 = createTool({
     execUrl: z.string().optional().describe('如果压测执行成功，此为压测执行页面的url，需要以markdown url的形式输出给用户，如[点我查看压测执行页面](execUrl)'),
     sceneUrl: z.string().optional().describe('当前压测场景的url，需要以markdown url的形式输出给用户，如[当前压测场景](sceneUrl)'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('快速压测工具', context, async (context) => {
       let productId = '';
       const scriptIds: string[] = [];
@@ -180,7 +180,7 @@ export const 获取脚本详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     scriptDetail: z.any().optional().describe('脚本详情信息'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('获取脚本详情工具', context, async (context) => {
       const script = await exactSearch(context.query, 'SCRIPT', threadId);
       if (script.confusion) {

@@ -29,7 +29,7 @@ ${ObjectTypes.map((type, index) => `${index + 1}. ${type}`).join('\n')}
     table: z.array(z.any()).optional().describe('表格数据'),
     columns: z.array(z.string().describe('列名')).optional().describe('列名列表'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('XSea对象查询工具', context, async (context) => {
       const type = ObjectTypes[context.type - 1].split('|')[0];
       const result = await fuzzySearch(context.query || type, XSeaNameType[type as XSeaName], threadId);

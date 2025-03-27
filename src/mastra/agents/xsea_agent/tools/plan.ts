@@ -22,7 +22,7 @@ export const 创建计划工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新计划在平台上的Url，需要以makrdown的形式呈现链接，并且填入planName，如[planName](http://xxx)'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('创建计划工具', context, async (context) => {
       const product = await exactSearch(context.query, 'PRODUCT', threadId);
       if (product.confusion) {
@@ -62,7 +62,7 @@ export const 获取计划详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     reportDetail: z.any().optional().describe('计划的详细信息'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     console.log('获取计划详情工具 ->', context);
     const report = await exactSearch(context.query, 'PLAN', threadId);
     if (report.confusion) {

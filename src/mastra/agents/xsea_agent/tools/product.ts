@@ -17,7 +17,7 @@ export const 创建产品工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     url: z.string().optional().describe('新产品在平台上的url，需要以makrdown url的形式填入productName和url，如[productName](url)'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('创建产品工具', context, async (context) => {
       const { data } = await thttp(threadId).post(`paas/products`, {
         productName: context.name,
@@ -45,7 +45,7 @@ export const 获取产品详情工具 = createTool({
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
     reportDetail: z.any().optional().describe('产品的详细信息'),
   }),
-  execute: async ({ context, threadId }) => {
+  execute: async ({ context, resourceId: cookie }) => {
     console.log('获取产品详情工具 ->', context);
     const report = await exactSearch(context.query, 'PRODUCT', threadId);
     if (report.confusion) {
