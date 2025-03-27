@@ -52,7 +52,7 @@ const Agents = () => {
         //   true,
         // );
       } else {
-        const mask = CN_MASKS.find((mask) => mask.name === expertName) as Mask;
+        const mask = CN_MASKS.find((mask) => nameProcess(mask.name) === nameProcess(expertName)) as Mask;
         await chatShore.newSession(mask);
         navigate(Path.Chat);
       }
