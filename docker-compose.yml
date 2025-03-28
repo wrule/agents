@@ -11,5 +11,5 @@ services:
       - XSKY_BASE_URL=http://10.10.220.55:8000
     ports:
       - "8091:8091"
-    command: /bin/zsh -c "source ~/.zshrc && npm run serve:all && tail -f /dev/null"
+    command: /bin/zsh -c "source ~/.zshrc && npm run start:all"
     restart: unless-stopped
