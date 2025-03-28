@@ -1,6 +1,6 @@
 services:
   perfma-gpt:
-    image: perfma-gpt-1
+    image: perfma-gpt
     container_name: perfma-gpt
     environment:
       - PORT=9091
