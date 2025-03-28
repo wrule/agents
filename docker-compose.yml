@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   perfma-gpt:
     image: perfma-gpt-1
@@ -13,5 +11,5 @@ services:
       - XSKY_BASE_URL=http://10.10.220.55:8000
     ports:
       - "8091:8091"
-    command: /bin/bash -c "npm run serve:all"
+    command: /bin/zsh -c "source ~/.zshrc && npm run serve:all && tail -f /dev/null"
     restart: unless-stopped
