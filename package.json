@@ -15,7 +15,7 @@
     "build:all": "npm run build && cd NextChatModal && npm run build",
     "serve:all": "npm run serve && cd NextChatModal && npm run serve && pm2 save",
     "start:ui": "cd NextChatModal && npm run start",
-    "start:all": "npm run start | npm run start:ui",
+    "start:all": "npm run start:ui | npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
