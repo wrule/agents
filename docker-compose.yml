@@ -2,7 +2,7 @@ version: '3'
 
 services:
   perfma-gpt:
-    image: perfma-gpt
+    image: perfma-gpt-1
     container_name: perfma-gpt
     environment:
       - PORT=9091
@@ -13,5 +13,5 @@ services:
       - XSKY_BASE_URL=http://10.10.220.55:8000
     ports:
       - "8091:8091"
-    command: npm run serve:all
+    command: /bin/bash -c "npm run serve:all"
     restart: unless-stopped
