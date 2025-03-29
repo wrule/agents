@@ -43,7 +43,7 @@ export const 创建计划工具 = createTool({
       });
       return {
         success: true,
-        url: `http://10.10.30.103:8081/${envId}/product/business/${product.first.productId}/plan/detail?id=${data.object}`,
+        url: `${process.env.XSEA}/${envId}/product/business/${product.first.productId}/plan/detail?id=${data.object}`,
       };
     });
   },

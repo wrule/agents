@@ -26,7 +26,7 @@ export const 创建产品工具 = createTool({
       const { object } = data;
       return {
         success: true,
-        url: `http://10.10.30.103:8081/822313712173449216/product/business/${object.id}/overview?tab=0`,
+        url: `${process.env.XSEA}/822313712173449216/product/business/${object.id}/overview?tab=0`,
       };
     });
   },
