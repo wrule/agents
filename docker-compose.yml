@@ -1,12 +1,13 @@
 services:
   perfma-gpt:
-    image: perfma-gpt
+    image: perfma-gpt-2
     container_name: perfma-gpt
     environment:
       - PORT=9091
       - BASE_URL=https://dashscope.aliyuncs.com/compatible-mode
       - OPENAI_API_KEY=sk-98452617897648f5972d453da4dca0c7
       - MODEL_NAME=qwen2.5-72b-instruct
+      - XSEA=http://10.10.30.103:8081
       - TESTMA_BASE_URL=http://10.10.30.103:18088
       - XSKY_BASE_URL=http://10.10.220.55:8000
     ports:
