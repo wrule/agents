@@ -176,8 +176,8 @@ export const getServerSideConfig = () => {
   ).split(",");
 
   return {
-    baseUrl: process.env.BASE_URL,
-    apiKey: getApiKey(process.env.OPENAI_API_KEY),
+    baseUrl: 'http://localhost:9091',
+    apiKey: getApiKey(),
     openaiOrgId: process.env.OPENAI_ORG_ID,
 
     isStability,
