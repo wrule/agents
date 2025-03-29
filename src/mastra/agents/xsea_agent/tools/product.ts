@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { thttp } from '../api/http';
 import { exactSearch, toolExecute } from '../utils';
+import { cookieEnvId } from '../utils/cookie';
 
 export const 创建产品工具 = createTool({
   id: 'create-product',
@@ -18,6 +19,7 @@ export const 创建产品工具 = createTool({
     url: z.string().optional().describe('新产品在平台上的url，需要以makrdown url的形式填入productName和url，如[productName](url)'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
+    const envId = cookieEnvId(cookie);
     return await toolExecute('创建产品工具', context, async (context) => {
       const { data } = await thttp(cookie).post(`paas/products`, {
         productName: context.name,
@@ -26,7 +28,7 @@ export const 创建产品工具 = createTool({
       const { object } = data;
       return {
         success: true,
-        url: `${process.env.XSEA}/822313712173449216/product/business/${object.id}/overview?tab=0`,
+        url: `${process.env.XSEA}/${envId}/product/business/${object.id}/overview?tab=0`,
       };
     });
   },

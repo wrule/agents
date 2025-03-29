@@ -2,8 +2,7 @@ import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { exactSearch, toolExecute } from '../utils';
 import { thttp } from '../api/http';
-
-const envId = '822313712173449216';
+import { cookieEnvId } from '../utils/cookie';
 
 export const 创建计划工具 = createTool({
   id: 'create-plan',
@@ -23,6 +22,7 @@ export const 创建计划工具 = createTool({
     url: z.string().optional().describe('新计划在平台上的Url，需要以makrdown的形式呈现链接，并且填入planName，如[planName](http://xxx)'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
+    const envId = cookieEnvId(cookie);
     return await toolExecute('创建计划工具', context, async (context) => {
       const product = await exactSearch(context.query, 'PRODUCT', cookie);
       if (product.confusion) {

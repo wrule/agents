@@ -3,6 +3,7 @@ import { createTool } from '@mastra/core/tools';
 import { thttp } from '../api/http';
 import dayjs from 'dayjs';
 import { exactSearch, toolExecute } from '../utils';
+import { cookieEnvId } from '../utils/cookie';
 
 export const 创建脚本工具 = createTool({
   id: 'create-script',
@@ -18,6 +19,7 @@ export const 创建脚本工具 = createTool({
     url: z.string().optional().describe('新脚本在平台上的url，确保输出遵循[scriptName](url)的makrdown格式，确保替换成为真实值'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
+    const envId = cookieEnvId(cookie);
     return await toolExecute('创建脚本工具', context, async (context) => {
       let type = context.type.toLowerCase();
       if (type === 'SEAMETER') {
@@ -48,8 +50,6 @@ export const 创建脚本工具 = createTool({
   },
 });
 
-const envId = '822313712173449216';
-
 export const 快速压测工具 = createTool({
   id: 'quick-stress-testing-script',
   description: `
@@ -67,6 +67,7 @@ export const 快速压测工具 = createTool({
     sceneUrl: z.string().optional().describe('当前压测场景的url，需要以markdown url的形式输出给用户，如[当前压测场景](sceneUrl)'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
+    const envId = cookieEnvId(cookie);
     return await toolExecute('快速压测工具', context, async (context) => {
       let productId = '';
       const scriptIds: string[] = [];
