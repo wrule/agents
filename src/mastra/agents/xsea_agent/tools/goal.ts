@@ -21,7 +21,7 @@ export const 创建目标工具 = createTool({
 4. 稳定性场景
     `.trim()),
     curve: z.array(z.object({
-      incConc: z.number().min(0).describe('递增并发'),
+      incConc: z.number().min(1).describe('递增并发'),
       incTime: z.number().min(0).describe('递增用时（秒）'),
       duration: z.number().min(0).describe('处在当前并发水平下的维持时长（秒）'),
     })).min(1).describe(`
@@ -83,7 +83,7 @@ export const 创建目标工具 = createTool({
         sceneStrategies.push({
           index: (index * 2) + 1,
           period: item.incTime,
-          userNum: item.incConc < 0 ? 0 : item.incConc,
+          userNum: item.incConc < 1 ? 1 : item.incConc,
         });
         sceneStrategies.push({
           index: (index * 2) + 2,
