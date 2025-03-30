@@ -10,8 +10,8 @@ export const 创建目标工具 = createTool({
 当需要创建一个目标，调用此工具
   `.trim(),
   inputSchema: z.object({
-    planQuery: z.string().describe('所属计划的查询短语，自动生成，planId优先'),
-    scriptQueryList: z.array(z.string().describe('目标绑定的脚本的查询短语，自动生成，scriptId优先')),
+    planQuery: z.string().describe('所属计划的查询短语，确保询问用户，planId优先'),
+    scriptQueryList: z.array(z.string().describe('目标绑定的脚本的查询短语，确保询问用户，scriptId优先')),
     name: z.string().min(1).max(20).describe('目标名称，确保询问用户'),
     type: z.number().min(1).max(4).describe(`
 目标类型的序号，可以是以下类型，确保询问用户
@@ -30,6 +30,8 @@ export const 创建目标工具 = createTool({
 - 避免询问用户递增并发值
 - 避免询问用户递增用时
 - 避免询问用户处在当前并发水平下的维持时长
+
+## 确保询问用户
     `),
   }),
   outputSchema: z.object({
