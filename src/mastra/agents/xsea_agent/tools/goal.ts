@@ -149,10 +149,10 @@ export const 获取目标详情工具 = createTool({
         thttp(cookie).post(`xsea/scene/querySceneDetail`, {
           envId,
           sceneId: goal.first.sceneId,
-          workspaceId: goal.first.workspaceId,
+          workspaceId: goal.first.productId,
         }),
         thttp(cookie).post(`xsea/scene/script/queryStrategy`, {
-          id: goal.first.goalId,
+          id: goal.first.sceneId,
         }),
       ]);
       return {
