@@ -233,7 +233,7 @@ export class ChatGPTApi implements LLMApi {
         threadId: useChatStore.getState().currentSession().id,
         agentName: mask.agentName,
         runId: mask.agentName,
-        resourceId: localStorage.getItem('currentCookie'),
+        resourceId: localStorage.getItem('currentCookie') || 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=3f475923ad424d429cc746e4892e8130',
         // stream: options.config.stream,
         // model: modelConfig.model,
         // temperature: !isO1OrO3 ? modelConfig.temperature : 1,

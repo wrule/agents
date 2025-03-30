@@ -88,7 +88,7 @@ const Next = () => {
         messages: prompt,
         agentName: mask.agentName,
         runId: mask.agentName,
-        resourceId: localStorage.getItem('currentCookie'),
+        resourceId: localStorage.getItem('currentCookie') || 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=3f475923ad424d429cc746e4892e8130',
         threadId: session.id + nanoid(),
         stream: false,
         output: zerialize(z.tuple([

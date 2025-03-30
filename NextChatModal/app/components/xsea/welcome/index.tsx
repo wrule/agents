@@ -14,7 +14,7 @@ const Welcome = () => {
     setLoading(true);
     try {
       const topK = 20;
-      const searchParams = { resourceId: localStorage.getItem('currentCookie') };
+      const searchParams = { resourceId: localStorage.getItem('currentCookie') || 'sys_env_id=822313712173449216; sys_env_code=Init; sys_token=3f475923ad424d429cc746e4892e8130' };
       const [{ data: scriptData }, { data: recordData }] = await Promise.all([
         axios.post(`/xsea/api/xsea/vector/query`, { type: 'SCRIPT', text: Math.random().toString(), topK }, {
           params: searchParams,
