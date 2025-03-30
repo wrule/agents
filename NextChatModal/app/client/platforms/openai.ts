@@ -226,7 +226,7 @@ export class ChatGPTApi implements LLMApi {
       }
 
       const mask = useChatStore.getState().currentSession().mask;
-
+      console.log('historyMessages', messages);
       // O1 not support image, tools (plugin in ChatGPTNextWeb) and system, stream, logprobs, temperature, top_p, n, presence_penalty, frequency_penalty yet.
       requestPayload = {
         messages: messages.slice(-1),
