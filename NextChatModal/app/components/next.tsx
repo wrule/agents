@@ -92,10 +92,10 @@ const Next = () => {
         threadId: session.id + nanoid(),
         stream: false,
         output: zerialize(z.tuple([
-          z.string(),
-          z.string(),
-          z.string(),
-          z.string(),
+          z.string().max(50),
+          z.string().max(50),
+          z.string().max(50),
+          z.string().max(50),
         ]).describe('用户接下来可能会发送的四个消息')),
       });
       setList(() => Array.isArray(data) ? data : []);
