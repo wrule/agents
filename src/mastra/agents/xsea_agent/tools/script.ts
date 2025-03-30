@@ -9,9 +9,9 @@ export const 创建脚本工具 = createTool({
   id: 'create-script',
   description: '当需要创建一个新的脚本时，调用此工具',
   inputSchema: z.object({
-    query: z.string().describe('脚本所属的产品，由用户提供'),
-    name: z.string().min(1).max(20).describe('脚本名称，由用户提供'),
-    type: z.enum(['JMeter', 'Gatling', 'Shell', 'SeaMeter']).describe('脚本类型，由用户提供'),
+    query: z.string().describe('脚本所属的产品，确保询问用户'),
+    name: z.string().min(1).max(20).describe('脚本名称，确保询问用户'),
+    type: z.enum(['JMeter', 'Gatling', 'Shell', 'SeaMeter']).describe('脚本类型，确保询问用户'),
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
