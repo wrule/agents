@@ -56,7 +56,7 @@ export const 快速压测工具 = createTool({
 当需要 直接压测某个或者多个脚本的时候，调用此工具
   `.trim(),
   inputSchema: z.object({
-    queryList: z.array(z.string().describe('脚本查询短语，自动生成')),
+    queryList: z.array(z.string().describe('脚本查询短语，自动生成，scriptId优先')),
     seconds: z.number().describe(`压测持续秒数，确保询问用户`),
     concurrency: z.number().describe(`需要达到的最大并发数，确保询问用户`),
   }),
