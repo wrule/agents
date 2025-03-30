@@ -137,29 +137,30 @@ export const 获取目标详情工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     const envId = cookieEnvId(cookie);
-    console.log('获取目标详情工具 ->', context);
-    const goal = await exactSearch(context.query, 'GOAL', cookie);
-    if (goal.confusion) {
+    return await toolExecute('获取目标详情工具', context, async (context) => {
+      const goal = await exactSearch(context.query, 'GOAL', cookie);
+      if (goal.confusion) {
+        return {
+          success: false,
+          prompt: goal.confusion,
+        };
+      }
+      const [{ data: goalDetailData }, { data: strategyDetailData }] = await Promise.all([
+        thttp(cookie).post(`xsea/scene/querySceneDetail`, {
+          envId,
+          sceneId: goal.first.sceneId,
+          workspaceId: goal.first.workspaceId,
+        }),
+        thttp(cookie).post(`xsea/scene/script/queryStrategy`, {
+          id: goal.first.goalId,
+        }),
+      ]);
       return {
-        success: false,
-        prompt: goal.confusion,
+        success: true,
+        goalDetail: goalDetailData.object,
+        strategyDetail: strategyDetailData.object,
       };
-    }
-    const [{ data: goalDetailData }, { data: strategyDetailData }] = await Promise.all([
-      thttp(cookie).post(`xsea/scene/querySceneDetail`, {
-        envId,
-        sceneId: goal.first.sceneId,
-        workspaceId: goal.first.workspaceId,
-      }),
-      thttp(cookie).post(`xsea/scene/script/queryStrategy`, {
-        id: goal.first.goalId,
-      }),
-    ]);
-    return {
-      success: true,
-      goalDetail: goalDetailData.object,
-      strategyDetail: strategyDetailData.object,
-    };
+    });
   },
 });
 
