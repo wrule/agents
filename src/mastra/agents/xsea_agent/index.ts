@@ -73,6 +73,7 @@ export const xsea_agent = new Agent({
   - 确保最终解释回答不超过500个字符
 
 ## 【重要】对于创建|修改|压测类工具，必须经过用户确认才能调用，请不要自动调用
+## 【重要】请确保所有markdown url输出正确，避免出现名称为空字符串，避免出现url格式不对的情况
   `.trim(),
   model: main,
   memory: new Memory({
