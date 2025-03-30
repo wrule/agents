@@ -12,9 +12,9 @@ export const 创建目标工具 = createTool({
   inputSchema: z.object({
     planQuery: z.string().describe('所属计划的查询短语，自动生成'),
     scriptQueryList: z.array(z.string().describe('目标绑定的脚本的查询短语，自动生成')),
-    name: z.string().min(1).max(20).describe('目标名称，由用户提供'),
+    name: z.string().min(1).max(20).describe('目标名称，确保询问用户'),
     type: z.number().min(1).max(4).describe(`
-目标类型的序号，可以是以下类型，由用户提供
+目标类型的序号，可以是以下类型，确保询问用户
 1. 基准场景
 2. 单场景
 3. 混合场景

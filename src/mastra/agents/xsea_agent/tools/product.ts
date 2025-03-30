@@ -10,8 +10,8 @@ export const 创建产品工具 = createTool({
 当需要创建产品时，调用此工具
   `.trim(),
   inputSchema: z.object({
-    name: z.string().max(20).describe('产品名称，由用户提供'),
-    desc: z.string().max(100).describe('产品描述，由用户提供'),
+    name: z.string().max(20).describe('产品名称，确保询问用户'),
+    desc: z.string().max(100).describe('产品描述，确保询问用户'),
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),

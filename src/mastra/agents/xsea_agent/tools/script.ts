@@ -57,8 +57,8 @@ export const 快速压测工具 = createTool({
   `.trim(),
   inputSchema: z.object({
     queryList: z.array(z.string().describe('脚本查询短语，自动生成')),
-    seconds: z.number().describe(`压测持续秒数，由用户提供`),
-    concurrency: z.number().describe(`需要达到的最大并发数，由用户提供`),
+    seconds: z.number().describe(`压测持续秒数，确保询问用户`),
+    concurrency: z.number().describe(`需要达到的最大并发数，确保询问用户`),
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),

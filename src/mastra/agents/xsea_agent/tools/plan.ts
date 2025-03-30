@@ -11,8 +11,8 @@ export const 创建计划工具 = createTool({
   `.trim(),
   inputSchema: z.object({
     query: z.string().describe('所属产品的查询短语，自动生成'),
-    name: z.string().min(1).max(20).describe('计划名称，由用户提供'),
-    purpose: z.string().min(1).max(100).describe('此计划希望实现的测试目标，由用户提供'),
+    name: z.string().min(1).max(20).describe('计划名称，确保询问用户'),
+    purpose: z.string().min(1).max(100).describe('此计划希望实现的测试目标，确保询问用户'),
     start: z.string().describe('计划的开始日期，YYYY-MM-DD格式'),
     end: z.string().describe('计划的结束日期，YYYY-MM-DD格式'),
   }),
