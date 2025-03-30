@@ -16,6 +16,7 @@ export const 创建脚本工具 = createTool({
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
+    scriptId: z.string().optional().describe('新建的脚本的scriptId'),
     url: z.string().optional().describe('新脚本在平台上的url，确保输出遵循[scriptName](url)的makrdown格式，确保替换成为真实值'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
@@ -43,6 +44,7 @@ export const 创建脚本工具 = createTool({
       });
       return {
         success: true,
+        scriptId: data.object,
         url: `${process.env.XSEA}/${envId}/product/business/${product.first.productId}/script?scriptId=${data.object}`,
         prompt: `一定要提醒用户如果需要编写脚本代码，需要在平台页面上唤起对应专家实现`,
       };
