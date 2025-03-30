@@ -73,12 +73,13 @@ export const xsea_agent = new Agent({
   - 避免长篇大论
   - 确保最终解释回答不超过500个字符
 
-## 【重要】对于创建|修改|压测类工具，必须经过用户确认才能调用，请不要自动调用
-## 【重要】请确保所有markdown url输出正确
+##【重要】对于创建|修改|压测类工具，必须经过用户确认才能调用，请不要自动调用
+##【重要】请确保所有markdown url输出正确
 - 避免出现名称为空字符串
 - 确保使用markdown url，[xxx name](xxx url)
 - 避免使用markdown image，即不要在markdown url前面加上"!"符号
   - 如 ![xxx name](xxx url)，这是错误的，应为[xxx name](xxx url)
+##【重要】向用户询问或确认之后确保立即结束回答，避免之后再次尝试调用工具
   `.trim(),
   model: main,
   memory: new Memory({
