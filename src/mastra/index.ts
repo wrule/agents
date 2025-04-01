@@ -17,6 +17,7 @@ import { xsea_guide } from './agents/xsea_guide';
 import { testma_agent } from './agents/testma_agent';
 import { xsky_agent } from './agents/xsky_agent';
 import { coder_v2 } from './agents/coder_v2';
+import { xwind_agent } from './agents/xwind_agent';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -24,6 +25,7 @@ export const mastra = new Mastra({
     xsea_agent,
     testma_agent,
     xsky_agent,
+    xwind_agent,
     jmeter_expert,
     gatling_expert,
     shell_expert,
