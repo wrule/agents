@@ -206,7 +206,7 @@ function Screen() {
             <Route path={Path.McpMarket} element={<McpMarketPage />} />
           </Routes>
         </WindowContent>
-        {/* <StatesView /> */}
+        <StatesView />
       </>
     );
   };
