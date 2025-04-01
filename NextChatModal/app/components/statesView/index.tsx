@@ -67,8 +67,8 @@ const StatesView = () => {
                               await chatStore.newSession(mask);
                               navigate(Path.Chat);
                               chatStore.AppendRoleMessage({
-                                role: "system",
-                                content: `${JSON.stringify(
+                                role: "user",
+                                content: `user-data: ${JSON.stringify(
                                   item.stackDatas,
                                   null,
                                   2,
@@ -99,8 +99,8 @@ const StatesView = () => {
                               await chatStore.newSession(mask);
                               navigate(Path.Chat);
                               chatStore.AppendRoleMessage({
-                                role: "system",
-                                content: `${JSON.stringify(
+                                role: "user",
+                                content: `user-data: ${JSON.stringify(
                                   item.heapHisto,
                                   null,
                                   2,
