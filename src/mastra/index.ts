@@ -16,6 +16,7 @@ import { interactive_prompt_agent } from './agents/interactive_prompt_agent';
 import { xsea_guide } from './agents/xsea_guide';
 import { testma_agent } from './agents/testma_agent';
 import { xsky_agent } from './agents/xsky_agent';
+import { coder_v2 } from './agents/coder_v2';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -29,6 +30,7 @@ export const mastra = new Mastra({
     touch_fish_agent,
     qa_cleaning_agent,
     coder,
+    coder_v2,
     interactive_prompt_agent,
     user_agent,
     xsea_guide,
