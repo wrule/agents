@@ -11,6 +11,7 @@ import { 创建目标工具, 压测目标工具, 获取目标详情工具 } from
 import { 获取压测记录详情工具 } from './tools/record';
 import { 获取测试报告详情工具 } from './tools/report';
 import { 获取定时任务详情工具 } from './tools/schedule';
+import { 注入故障工具 } from './tools/inject';
 
 export const xsea_agent = new Agent({
   name: 'XSea智能体',
@@ -73,6 +74,10 @@ export const xsea_agent = new Agent({
   - 避免长篇大论
   - 确保最终解释回答不超过500个字符
 
+- 用户想注入故障或者异常的时候 -> 注入故障工具
+  - 避免询问多余信息
+  - 确保直接回答注入成功或者注入失败
+
 ##【重要】对于创建|修改|压测类工具，必须经过用户确认才能调用，请不要自动调用
 ##【重要】请确保所有markdown url输出正确
 - 避免出现名称为空字符串
@@ -106,5 +111,6 @@ export const xsea_agent = new Agent({
     获取压测记录详情工具,
     获取测试报告详情工具,
     获取定时任务详情工具,
+    注入故障工具,
   },
 });
