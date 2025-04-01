@@ -28,8 +28,7 @@ export const 注入故障工具 = createTool({
         },
         {
           headers: {
-            cookie:
-              'sys_token=a3de603a41dc4fed9562ffe8d1e61669; sys_env_id=977046101482688512; sys_env_code=AI_DEMO; X-XSHELTER-ACCESS-TOKEN=9cf1c1b7-e9fc-4636-b0ec-3ec6ed44556c',
+            cookie: process.env.XCHAOS_TOKEN,
             ["Content-Type"]: "application/json",
           },
         },
