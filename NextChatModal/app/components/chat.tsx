@@ -1806,7 +1806,7 @@ function _Chat() {
               }}
             >
               {messages
-                .filter((message) => message.role !== "system")
+                .filter((message) => message.role !== "system" && !((message.content as string)?.startsWith('user-data:')))
                 // TODO
                 // .filter((m) => !m.isMcpResponse)
                 .map((message, i) => {
