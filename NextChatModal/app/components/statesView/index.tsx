@@ -1,11 +1,17 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./index.module.scss";
 import { SessionJSON } from "../xsea/localJSON";
-import { AgentStore } from "@/app/agent/store";
+import { CN_MASKS } from "@/app/agent/store";
+import { useChatStore } from "@/app/store";
+import { Mask } from "@/app/store/mask";
+import { Path } from "@/app/constant";
+import { useNavigate } from "react-router-dom";
 
 const StatesView = () => {
   const [expand, setExpand] = useState<boolean>(false);
   const [tests, setTests] = useState<any[]>([]);
+  const chatStore = useChatStore();
+  const navigate = useNavigate();
 
   const syncStates = useCallback(() => {
     const newShow = SessionJSON.tests?.length >= 1;
@@ -51,25 +57,36 @@ const StatesView = () => {
                         {test.name ?? "-"}
                       </a>
                     </div>
-                    {(test.problem?.list ?? []).map((item: any) => (
-                      <>
+                    {(test.problem?.list ?? []).map((item: any) => {
+                      const mask = CN_MASKS.find((mask) => mask.name === 'XWind智能体') as Mask;
+                      return <>
                         {item.stackDatas && (
                           <div
                             className={styles.problem}
-                            onClick={() => {
-                              AgentStore.get("XSea_调用栈分析").Create(
-                                [
-                                  {
-                                    role: "system",
-                                    content: `${JSON.stringify(
-                                      item.stackDatas,
-                                      null,
-                                      2,
-                                    )}\n性能瓶颈在哪？`,
-                                  },
-                                ],
-                                true,
-                              );
+                            onClick={async () => {
+                              await chatStore.newSession(mask);
+                              navigate(Path.Chat);
+                              chatStore.AppendRoleMessage({
+                                role: "system",
+                                content: `${JSON.stringify(
+                                  item.stackDatas,
+                                  null,
+                                  2,
+                                )}\n性能瓶颈在哪？`,
+                              }, true);
+                              // AgentStore.get("XSea_调用栈分析").Create(
+                              //   [
+                              //     {
+                              //       role: "system",
+                              //       content: `${JSON.stringify(
+                              //         item.stackDatas,
+                              //         null,
+                              //         2,
+                              //       )}\n性能瓶颈在哪？`,
+                              //     },
+                              //   ],
+                              //   true,
+                              // );
                             }}
                           >
                             🎛️ 发现CPU性能问题
@@ -78,27 +95,37 @@ const StatesView = () => {
                         {item.heapHisto && (
                           <div
                             className={styles.problem}
-                            onClick={() => {
-                              AgentStore.get("XSea_内存分析").Create(
-                                [
-                                  {
-                                    role: "system",
-                                    content: `${JSON.stringify(
-                                      item.heapHisto,
-                                      null,
-                                      2,
-                                    )}\n性能瓶颈在哪？`,
-                                  },
-                                ],
-                                true,
-                              );
+                            onClick={async () => {
+                              await chatStore.newSession(mask);
+                              navigate(Path.Chat);
+                              chatStore.AppendRoleMessage({
+                                role: "system",
+                                content: `${JSON.stringify(
+                                  item.heapHisto,
+                                  null,
+                                  2,
+                                )}\n性能瓶颈在哪？`,
+                              }, true);
+                              // AgentStore.get("XSea_内存分析").Create(
+                              //   [
+                              //     {
+                              //       role: "system",
+                              //       content: `${JSON.stringify(
+                              //         item.heapHisto,
+                              //         null,
+                              //         2,
+                              //       )}\n性能瓶颈在哪？`,
+                              //     },
+                              //   ],
+                              //   true,
+                              // );
                             }}
                           >
                             📟 发现内存性能问题
                           </div>
                         )}
                       </>
-                    ))}
+                    })}
                   </li>
                 ))}
               </ul>
