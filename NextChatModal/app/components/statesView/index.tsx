@@ -40,7 +40,7 @@ const StatesView = () => {
               <b>当前压测</b>
               <ul className={styles.test_list}>
                 {tests.map((test, index) => (
-                  <li key={test.executeRecord?.id}>
+                  <li key={test.name}>
                     <div>
                       <a
                         href="javascript:;"
@@ -48,10 +48,10 @@ const StatesView = () => {
                           // window.top?.open(`http://192.168.8.139:8080${test.executeRecord.url}`);
                         }}
                       >
-                        {test.goal?.name ?? "-"}
+                        {test.name ?? "-"}
                       </a>
                     </div>
-                    {(test.list ?? []).map((item: any) => (
+                    {(test.problem?.list ?? []).map((item: any) => (
                       <>
                         {item.stackDatas && (
                           <div
