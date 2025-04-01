@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
-    i: z.string().max(200).describe('introduction，本次代码修改的介绍'),
+    i: z.string().max(200).describe('introduction，本轮代码修改的介绍'),
     a: z.array(
       z.object({
         t: z.number().min(1).max(3).describe(`
@@ -20,9 +20,9 @@ const parser = StructuredOutputParser.fromZodSchema(
 - 如果操作类型为删除（t为3），则此字段不存在
         `.trim()),
       }),
-    ),
-    s: z.string().max(200).describe('summary，本次代码修改的总结'),
-  }),
+    ).describe('actions，本轮代码修改的操作序列'),
+    s: z.string().max(200).describe('summary，本轮代码修改的总结'),
+  }).describe('用于定义一轮代码修改的对象'),
 );
 
 export const coder_v2 = new Agent({
