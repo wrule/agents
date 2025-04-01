@@ -37,7 +37,7 @@ const StatesView = () => {
         <>
           {tests.length > 0 && (
             <div className={styles.his_test}>
-              <b>历史压测</b>
+              <b>当前压测</b>
               <ul className={styles.test_list}>
                 {tests.map((test, index) => (
                   <li key={test.executeRecord?.id}>
