@@ -62,16 +62,18 @@ const Agents = () => {
       }
     } else {
       if (message.type === "发送异常") {
-        const execId = message.problem.execId;
-        const list = message.problem.list;
-        const tests: any[] = SessionJSON.tests ?? [];
-        const index = tests.findIndex(
-          (test) => test.executeRecord.id === execId,
-        );
-        if (index >= 0) {
-          tests[index] = { ...tests[index], list };
-        }
-        SessionJSON.tests = tests;
+        console.log('发送异常', message);
+        SessionJSON.tests = [message];
+        // const execId = message.problem.execId;
+        // const list = message.problem.list;
+        // const tests: any[] = SessionJSON.tests ?? [];
+        // const index = tests.findIndex(
+        //   (test) => test.executeRecord.id === execId,
+        // );
+        // if (index >= 0) {
+        //   tests[index] = { ...tests[index], list };
+        // }
+        // SessionJSON.tests = tests;
       }
     }
   };
