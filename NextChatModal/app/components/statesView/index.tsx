@@ -4,14 +4,13 @@ import { SessionJSON } from "../xsea/localJSON";
 import { AgentStore } from "@/app/agent/store";
 
 const StatesView = () => {
-  const [expand, setExpand] = useState<boolean>(true);
+  const [expand, setExpand] = useState<boolean>(false);
   const [tests, setTests] = useState<any[]>([]);
 
   const syncStates = useCallback(() => {
-    const oldShow = tests.length < 1;
-    const newShow = SessionJSON.tests.length >= 1;
+    const newShow = SessionJSON.tests?.length >= 1;
     setTests(SessionJSON.tests ?? []);
-    if (!oldShow && newShow) {
+    if (newShow) {
       document.documentElement.style.setProperty("--tools-width", "240px");
       setTimeout(() => {
         setExpand(newShow);
@@ -41,7 +40,7 @@ const StatesView = () => {
               <b>历史压测</b>
               <ul className={styles.test_list}>
                 {tests.map((test, index) => (
-                  <li key={test.executeRecord.id}>
+                  <li key={test.executeRecord?.id}>
                     <div>
                       <a
                         href="javascript:;"
@@ -49,7 +48,7 @@ const StatesView = () => {
                           // window.top?.open(`http://192.168.8.139:8080${test.executeRecord.url}`);
                         }}
                       >
-                        {test.goal.name ?? "-"}
+                        {test.goal?.name ?? "-"}
                       </a>
                     </div>
                     {(test.list ?? []).map((item: any) => (
