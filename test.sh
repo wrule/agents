@@ -1,18 +1,13 @@
 #!/bin/bash
-curl -X POST "https://oneapi.newbelle.com.cn/v1/chat/completions" \
+curl https://openrouter.ai/api/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-D6Kt082QDbdGtV4nB0E940D7AbC646C19e3bAc325c9e74C9" \
+  -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -d '{
-    "model": "Qwen2.5-32B-Instruct",
-    "messages": [
-      {
-        "role": "system",
-        "content": "You are a helpful assistant."
-      },
-      {
-        "role": "user",
-        "content": "Hello, how are you today?"
-      }
-    ],
-    "stream": true
-  }'
+  "model": "qwen/qwen2.5-32b-instruct",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你好"
+    }
+  ]
+}'
