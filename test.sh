@@ -1,6 +1,6 @@
 #!/bin/bash
 echo $OPENROUTER_API_KEY
-curl https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions \
+curl -N https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $OPENROUTER_API_KEY" \
   -d '{
@@ -8,7 +8,8 @@ curl https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions \
   "messages": [
     {
       "role": "user",
-      "content": "你好"
+      "content": "写一个一百字的小作文"
     }
-  ]
+  ],
+  "stream": true
 }'
