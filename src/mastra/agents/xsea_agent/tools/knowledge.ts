@@ -17,7 +17,7 @@ export const XSea知识库查询工具 = createTool({
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('XSea知识库查询工具', context, async (context) => {
       const { data } = await thttp(cookie).post(`xsea/vector/queryQA`, { text: context.query, topK: 20, filterScore: false });
-      const qaList = data.object?.map((item: any) => JSON.parse(item.data)) ?? [];
+      const qaList = data.object?.map((item: any) => item.data) ?? [];
       return {
         success: true,
         qaList,
