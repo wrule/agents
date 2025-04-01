@@ -9,8 +9,8 @@ const parser = StructuredOutputParser.fromZodSchema(
     a: z.array(
       z.object({
         t: z.number().min(1).max(3).describe(`
-操作类型序号
-1. 在第n行之前插入一个内容为c的新行
+操作类型的序号
+1. 在第n行之前插入一个新行，内容为c
 2. 把第n行的内容修改为c
 3. 删第n行
         `.trim()),
