@@ -47,7 +47,7 @@ const StatesView = () => {
               <ul className={styles.test_list}>
                 {tests.map((test, index) => (
                   <li key={test.name}>
-                    <div>
+                    <div className={styles.a_name}>
                       <a
                         href="javascript:;"
                         onClick={() => {
