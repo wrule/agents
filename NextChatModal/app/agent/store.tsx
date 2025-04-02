@@ -43,24 +43,24 @@ export const CN_MASKS: BuiltinMask[] = [
       },
     ],
   },
-  {
-    avatar: "🤖",
-    name: "TestMa智能体",
-    agentName: "testma_agent",
-    context: [],
-  },
-  {
-    avatar: "🤖",
-    name: "XSky智能体",
-    agentName: "xsky_agent",
-    context: [],
-  },
-  {
-    avatar: "🤖",
-    name: "XWind智能体",
-    agentName: "xwind_agent",
-    context: [],
-  },
+  // {
+  //   avatar: "🤖",
+  //   name: "TestMa智能体",
+  //   agentName: "testma_agent",
+  //   context: [],
+  // },
+  // {
+  //   avatar: "🤖",
+  //   name: "XSky智能体",
+  //   agentName: "xsky_agent",
+  //   context: [],
+  // },
+  // {
+  //   avatar: "🤖",
+  //   name: "XWind智能体",
+  //   agentName: "xwind_agent",
+  //   context: [],
+  // },
   {
     avatar: "👨‍💻",
     name: "JMeter专家",
