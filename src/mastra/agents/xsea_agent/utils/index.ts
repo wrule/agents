@@ -77,7 +77,7 @@ export const fuzzySearch = async (query: string, type: XSeaType, cookie?: string
     ...item.data,
     score: item.score,
   })) ?? [];
-  console.log('fuzzySearch', query, type, list);
+  // console.log('fuzzySearch', query, type, list);
   return list;
 };
 
@@ -100,6 +100,6 @@ async function toolExecute<T>(name: string, t: T, callback: (t: T) => Promise<To
       prompt: `调用错误消息为：${error.message ?? '未知错误'}，请向用户解释，并引导用户正确操作`,
     };
   }
-  console.log(name, '<-', result);
+  console.log(name, '<-');
   return result;
 }

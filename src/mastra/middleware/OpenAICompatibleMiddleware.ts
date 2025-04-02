@@ -55,6 +55,7 @@ const vercelStreamToOpenAIResponse = (stream: StreamTextResult<any, unknown>, id
             break;
           }
           const chunkText = new TextDecoder().decode(value);
+          // console.log(done, chunkText);
           chunkText.split('\n').forEach((line) => {
             const transformedChunk = vercelChunkToOpenAI(line, id);
             if (transformedChunk) {
