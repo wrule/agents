@@ -1,0 +1,14 @@
+data: {"choices":[{"delta":{"content":null,"tool_calls":[{"function":{"name":"XSea对象查询工具","arguments":"{\""},"index":0,"id":"call_222e9e043d844183b94ea4","type":"function"}],"role":"assistant"},"finish_reason":null,"index":0,"logprobs":null}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: {"choices":[{"delta":{"content":null,"tool_calls":[{"function":{"arguments":"type\": 1"},"index":0,"id":"","type":"function"}]},"finish_reason":null,"index":0,"logprobs":null}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: {"choices":[{"delta":{"content":null,"tool_calls":[{"function":{"arguments":", \"query\":"},"index":0,"id":"","type":"function"}]},"finish_reason":null,"index":0,"logprobs":null}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: {"choices":[{"delta":{"content":null,"tool_calls":[{"function":{"arguments":" \"电商\"}"},"index":0,"id":"","type":"function"}]},"finish_reason":null,"index":0,"logprobs":null}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: {"choices":[{"delta":{"tool_calls":[{"function":{"arguments":null},"index":0,"id":"","type":"function"}]},"index":0}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: {"choices":[{"finish_reason":"tool_calls","delta":{},"index":0,"logprobs":null}],"object":"chat.completion.chunk","usage":null,"created":1743584306,"system_fingerprint":null,"model":"qwen2.5-32b-instruct","id":"chatcmpl-219c9bb7-99b6-99cb-aefa-7a92619a3109"}
+
+data: [DONE]
+
