@@ -93,12 +93,12 @@ export const CN_MASKS: BuiltinMask[] = [
   },
   {
     avatar: "📮",
-    name: "摸摸鱼",
+    name: "休闲一下",
     agentName: "touch_fish_agent",
     context: [
       {
         role: "assistant",
-        content: "嘿嘿 🐶",
+        content: "休息之余，轻松一下吧 ☀️",
       },
     ],
   },
