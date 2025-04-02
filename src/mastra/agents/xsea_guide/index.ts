@@ -1,5 +1,6 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
+import { Memory } from '@mastra/memory';
 
 export const xsea_guide = new Agent({
   name: 'XSea产品引导',
@@ -18,5 +19,10 @@ export const xsea_guide = new Agent({
     - 测试报告
     - 定时任务
   `.trim(),
+  memory: new Memory({
+    options: {
+      lastMessages: 50,
+    },
+  }),
   model: main,
 });
