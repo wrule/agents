@@ -1,0 +1,24 @@
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"role":"assistant","content":""},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"id":"chatcmpl-tool-cf46a614a181498992ceb2f98b0f6711","type":"function","index":0,"function":{"name":"XSea对象查询工具"}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"{\"type\": 1"}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":", \"query\": \"\""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":""}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"tool_calls":[{"index":0,"function":{"arguments":"}"}}]},"logprobs":null,"finish_reason":null}]}
+
+data: {"id":"chat-31d8728cbf694ad2b59d836fe16d131e","object":"chat.completion.chunk","created":1743589744,"model":"Qwen2.5-32B-Instruct","choices":[{"index":0,"delta":{"content":""},"logprobs":null,"finish_reason":"tool_calls","stop_reason":null}]}
+
+data: [DONE]
+
