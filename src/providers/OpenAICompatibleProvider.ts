@@ -18,6 +18,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
   baseURL: path.join(process.env.BASE_URL!, '/v1'),
   fetch: async (...args) => {
     const res = await fetch(...args);
+    // return res;
 
     const newStream = new ReadableStream({
       async start(controller) {
@@ -30,7 +31,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
             while (true) {
               const { done, value } = await reader.read();
               if (done) break;
-              const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
+              const lines = new TextDecoder().decode(value).split('\n');
               const newLines: string[] = [];
               lines.forEach((line) => {
                 if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
@@ -74,7 +75,8 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                 }
                 newLines.push(line);
               });
-              const resultText = `${newLines.join('\n\n')}\n\n`;
+              console.log(newLines);
+              const resultText = newLines.join('\n');
               // console.log(resultText);
               const newValue = new TextEncoder().encode(resultText);
               controller.enqueue(newValue);
