@@ -1,6 +1,17 @@
 import path from 'path';
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 
+const betterObject = (object1: any, object2: any) => {
+  let result = null;
+  if (object1 && object2) {
+    result = JSON.stringify(object1).length > JSON.stringify(object2).length ?
+      object1 : object2;
+  } else {
+    result = object1 || object2;
+  }
+  return result;
+}
+
 const OpenAICompatibleProvider = createOpenAICompatible({
   name: 'provider',
   apiKey: process.env.OPENAI_API_KEY,
@@ -28,15 +39,10 @@ const OpenAICompatibleProvider = createOpenAICompatible({
               const jsonObject = JSON.parse(jsonText);
               const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
               if (toolCallStop) {
-                let result = null;
-                if (fullArgsTextObject && argsTextObject) {
-                  result = JSON.stringify(fullArgsTextObject).length > JSON.stringify(argsTextObject).length ?
-                    fullArgsTextObject : argsTextObject;
+                const result = betterObject(fullArgsTextObject, argsTextObject);
+                if (result) {
                   console.log(result);
-                } else {
-                  result = fullArgsTextObject || argsTextObject;
                 }
-                console.log(result);
                 fullArgsTextObject = null;
                 argsTextObject = null;
               }
