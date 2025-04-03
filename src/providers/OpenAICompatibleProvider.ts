@@ -30,7 +30,6 @@ const OpenAICompatibleProvider = createOpenAICompatible({
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-
           const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
           lines.forEach((line) => {
             if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
