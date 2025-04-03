@@ -26,6 +26,20 @@ const OpenAICompatibleProvider = createOpenAICompatible({
             if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
               const jsonText = line.slice(5);
               const jsonObject = JSON.parse(jsonText);
+              const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
+              if (toolCallStop) {
+                let result = null;
+                if (fullArgsTextObject && argsTextObject) {
+                  result = JSON.stringify(fullArgsTextObject).length > JSON.stringify(argsTextObject).length ?
+                    fullArgsTextObject : argsTextObject;
+                  console.log(result);
+                } else {
+                  result = fullArgsTextObject || argsTextObject;
+                }
+                console.log(result);
+                fullArgsTextObject = null;
+                argsTextObject = null;
+              }
               const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
               if (typeof argsText === 'string') {
                 fullArgsText += argsText;
@@ -35,15 +49,6 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                 try {
                   argsTextObject = JSON.parse(argsText);
                 } catch (error) { }
-                if (fullArgsTextObject || argsTextObject) {
-                  if (fullArgsTextObject && argsTextObject) {
-
-                  } else if (fullArgsTextObject) {
-
-                  } else {
-
-                  }
-                }
                 return;
               }
             }
