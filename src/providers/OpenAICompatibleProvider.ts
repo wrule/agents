@@ -19,70 +19,80 @@ const OpenAICompatibleProvider = createOpenAICompatible({
   fetch: async (...args) => {
     const res = await fetch(...args);
 
-    const clonedRes = res.clone();
-    if (clonedRes.body) {
-      try {
-        const reader = clonedRes.body.getReader();
-        let fullArgsText = '';
-        let fullArgsTextObject: any = null;
-        let argsTextObject: any = null;
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
-          const newLines: string[] = [];
-          lines.forEach((line) => {
-            if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
-              try {
-                const jsonText = line.slice(5);
-                const jsonObject = JSON.parse(jsonText);
-                const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
-                if (typeof argsText === 'string') {
-                  fullArgsText += argsText;
+    const newStream = new ReadableStream({
+      async start(controller) {
+        const clonedRes = res.clone();
+        if (clonedRes.body) {
+          try {
+            const reader = clonedRes.body.getReader();
+            let fullArgsText = '';
+            let fullArgsTextObject: any = null;
+            let argsTextObject: any = null;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
+              const newLines: string[] = [];
+              lines.forEach((line) => {
+                if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
                   try {
-                    fullArgsTextObject = JSON.parse(fullArgsText);
-                  } catch (error) { }
-                  try {
-                    argsTextObject = JSON.parse(argsText);
-                  } catch (error) { }
-                  return;
-                }
-                const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
-                if (toolCallStop) {
-                  const result = betterObject(fullArgsTextObject, argsTextObject);
-                  if (result) {
-                    jsonObject.choices[0].delta = {
-                      tool_calls: [{
-                        index: 0,
-                        function: {
-                          arguments: JSON.stringify(result),
-                        },
-                      }],
-                    };
-                    jsonObject.choices[0].finish_reason = null;
-                    delete jsonObject.choices[0].stop_reason;
-                    newLines.push(`data: ${JSON.stringify(jsonObject)}`);
+                    const jsonText = line.slice(5);
+                    const jsonObject = JSON.parse(jsonText);
+                    const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
+                    if (typeof argsText === 'string') {
+                      fullArgsText += argsText;
+                      try {
+                        fullArgsTextObject = JSON.parse(fullArgsText);
+                      } catch (error) { }
+                      try {
+                        argsTextObject = JSON.parse(argsText);
+                      } catch (error) { }
+                      return;
+                    }
+                    const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
+                    if (toolCallStop) {
+                      const result = betterObject(fullArgsTextObject, argsTextObject);
+                      if (result) {
+                        jsonObject.choices[0].delta = {
+                          tool_calls: [{
+                            index: 0,
+                            function: {
+                              arguments: JSON.stringify(result),
+                            },
+                          }],
+                        };
+                        jsonObject.choices[0].finish_reason = null;
+                        delete jsonObject.choices[0].stop_reason;
+                        newLines.push(`data: ${JSON.stringify(jsonObject)}`);
+                      }
+                      fullArgsText = '';
+                      fullArgsTextObject = null;
+                      argsTextObject = null;
+                    }
+                  } catch (error) {
+                    console.error(error);
                   }
-                  fullArgsText = '';
-                  fullArgsTextObject = null;
-                  argsTextObject = null;
                 }
-              } catch (error) {
-                console.error(error);
-              }
+                newLines.push(line);
+              });
+              const resultText = `${newLines.join('\n\n')}\n\n`;
+              console.log(resultText);
+              const newValue = new TextEncoder().encode(resultText);
+              controller.enqueue(newValue);
             }
-            newLines.push(line);
-          });
-          const resultText = `${newLines.join('\n\n')}\n\n`;
-          console.log(resultText);
-          const newValue = new TextEncoder().encode(resultText);
+          } catch (error) {
+            console.error(error);
+          }
         }
-      } catch (error) {
-        console.error(error);
-      }
-    }
+        controller.close();
+      },
+    });
 
-    return res;
+    return new Response(newStream, {
+      status: res.status,
+      statusText: res.statusText,
+      headers: res.headers,
+    });
   },
 });
 
