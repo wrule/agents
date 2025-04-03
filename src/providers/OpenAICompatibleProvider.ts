@@ -25,7 +25,23 @@ const OpenAICompatibleProvider = createOpenAICompatible({
               const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
               if (argsText) {
                 fullArgsText += argsText;
-                console.log(fullArgsText);
+                let fullArgsTextObject = null;
+                try {
+                  fullArgsTextObject = JSON.parse(fullArgsText);
+                } catch (error) { }
+                let argsTextObject = null;
+                try {
+                  argsTextObject = JSON.parse(argsText);
+                } catch (error) { }
+                if (fullArgsTextObject || argsTextObject) {
+                  if (fullArgsTextObject && argsTextObject) {
+
+                  } else if (fullArgsTextObject) {
+
+                  } else {
+
+                  }
+                }
               }
             }
             return line;
