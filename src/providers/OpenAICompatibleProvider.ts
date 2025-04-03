@@ -16,6 +16,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
         let fullArgsText = '';
         let fullArgsTextObject: any = null;
         let argsTextObject: any = null;
+        let count = 1;
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -26,7 +27,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
               const jsonText = line.slice(5);
               const jsonObject = JSON.parse(jsonText);
               const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
-              if (argsText) {
+              if (typeof argsText === 'string') {
                 fullArgsText += argsText;
                 try {
                   fullArgsTextObject = JSON.parse(fullArgsText);
@@ -43,11 +44,11 @@ const OpenAICompatibleProvider = createOpenAICompatible({
 
                   }
                 }
+                return;
               }
             }
-            return line;
+            console.log(count++, line);
           });
-          // console.log(1, newLines);
         }
       } catch (error) {
         console.error('Error reading stream:', error);
