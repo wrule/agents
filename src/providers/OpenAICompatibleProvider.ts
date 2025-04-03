@@ -24,7 +24,6 @@ const OpenAICompatibleProvider = createOpenAICompatible({
     if (clonedRes.body) {
       try {
         const reader = clonedRes.body.getReader();
-        let count = 1;
         let fullArgsText = '';
         let fullArgsTextObject: any = null;
         let argsTextObject: any = null;
@@ -63,7 +62,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                     };
                     jsonObject.choices[0].finish_reason = null;
                     delete jsonObject.choices[0].stop_reason;
-                    console.log(count++, `data: ${JSON.stringify(jsonObject)}`);
+                    console.log(`data: ${JSON.stringify(jsonObject)}`);
                   }
                   fullArgsText = '';
                   fullArgsTextObject = null;
@@ -73,7 +72,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                 console.error(error);
               }
             }
-            console.log(count++, line);
+            console.log(line);
           });
         }
       } catch (error) {
