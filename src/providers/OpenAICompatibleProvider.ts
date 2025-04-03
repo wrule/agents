@@ -13,6 +13,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
     if (clonedRes.body) {
       const reader = clonedRes.body.getReader();
       try {
+        let fullArgsText = '';
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -21,11 +22,15 @@ const OpenAICompatibleProvider = createOpenAICompatible({
             if (line.startsWith('data: ') && !line.endsWith('[DONE]')) {
               const jsonText = line.slice(6);
               const jsonObject = JSON.parse(jsonText);
-              return jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
+              const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
+              if (argsText) {
+                fullArgsText += argsText;
+                console.log(fullArgsText);
+              }
             }
             return line;
           });
-          console.log(1, newLines);
+          // console.log(1, newLines);
         }
       } catch (error) {
         console.error('Error reading stream:', error);
