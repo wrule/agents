@@ -80,6 +80,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
               controller.enqueue(newValue);
             }
           } catch (error) {
+            controller.error(error);
             console.error(error);
           }
         }
