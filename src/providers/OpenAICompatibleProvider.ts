@@ -64,6 +64,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                         jsonObject.choices[0].finish_reason = null;
                         delete jsonObject.choices[0].stop_reason;
                         newLines.push(`data: ${JSON.stringify(jsonObject)}`);
+                        newLines.push('');
                       }
                       fullArgsText = '';
                       fullArgsTextObject = null;
