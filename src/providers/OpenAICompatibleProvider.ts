@@ -18,9 +18,9 @@ const OpenAICompatibleProvider = createOpenAICompatible({
           const { done, value } = await reader.read();
           if (done) break;
           const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
-          const newLines = lines.map((line) => {
-            if (line.startsWith('data: ') && !line.endsWith('[DONE]')) {
-              const jsonText = line.slice(6);
+          lines.forEach((line) => {
+            if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
+              const jsonText = line.slice(5);
               const jsonObject = JSON.parse(jsonText);
               const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
               if (argsText) {
