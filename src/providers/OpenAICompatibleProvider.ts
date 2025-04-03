@@ -35,27 +35,31 @@ const OpenAICompatibleProvider = createOpenAICompatible({
           const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
           lines.forEach((line) => {
             if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
-              const jsonText = line.slice(5);
-              const jsonObject = JSON.parse(jsonText);
-              const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
-              if (toolCallStop) {
-                const result = betterObject(fullArgsTextObject, argsTextObject);
-                if (result) {
-                  console.log(result);
+              try {
+                const jsonText = line.slice(5);
+                const jsonObject = JSON.parse(jsonText);
+                const toolCallStop = jsonObject.choices?.[0]?.finish_reason === 'tool_calls';
+                if (toolCallStop) {
+                  const result = betterObject(fullArgsTextObject, argsTextObject);
+                  if (result) {
+                    console.log(result);
+                  }
+                  fullArgsTextObject = null;
+                  argsTextObject = null;
                 }
-                fullArgsTextObject = null;
-                argsTextObject = null;
-              }
-              const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
-              if (typeof argsText === 'string') {
-                fullArgsText += argsText;
-                try {
-                  fullArgsTextObject = JSON.parse(fullArgsText);
-                } catch (error) { }
-                try {
-                  argsTextObject = JSON.parse(argsText);
-                } catch (error) { }
-                return;
+                const argsText = jsonObject.choices?.[0]?.delta?.tool_calls?.[0]?.function?.arguments;
+                if (typeof argsText === 'string') {
+                  fullArgsText += argsText;
+                  try {
+                    fullArgsTextObject = JSON.parse(fullArgsText);
+                  } catch (error) { }
+                  try {
+                    argsTextObject = JSON.parse(argsText);
+                  } catch (error) { }
+                  return;
+                }
+              } catch (error) {
+                console.error(error);
               }
             }
             console.log(count++, line);
