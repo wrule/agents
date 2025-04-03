@@ -21,10 +21,9 @@ const OpenAICompatibleProvider = createOpenAICompatible({
 
     const newStream = new ReadableStream({
       async start(controller) {
-        const clonedRes = res.clone();
-        if (clonedRes.body) {
+        if (res.body) {
           try {
-            const reader = clonedRes.body.getReader();
+            const reader = res.body.getReader();
             let fullArgsText = '';
             let fullArgsTextObject: any = null;
             let argsTextObject: any = null;
