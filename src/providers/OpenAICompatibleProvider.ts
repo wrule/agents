@@ -31,6 +31,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
           const { done, value } = await reader.read();
           if (done) break;
           const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
+          const newLines: string[] = [];
           lines.forEach((line) => {
             if (line.startsWith('data:') && !line.endsWith('[DONE]')) {
               try {
@@ -61,7 +62,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                     };
                     jsonObject.choices[0].finish_reason = null;
                     delete jsonObject.choices[0].stop_reason;
-                    console.log(`data: ${JSON.stringify(jsonObject)}`);
+                    newLines.push(`data: ${JSON.stringify(jsonObject)}`);
                   }
                   fullArgsText = '';
                   fullArgsTextObject = null;
@@ -71,8 +72,9 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                 console.error(error);
               }
             }
-            console.log(line);
+            newLines.push(line);
           });
+          console.log(newLines.join('\n\n'));
         }
       } catch (error) {
         console.error(error);
