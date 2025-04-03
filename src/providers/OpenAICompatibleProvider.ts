@@ -30,6 +30,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
+          console.log(`[${new TextDecoder().decode(value)}]`);
           const lines = new TextDecoder().decode(value).split('\n').map((line) => line.trim()).filter((line) => line);
           const newLines: string[] = [];
           lines.forEach((line) => {
@@ -74,7 +75,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
             }
             newLines.push(line);
           });
-          console.log(newLines.join('\n\n'));
+          // console.log(newLines.join('\n\n'));
         }
       } catch (error) {
         console.error(error);
