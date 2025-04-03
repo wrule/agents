@@ -22,12 +22,12 @@ const OpenAICompatibleProvider = createOpenAICompatible({
 
     const clonedRes = res.clone();
     if (clonedRes.body) {
-      const reader = clonedRes.body.getReader();
       try {
+        const reader = clonedRes.body.getReader();
+        let count = 1;
         let fullArgsText = '';
         let fullArgsTextObject: any = null;
         let argsTextObject: any = null;
-        let count = 1;
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -44,6 +44,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
                   if (result) {
                     console.log(result);
                   }
+                  fullArgsText = '';
                   fullArgsTextObject = null;
                   argsTextObject = null;
                 }
@@ -66,7 +67,7 @@ const OpenAICompatibleProvider = createOpenAICompatible({
           });
         }
       } catch (error) {
-        console.error('Error reading stream:', error);
+        console.error(error);
       }
     }
 
