@@ -17,7 +17,6 @@ const OpenAICompatibleProvider = createOpenAICompatible({
   apiKey: process.env.OPENAI_API_KEY,
   baseURL: path.join(process.env.BASE_URL!, '/v1'),
   fetch: async (...args) => {
-    const url = args[0];
     const res = await fetch(...args);
 
     const clonedRes = res.clone();
