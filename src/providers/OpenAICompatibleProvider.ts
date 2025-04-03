@@ -74,7 +74,8 @@ const OpenAICompatibleProvider = createOpenAICompatible({
             }
             newLines.push(line);
           });
-          console.log(`${newLines.join('\n\n')}\n\n`);
+          const resultText = `${newLines.join('\n\n')}\n\n`;
+          const newValue = new TextEncoder().encode(resultText);
         }
       } catch (error) {
         console.error(error);
