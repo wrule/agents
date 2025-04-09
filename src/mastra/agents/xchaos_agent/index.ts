@@ -1,6 +1,6 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
-import { 查询演练任务工具 } from './tools/task';
+import { 执行演练任务工具, 查询演练任务工具 } from './tools/task';
 import { Memory } from '@mastra/memory';
 
 export const xchaos_agent = new Agent({
@@ -25,5 +25,6 @@ export const xchaos_agent = new Agent({
   }),
   tools: {
     查询演练任务工具,
+    执行演练任务工具,
   },
 });

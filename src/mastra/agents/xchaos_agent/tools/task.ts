@@ -73,6 +73,35 @@ export const 查询演练任务工具 = createTool({
   },
 });
 
+export const 执行演练任务工具 = createTool({
+  id: 'execute-task',
+  description: `
+当需要执行某个演练任务的时候，调用此工具
+- 避免询问用户演练任务Id
+- 引导用户描述演练任务名称
+- 调用 查询演练任务工具 并且 findOne 设为 true，进行查询
+- 根据查询结果获取taskId
+  `.trim(),
+  inputSchema: z.object({
+    taskId: z.string().describe(`taskId，演练任务Id`)
+  }),
+  outputSchema: z.object({
+    success: z.boolean().describe('调用是否成功'),
+    prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
+  }),
+  execute: async ({ context, resourceId: cookie }) => {
+    return await toolExecute('执行演练任务工具', context, async (context) => {
+      const { data } = await thttp('sys_token=4664a648c5fa4313872f95c3d39f6006; sys_env_id=694456073411100672; sys_env_code=Init').post(`xchaos/taskinstance/executeTask`, {
+        taskId: context.taskId,
+        ignore: false,
+      });
+      return {
+        success: true,
+      };
+    });
+  },
+});
+
 export const 创建任务工具 = createTool({
   id: 'create-task',
   description: `
