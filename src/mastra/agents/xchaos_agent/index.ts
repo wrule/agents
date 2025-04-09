@@ -1,6 +1,6 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
-import { 执行演练任务工具, 查询演练任务工具 } from './tools/task';
+import { 创建演练任务工具, 执行演练任务工具, 查询演练任务工具 } from './tools/task';
 import { Memory } from '@mastra/memory';
 
 export const xchaos_agent = new Agent({
@@ -23,6 +23,10 @@ export const xchaos_agent = new Agent({
 - 引导用户描述演练任务名称
 - 调用 查询演练任务工具 并且 findOne 设为 true，进行查询
 - 根据查询结果获取taskId
+
+### 创建演练任务工具
+- 避免询问用户多余信息
+- 确保直接回答markdown url
   `.trim(),
   model: main,
   memory: new Memory({
@@ -33,5 +37,6 @@ export const xchaos_agent = new Agent({
   tools: {
     查询演练任务工具,
     执行演练任务工具,
+    创建演练任务工具,
   },
 });

@@ -104,26 +104,22 @@ export const 执行演练任务工具 = createTool({
   },
 });
 
-export const 创建任务工具 = createTool({
+export const 创建演练任务工具 = createTool({
   id: 'create-task',
   description: `
-当需要创建一个[演练任务|故障演练]的时候，调用此工具
+当需要创建一个[任务|故障演练|演练]的时候，调用此工具
   `.trim(),
-  inputSchema: z.object({
-    name: z.string().describe('演练任务名称'),
-    description: z.string().describe('演练任务描述').optional(),
-    validIgnore: z.boolean().describe('失效自动忽略').optional(),
-    applicationInstanceUrls: z.array(z.string()).describe('需要演练的集群'),
-    containerInstanceUrls: z.array(z.string()).describe('需要演练的主机列表'),
-  }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
+    markdown: z.string().optional().describe('若此字段存在，则确保回答直接输出此markdown，避免回答和此markdown不一致'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
-    return await toolExecute('创建目标工具', context, async (context) => {
+    return await toolExecute('创建演练任务工具', context, async (context) => {
       return {
         success: true,
+        prompt: '请仅回答markdown字段的内容，避免长篇大论',
+        markdown: `[请点此链接新增任务](${process.env.XCHAOS}/workspace/task/list/custom/add?envId=${cookieEnvId(cookie)}&envCode=${cookieEnvCode(cookie)})`,
       };
     });
   },
