@@ -62,6 +62,12 @@ export const CN_MASKS: BuiltinMask[] = [
   //   context: [],
   // },
   {
+    avatar: "🤖",
+    name: "XChaos智能体",
+    agentName: "xchaos_agent",
+    context: [],
+  },
+  {
     avatar: "👨‍💻",
     name: "JMeter专家",
     agentName: "jmeter_expert",
