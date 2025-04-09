@@ -40,7 +40,7 @@ export const 查询演练任务工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('查询演练任务工具', context, async (context) => {
-      const { data } = await thttp('sys_token=4664a648c5fa4313872f95c3d39f6006; sys_env_id=694456073411100672; sys_env_code=Init').post(`xchaos/task/getTaskList`, {
+      const { data } = await thttp(cookie).post(`xchaos/task/getTaskList`, {
         name: context.keyword,
         pageNumber: (context.pageNum ?? 1) - 1,
         pageSize: 10,
@@ -90,7 +90,7 @@ export const 执行演练任务工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('执行演练任务工具', context, async (context) => {
-      const { data } = await thttp('sys_token=4664a648c5fa4313872f95c3d39f6006; sys_env_id=694456073411100672; sys_env_code=Init').post(`xchaos/taskinstance/executeTask`, {
+      const { data } = await thttp(cookie).post(`xchaos/taskinstance/executeTask`, {
         taskId: context.taskId,
         ignore: false,
       });
