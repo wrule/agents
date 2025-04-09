@@ -52,6 +52,7 @@ export const 查询演练任务工具 = createTool({
         metricDesc: item.metricDesc,
         deployTypeName: item.deployTypeName,
       }));
+      // console.log(list);
       return {
         success: true,
         prompt: context.findOne ? (
@@ -77,17 +78,14 @@ export const 执行演练任务工具 = createTool({
   id: 'execute-task',
   description: `
 当需要执行某个演练任务的时候，调用此工具
-- 避免询问用户演练任务Id
-- 引导用户描述演练任务名称
-- 调用 查询演练任务工具 并且 findOne 设为 true，进行查询
-- 根据查询结果获取taskId
   `.trim(),
   inputSchema: z.object({
-    taskId: z.string().describe(`taskId，演练任务Id`)
+    taskId: z.string().describe(`taskId，演练任务Id`),
   }),
   outputSchema: z.object({
     success: z.boolean().describe('调用是否成功'),
     prompt: z.string().optional().describe('向用户解释调用结果的prompt'),
+    url: z.string().optional().describe('演练执行页面的url，以markdown url的形式输出，如[演练执行页面](http:/xxx)'),
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('执行演练任务工具', context, async (context) => {
@@ -95,8 +93,11 @@ export const 执行演练任务工具 = createTool({
         taskId: context.taskId,
         ignore: false,
       });
+      // console.log(data);
       return {
         success: true,
+        prompt: '演练任务执行成功，引导用户通过url到平台上查看执行详情',
+        url: `${process.env.XCHAOS}/workspace/task/list/custom/practice/${data.object?.id}?envId=694456073411100672&envCode=Init`,
       };
     });
   },
