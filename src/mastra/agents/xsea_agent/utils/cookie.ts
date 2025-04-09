@@ -26,3 +26,7 @@ function parseCookieString(cookieStr?: string): Record<string, string> {
 export function cookieEnvId(cookie?: string) {
   return parseCookieString(cookie)['sys_env_id'] || '1';
 }
+
+export function cookieEnvCode(cookie?: string) {
+  return parseCookieString(cookie)['sys_env_code'] || '';
+}

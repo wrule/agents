@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { toolExecute } from '../../xsea_agent/utils';
 import { thttp } from '../api/http';
+import { cookieEnvCode, cookieEnvId } from '../../xsea_agent/utils/cookie';
 
 export const 查询演练任务工具 = createTool({
   id: 'query-task',
@@ -97,7 +98,7 @@ export const 执行演练任务工具 = createTool({
       return {
         success: true,
         prompt: '演练任务执行成功，引导用户通过url到平台上查看执行详情',
-        url: `${process.env.XCHAOS}/workspace/task/list/custom/practice/${data.object?.id}?envId=694456073411100672&envCode=Init`,
+        url: `${process.env.XCHAOS}/workspace/task/list/custom/practice/${data.object?.id}?envId=${cookieEnvId(cookie)}&envCode=${cookieEnvCode(cookie)}`,
       };
     });
   },
