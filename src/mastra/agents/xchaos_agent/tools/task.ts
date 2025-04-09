@@ -2,6 +2,24 @@ import { z } from 'zod';
 import { createTool } from '@mastra/core/tools';
 import { toolExecute } from '../../xsea_agent/utils';
 
+export const 查询演练任务工具 = createTool({
+  id: 'query-task-list',
+  description: `
+当需要查询演练任务的时候，调用此工具
+  `.trim(),
+  inputSchema: z.object({
+    name: z.string().describe('演练任务名称，不传查所有').optional(),
+  }),
+  outputSchema: z.any(),
+  execute: async ({ context, resourceId: cookie }) => {
+    return await toolExecute('查询演练任务工具', context, async (context) => {
+      return {
+        success: true,
+      };
+    });
+  },
+});
+
 export const 创建任务工具 = createTool({
   id: 'create-task',
   description: `
