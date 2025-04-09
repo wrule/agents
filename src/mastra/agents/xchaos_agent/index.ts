@@ -1,6 +1,7 @@
 import { Agent } from '@mastra/core/agent';
 import main from '../../../models/main';
 import { 查询演练任务工具 } from './tools/task';
+import { Memory } from '@mastra/memory';
 
 export const xchaos_agent = new Agent({
   name: 'XChaos智能体',
@@ -17,6 +18,11 @@ export const xchaos_agent = new Agent({
 - 支持Linux主机、Docker、Kubernetes、Windows主机等多种部署类型的故障演练
   `.trim(),
   model: main,
+  memory: new Memory({
+    options: {
+      lastMessages: 50,
+    },
+  }),
   tools: {
     查询演练任务工具,
   },
