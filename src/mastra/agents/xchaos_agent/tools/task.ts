@@ -46,16 +46,25 @@ export const 查询演练任务工具 = createTool({
         professionalId: null,
         taskType: 'CUSTOM',
       });
-      const list = (data.object?.content ?? []).map((item: any) => ({
+      const list: any[] = (data.object?.content ?? []).map((item: any) => ({
         id: item.id,
         name: item.name,
         metricDesc: item.metricDesc,
         deployTypeName: item.deployTypeName,
       }));
-      // console.log(list);
       return {
         success: true,
-        prompt: context.findOne ? ('') : '以markdown table输出表格，简单指引用户分页操作',
+        prompt: context.findOne ? (
+          () => {
+            if (list.length === 0) {
+              return `没有搜索到任何信息，请引导用户补充更多搜索关键字`;
+            } else if (list.length === 1) {
+              return `已经精准匹配到目标，请留意id以供之后需要的时候使用`;
+            } else {
+              return `存在多个匹配项目，请以markdown table输出表格，引导用户选择`;
+            }
+          }
+        )() : '以markdown table输出表格，简单指引用户分页操作',
         columns: ['演练名称', '部署类型', '演练指标'],
         dataSource: list,
         total: Number(data.object?.totalElements),
