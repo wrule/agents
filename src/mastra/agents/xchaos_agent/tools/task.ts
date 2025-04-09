@@ -35,6 +35,7 @@ export const 查询演练任务工具 = createTool({
       metricDesc: z.string().describe('演练指标'),
       deployTypeName: z.string().describe('部署类型'),
     })).describe('表格内容数据').optional(),
+    total: z.number().describe('当前查询条件下的结果总数').optional(),
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('查询演练任务工具', context, async (context) => {
@@ -54,8 +55,10 @@ export const 查询演练任务工具 = createTool({
       // console.log(list);
       return {
         success: true,
+        prompt: context.findOne ? ('') : '以markdown table输出表格，简单指引用户分页操作',
         columns: ['演练名称', '部署类型', '演练指标'],
         dataSource: list,
+        total: Number(data.object?.totalElements),
       };
     });
   },
