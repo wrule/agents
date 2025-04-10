@@ -14,7 +14,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     port: z.number().optional().default(anyUndefined),
     pathname: z.string().optional().default(anyUndefined),
     queries: z.record(z.string(), z.string()).optional().default(anyUndefined),
-    body: z.string().optional().default(anyUndefined),
+    body: z.record(z.string(), z.any()).optional().default(anyUndefined),
     headers: z.record(z.string(), z.string()).optional().default(anyUndefined),
   })
 );
