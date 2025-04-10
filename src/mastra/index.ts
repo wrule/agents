@@ -21,11 +21,13 @@ import { xwind_agent } from './agents/xwind_agent';
 import { xchaos_agent } from './agents/xchaos_agent';
 import { xsky_agent_v1 } from './agents/xsky_agent_v1';
 import { xwind_agent_v1 } from './agents/xwind_agent_v1';
+import { xsea_agent_v5 } from './agents/xsea_agent_v5';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
   agents: {
     xsea_agent,
+    xsea_agent_v5,
     testma_agent,
     xsky_agent,
     xsky_agent_v1,

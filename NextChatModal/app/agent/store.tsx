@@ -43,6 +43,18 @@ export const CN_MASKS: BuiltinMask[] = [
       },
     ],
   },
+  {
+    avatar: "🤖",
+    name: "XSea智能体V5",
+    agentName: "xsea_agent_v5",
+    context: [
+      {
+        role: "assistant",
+        content: "你好",
+        component: "@ui-welcome",
+      },
+    ],
+  },
   // {
   //   avatar: "🤖",
   //   name: "TestMa智能体",
