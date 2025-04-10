@@ -37,7 +37,7 @@ export const json_http = new Agent({
 - body相同，避免列出
 - headers相同，避免列出
 
-## 避免列出http1的任何字段
+## 避免列出任何http1的字段
 
 ## 差异字段输出遵循以下格式
 ${parser.getFormatInstructions()}
