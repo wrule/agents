@@ -43,8 +43,8 @@ const Agents = () => {
         await chatShore.newSession(mask);
         navigate(Path.Chat);
         chatShore.AppendRoleMessage({
-          role: "system",
-          content: message.problem,
+          role: "user",
+          content: typeof message.problem === 'string' ? message.problem : 'user-data: 以下是一段对话的JSON，请你回答其中问题\n' + JSON.stringify(message.problem) + '\n避免提及回答引用JSON',
         }, true);
         // AgentStore.get(message.expertName).Create(
         //   [
