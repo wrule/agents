@@ -18,8 +18,6 @@ const ZodHTTPRequest = z.object({
 });
 const ZodHTTPRequestList = z.array(ZodHTTPRequest);
 
-type HTTPRequest = z.infer<typeof ZodHTTPRequest>;
-
 const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequest);
 
 export const json_http = new Agent({
