@@ -41,6 +41,8 @@ function extract_struct(http) {
   };
 }
 
+stringify = JSON.stringify;
+
 function compare(http1, http2) {
   struct1 = extract(http1);
   if (http2 not provided) return struct1;
@@ -51,9 +53,9 @@ function compare(http1, http2) {
   if (struct1.hostname != struct2.hostname) result.hostname = struct2.hostname;
   if (struct1.port != struct2.port) result.port = struct2.port;
   if (struct1.pathname != struct2.pathname) result.pathname = struct2.pathname;
-  if (JSON.stringify(struct1.queries) != JSON.stringify(struct2.queries)) result.queries = struct2.queries;
-  if (JSON.stringify(struct1.body) != JSON.stringify(struct2.body)) result.body = struct2.body;
-  if (JSON.stringify(struct1.headers) != JSON.stringify(struct2.headers)) result.headers = struct2.headers;
+  if (stringify(struct1.queries) != stringify(struct2.queries)) result.queries = struct2.queries;
+  if (stringify(struct1.body) != stringify(struct2.body)) result.body = struct2.body;
+  if (stringify(struct1.headers) != stringify(struct2.headers)) result.headers = struct2.headers;
   return result;
 }
 - 确保你的工作流程与compare函数一致
