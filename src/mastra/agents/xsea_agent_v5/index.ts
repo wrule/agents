@@ -14,7 +14,7 @@ import { 获取定时任务详情工具 } from './tools/schedule';
 import { 注入故障工具 } from './tools/inject';
 
 export const xsea_agent_v5 = new Agent({
-  name: 'XSea智能体',
+  name: 'XSea智能体V5',
   instructions: `
 ## XSea是一个性能测试平台
 ## 你是XSea性能测试平台的AI助手，帮助用户访问XSea，并且解答问题
