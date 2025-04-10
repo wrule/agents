@@ -17,10 +17,11 @@ const ZodHTTPRequest = z.object({
   body: z.record(z.string(), z.any()).optional().default(anyUndefined),
   headers: z.record(z.string(), z.string()).optional().default(anyUndefined),
 });
+const ZodHTTPRequestList = z.array(ZodHTTPRequest);
 
 type HTTPRequest = z.infer<typeof ZodHTTPRequest>;
 
-const parser = StructuredOutputParser.fromZodSchema(z.array(ZodHTTPRequest));
+const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequestList);
 
 export const json_http = new Agent({
   name: 'JSON_HTTP',
