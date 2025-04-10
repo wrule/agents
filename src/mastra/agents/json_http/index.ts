@@ -14,6 +14,7 @@ const httpRequest = z.object({
       z.string(),
     ]),
   ).optional(),
+  body: z.string().optional(),
   headers: z.array(
     z.tuple([
       z.string(),
