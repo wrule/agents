@@ -7,7 +7,6 @@ import { Memory } from '@mastra/memory';
 const anyUndefined = undefined as any;
 
 const ZodHTTPRequest = z.object({
-  id: z.number().min(0),
   method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']).optional().default(anyUndefined),
   protocol: z.enum(['HTTP', 'HTTPS']).optional().default(anyUndefined),
   hostname: z.string().optional().default(anyUndefined),
