@@ -8,9 +8,9 @@ const anyUndefined = undefined as any;
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
-    method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']),
-    protocol: z.enum(['HTTP', 'HTTPS']),
-    hostname: z.string(),
+    method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']).optional().default(anyUndefined),
+    protocol: z.enum(['HTTP', 'HTTPS']).optional().default(anyUndefined),
+    hostname: z.string().optional().default(anyUndefined),
     port: z.number().optional().default(anyUndefined),
     pathname: z.string().optional().default(anyUndefined),
     queries: z.record(z.string(), z.string()).optional().default(anyUndefined),
