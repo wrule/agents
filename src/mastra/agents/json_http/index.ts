@@ -20,14 +20,28 @@ const ZodHTTPRequestList = z.array(ZodHTTPRequest);
 
 type HTTPRequest = z.infer<typeof ZodHTTPRequest>;
 
-const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequestList);
+const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequest);
 
 export const json_http = new Agent({
   name: 'JSON_HTTP',
   instructions: `
-# 你是HTTP Request的JSON结构生成器
+# 你是HTTP请求的差异对比器
 
-## 确保你的回答遵循以下JSON
+## 用户会向你描述两个HTTP请求（http1，http2）
+
+## 你的工作是根据两个HTTP请求的差异，列出http2的字段
+- method相同，避免列出
+- protocol相同，避免列出
+- hostname相同，避免列出
+- port相同，避免列出
+- pathname相同，避免列出
+- queries相同，避免列出
+- body相同，避免列出
+- headers相同，避免列出
+
+## 避免列出http1的任何字段
+
+## 差异字段输出遵循以下格式
 ${parser.getFormatInstructions()}
   `.trim(),
   memory: new Memory({
