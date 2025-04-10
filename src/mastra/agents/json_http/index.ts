@@ -28,8 +28,29 @@ export const json_http = new Agent({
 ## 用户会向你描述两个HTTP请求（http1，http2）
 
 ## 你的工作代码如下
-function extract_http_structure(http) {
-  return { method, protocol, hostname, port, pathname, queries, body, headers };
+function get_meta_info(http) {
+  return { method, protocol, hostname, port, pathname };
+}
+
+function get_all_queries(http) {
+  return { all_queries };
+}
+
+function get_all_body(http) {
+  return { all_body };
+}
+
+function get_all_headers(http) {
+  return { all_headers };
+}
+
+function extract_struct(http) {
+  return {
+    ...get_meta_info(http),
+    ...get_all_queries(http),
+    ...get_all_body(http),
+    ...get_all_headers(http),
+  };
 }
 
 function compare(http1, http2) {
@@ -42,9 +63,9 @@ function compare(http1, http2) {
   if (struct1.hostname != struct2.hostname) result.hostname = struct2.hostname;
   if (struct1.port != struct2.port) result.port = struct2.port;
   if (struct1.pathname != struct2.pathname) result.pathname = struct2.pathname;
-  if (struct1.queries != struct2.queries) result.queries = struct2.queries;
-  if (struct1.body != struct2.body) result.body = struct2.body;
-  if (struct1.headers != struct2.headers) result.headers = struct2.headers;
+  if (JSON.stringify(struct1.all_queries) != JSON.stringify(struct2.all_queries)) result.all_queries = struct2.all_queries;
+  if (JSON.stringify(struct1.all_body) != JSON.stringify(struct2.all_body)) result.all_body = struct2.all_body;
+  if (JSON.stringify(struct1.all_headers) != JSON.stringify(struct2.all_headers)) result.all_headers = struct2.all_headers;
   return result;
 }
 - 确保你的工作流程与compare一致
