@@ -23,14 +23,32 @@ const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequest);
 export const json_http = new Agent({
   name: 'JSON_HTTP',
   instructions: `
-# 你是HTTP请求的差异对比器
+# 你是输出JSON数据的伪代码运行时
 
 ## 用户会向你描述两个HTTP请求（http1，http2）
 
-## 你的工作流程遵循以下代码
+## 你的工作代码如下
+function extract_http_structure(http) {
+  return { method, protocol, hostname, port, pathname, queries, body, headers };
+}
 
-## 差异字段输出遵循以下格式
-${parser.getFormatInstructions()}
+function compare(http1, http2) {
+  struct1 = extract(http1);
+  if (http2 not provided) return struct1;
+  struct2 = extract(http2);
+  result = { };
+  if (struct1.method != struct2.method) result.method = struct2.method;
+  if (struct1.protocol != struct2.protocol) result.protocol = struct2.protocol;
+  if (struct1.hostname != struct2.hostname) result.hostname = struct2.hostname;
+  if (struct1.port != struct2.port) result.port = struct2.port;
+  if (struct1.pathname != struct2.pathname) result.pathname = struct2.pathname;
+  if (struct1.queries != struct2.queries) result.queries = struct2.queries;
+  if (struct1.body != struct2.body) result.body = struct2.body;
+  if (struct1.headers != struct2.headers) result.headers = struct2.headers;
+  return result;
+}
+- 确保你的工作流程与compare一致
+- 确保你的回答与compare函数的返回结果一致
   `.trim(),
   memory: new Memory({
     options: {
