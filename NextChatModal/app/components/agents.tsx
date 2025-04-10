@@ -37,6 +37,7 @@ const Agents = () => {
     };
 
     if (message.from === "ai_parent" && message.expertName) {
+      // alert(JSON.stringify(message));
       const expertName = ((message.expertName ?? '') as string).replace('_', '');
       if (message.problem) {
         const mask = CN_MASKS.find((mask) => nameProcess(mask.name) === nameProcess(expertName)) as Mask;
