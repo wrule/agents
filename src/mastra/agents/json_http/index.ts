@@ -6,19 +6,19 @@ import { Memory } from '@mastra/memory';
 
 const anyUndefined = undefined as any;
 
-const parser = StructuredOutputParser.fromZodSchema(
-  z.object({
-    id: z.number().min(0),
-    method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']).optional().default(anyUndefined),
-    protocol: z.enum(['HTTP', 'HTTPS']).optional().default(anyUndefined),
-    hostname: z.string().optional().default(anyUndefined),
-    port: z.number().optional().default(anyUndefined),
-    pathname: z.string().optional().default(anyUndefined),
-    queries: z.record(z.string(), z.string()).optional().default(anyUndefined),
-    body: z.record(z.string(), z.any()).optional().default(anyUndefined),
-    headers: z.record(z.string(), z.string()).optional().default(anyUndefined),
-  })
-);
+const ZodHTTPRequest = z.object({
+  id: z.number().min(0),
+  method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']).optional().default(anyUndefined),
+  protocol: z.enum(['HTTP', 'HTTPS']).optional().default(anyUndefined),
+  hostname: z.string().optional().default(anyUndefined),
+  port: z.number().optional().default(anyUndefined),
+  pathname: z.string().optional().default(anyUndefined),
+  queries: z.record(z.string(), z.string()).optional().default(anyUndefined),
+  body: z.record(z.string(), z.any()).optional().default(anyUndefined),
+  headers: z.record(z.string(), z.string()).optional().default(anyUndefined),
+});
+
+const parser = StructuredOutputParser.fromZodSchema(ZodHTTPRequest);
 
 export const json_http = new Agent({
   name: 'JSON_HTTP',
