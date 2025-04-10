@@ -4,26 +4,18 @@ import { z } from 'zod';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 import { Memory } from '@mastra/memory';
 
+const anyUndefined = undefined as any;
+
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
     method: z.enum(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT']),
     protocol: z.enum(['HTTP', 'HTTPS']),
     hostname: z.string(),
-    port: z.number().optional(),
-    pathname: z.string().optional(),
-    queries: z.array(
-      z.tuple([
-        z.string(),
-        z.string(),
-      ]),
-    ).optional(),
-    body: z.string().optional(),
-    headers: z.array(
-      z.tuple([
-        z.string(),
-        z.string(),
-      ]),
-    ).optional(),
+    port: z.number().optional().default(anyUndefined),
+    pathname: z.string().optional().default(anyUndefined),
+    queries: z.record(z.string(), z.string()).optional().default(anyUndefined),
+    body: z.string().optional().default(anyUndefined),
+    headers: z.record(z.string(), z.string()).optional().default(anyUndefined),
   })
 );
 
