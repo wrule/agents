@@ -8,6 +8,12 @@ const httpRequest = z.object({
   hostname: z.string(),
   port: z.number().optional(),
   pathname: z.string().optional(),
+  queries: z.array(
+    z.tuple([
+      z.string(),
+      z.string(),
+    ]),
+  ).optional(),
   headers: z.array(
     z.tuple([
       z.string(),
