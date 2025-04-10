@@ -27,18 +27,7 @@ export const json_http = new Agent({
 
 ## 用户会向你描述两个HTTP请求（http1，http2）
 
-## IF 未提供http2 -> 列出http1的所有字段
-
-## IF 已提供http2 -> 根据两个HTTP请求的差异，列出http2的字段
-- method相同，避免列出
-- protocol相同，避免列出
-- hostname相同，避免列出
-- port相同，避免列出
-- pathname相同，避免列出
-- queries相同，避免列出
-- body相同，避免列出
-- headers相同，避免列出
-- 避免列出任何http1的字段
+## 你的工作流程遵循以下代码
 
 ## 差异字段输出遵循以下格式
 ${parser.getFormatInstructions()}
