@@ -49,18 +49,30 @@ export const CN_MASKS: BuiltinMask[] = [
   //   agentName: "testma_agent",
   //   context: [],
   // },
-  // {
-  //   avatar: "🤖",
-  //   name: "XSky智能体",
-  //   agentName: "xsky_agent",
-  //   context: [],
-  // },
-  // {
-  //   avatar: "🤖",
-  //   name: "XWind智能体",
-  //   agentName: "xwind_agent",
-  //   context: [],
-  // },
+  {
+    avatar: "🤖",
+    name: "XSky智能体",
+    agentName: "xsky_agent",
+    context: [],
+  },
+  {
+    avatar: "🤖",
+    name: "XWind智能体",
+    agentName: "xwind_agent",
+    context: [],
+  },
+  {
+    avatar: "🤖",
+    name: "XSky智能体V1",
+    agentName: "xsky_agent_v1",
+    context: [],
+  },
+  {
+    avatar: "🤖",
+    name: "XWind智能体V1",
+    agentName: "xwind_agent_v1",
+    context: [],
+  },
   {
     avatar: "🤖",
     name: "XChaos智能体",
