@@ -15,3 +15,19 @@ const thttp = (cookie?: string) => {
   });
   return http;
 };
+
+export
+const thttp_v5 = (cookie?: string) => {
+  const http = axios.create({
+    baseURL: `${process.env.XSEA_V5}/api`,
+    headers: { cookie },
+  });
+  http.interceptors.response.use((response) => {
+    const { data } = response;
+    if (data.success === false) {
+      throw new Error(data.message ?? '未知原因');
+    }
+    return response;
+  });
+  return http;
+};
