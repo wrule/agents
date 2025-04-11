@@ -65,31 +65,56 @@ export const CN_MASKS: BuiltinMask[] = [
     avatar: "🤖",
     name: "XSky智能体",
     agentName: "xsky_agent",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "你好，我是XSky智能体，有什么可以帮你的吗？😄",
+      },
+    ],
   },
   {
     avatar: "🤖",
     name: "XWind智能体",
     agentName: "xwind_agent",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "你好，我是XWind智能体，有什么可以帮你的吗？😄",
+      },
+    ],
   },
   {
     avatar: "🤖",
     name: "XSky智能体V1",
     agentName: "xsky_agent_v1",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "你好，我是XSky智能体，有什么可以帮你的吗？😄",
+      },
+    ],
   },
   {
     avatar: "🤖",
     name: "XWind智能体V1",
     agentName: "xwind_agent_v1",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "你好，我是XWind智能体，有什么可以帮你的吗？😄",
+      },
+    ],
   },
   {
     avatar: "🤖",
     name: "XChaos智能体",
     agentName: "xchaos_agent",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "你好，我是XChaos智能体，有什么可以帮你的吗？😄",
+      },
+    ],
   },
   {
     avatar: "👨‍💻",
