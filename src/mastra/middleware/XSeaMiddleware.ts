@@ -1,5 +1,5 @@
 import { Context, Next } from 'hono';
-import { thttp } from '../agents/xsea_agent/api/http';
+import { thttp, thttp_v5 } from '../agents/xsea_agent/api/http';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 
 export
@@ -11,11 +11,11 @@ const XSeaMiddleware: HonoMiddleware = async (ctx: Context, next: Next) => {
     const fullPath = (url.pathname + url.search).replace(/^\/xsea\/api/, '');
     const cookie = url.searchParams.get('resourceId') ?? undefined;
     if (['GET'].includes(ctx.req.method)) {
-      const res = await thttp(cookie).get(fullPath);
+      const res = await thttp_v5(cookie).get(fullPath);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     } else {
       const body = await ctx.req.json();
-      const res = await thttp(cookie).post(fullPath, body);
+      const res = await thttp_v5(cookie).post(fullPath, body);
       return ctx.json(res.data, res.status as ContentfulStatusCode);
     }
   } catch (error: any) {
