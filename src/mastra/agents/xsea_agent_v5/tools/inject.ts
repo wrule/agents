@@ -17,6 +17,7 @@ export const 注入故障工具 = createTool({
   }),
   execute: async ({ context, resourceId: cookie }) => {
     return await toolExecute('注入故障工具', context, async (context) => {
+      console.log(process.env.XCHAOS_TOKEN);
       const { data } = await axios.post(
         `http://10.10.224.24:8089/api/xchaos/taskinstance/executeTask`,
         {
