@@ -37,6 +37,7 @@ export const 注入故障工具 = createTool({
       console.log('注入接口返回', data);
       return {
         success: true,
+        prompt: `注入接口返回信息：${JSON.stringify(data)}，如果有异常请向用户简单解释`,
       };
     });
   },
