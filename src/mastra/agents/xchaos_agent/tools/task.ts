@@ -119,7 +119,7 @@ export const 创建演练任务工具 = createTool({
       return {
         success: true,
         prompt: '请仅回答markdown字段的内容，避免长篇大论',
-        markdown: `[请点此链接新增任务](${process.env.XCHAOS}/workspace/task/list/custom/add?envId=${cookieEnvId(cookie)}&envCode=${cookieEnvCode(cookie)})`,
+        markdown: `[请点此链接新增任务](${process.env.XCHAOS}/workspace/task/list/custom/add?envId=${cookieEnvId(cookie)}&envCode=${cookieEnvCode(cookie)}&ai=true)`,
       };
     });
   },
