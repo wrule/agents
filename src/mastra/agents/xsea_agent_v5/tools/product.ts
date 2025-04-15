@@ -21,9 +21,9 @@ export const 创建产品工具 = createTool({
   execute: async ({ context, resourceId: cookie }) => {
     const envId = cookieEnvId(cookie);
     return await toolExecute('创建产品工具', context, async (context) => {
-      const { data } = await thttp(cookie).post(`paas/products`, {
-        productName: context.name,
-        productDesc: context.desc,
+      const { data } = await thttp(cookie).post(`xsea/workspace/save`, {
+        name: context.name,
+        remark: context.desc,
       });
       const { object } = data;
       return {
