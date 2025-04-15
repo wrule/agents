@@ -365,7 +365,7 @@ export function SideBar(props: { className?: string }) {
             icon={<AddIcon />}
             text={shouldNarrow ? undefined : Locale.Home.NewChat}
             onClick={async () => {
-              await chatStore.newSession(CN_MASKS.find((mask) => mask.name === "XSea智能体") as any);
+              await chatStore.newSession(CN_MASKS.find((mask) => mask.name === "XSea智能体V5") as any);
               navigate(Path.Chat);
               // AgentStore.get("XSea智能体").Create([], true);
               // if (config.dontShowMaskSplashScreen) {
