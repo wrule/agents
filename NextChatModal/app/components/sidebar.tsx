@@ -315,7 +315,7 @@ export function SideBar(props: { className?: string }) {
           />
         )}
       </SideBarHeader>
-      {sessions.length > 1 && (
+      {(
         <SideBarBody
           onClick={(e) => {
             if (e.target === e.currentTarget) {

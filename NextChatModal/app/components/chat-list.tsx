@@ -140,8 +140,9 @@ export function ChatList(props: { narrow?: boolean }) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {sessions.map((item, i) => (
-              <ChatItem
+            {sessions.map((item, i) => {
+              if (item.topic === '新的聊天') return null;
+              return <ChatItem
                 title={item.topic}
                 time={new Date(item.lastUpdate).toLocaleString()}
                 count={item.messages.length}
@@ -163,8 +164,8 @@ export function ChatList(props: { narrow?: boolean }) {
                 }}
                 narrow={props.narrow}
                 mask={item.mask}
-              />
-            ))}
+              />;
+            })}
             {provided.placeholder}
           </div>
         )}
