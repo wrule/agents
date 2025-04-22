@@ -7,3 +7,5 @@ dist
 *.db
 
 1.log
+memory.db-shm
+memory.db-wal
