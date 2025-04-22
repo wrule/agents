@@ -117,7 +117,7 @@ export const 创建目标工具 = createTool({
 
       return {
         success: true,
-        url: `${process.env.XSEA_V5}/${envId}/product/business/${plan.first.productId}/plan/target?id=${plan.first.planId}&goalId=${data.object}`,
+        url: `${process.env.XSEA}/${envId}/product/business/${plan.first.productId}/plan/target?id=${plan.first.planId}&goalId=${data.object}`,
       };
     });
   },
@@ -214,7 +214,7 @@ export const 压测目标工具 = createTool({
       }
       return {
         success: true,
-        url: `${process.env.XSEA_V5}/${envId}/product/business/${goal.first.productId}/plan/targetExecute?sceneExecId=${execData.object}`,
+        url: `${process.env.XSEA}/${envId}/product/business/${goal.first.productId}/plan/targetExecute?sceneExecId=${execData.object}`,
       };
     });
   },

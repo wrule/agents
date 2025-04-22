@@ -45,7 +45,7 @@ export const 创建脚本工具 = createTool({
       return {
         success: true,
         scriptId: data.object,
-        url: `${process.env.XSEA_V5}/${envId}/product/business/${product.first.productId}/script?scriptId=${data.object}`,
+        url: `${process.env.XSEA}/${envId}/product/business/${product.first.productId}/script?scriptId=${data.object}`,
         prompt: `一定要提醒用户如果需要编写脚本代码，需要在平台页面上唤起对应专家实现`,
       };
     });
@@ -158,9 +158,9 @@ export const 快速压测工具 = createTool({
       const success = execData.success && typeof execData.object === 'string';
       return {
         success: !!(success),
-        sceneUrl: `${process.env.XSEA_V5}/${envId}/product/business/${productId}/plan/target?id=${targetPlan.id}&goalId=${targetGoal.id}`,
+        sceneUrl: `${process.env.XSEA}/${envId}/product/business/${productId}/plan/target?id=${targetPlan.id}&goalId=${targetGoal.id}`,
         ...(success ? {
-          execUrl: `${process.env.XSEA_V5}/${envId}/product/business/${productId}/plan/targetExecute?sceneExecId=${execData.object}`,
+          execUrl: `${process.env.XSEA}/${envId}/product/business/${productId}/plan/targetExecute?sceneExecId=${execData.object}`,
         } : { }),
         ...(!success ? {
           errorInfo: execData,
