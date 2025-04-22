@@ -2120,8 +2120,18 @@ function _Chat() {
                               ) && <div className={styles.confirm}>
                                 <span></span>
                                 <Space>
-                                  <Button size="small">取消</Button>
-                                  <Button type="primary" size="small">确认</Button>
+                                  <Button size="small" onClick={() => {
+                                    chatStore.AppendRoleMessage({
+                                      role: "user",
+                                      content: "取消",
+                                    }, true);
+                                  }}>取消</Button>
+                                  <Button type="primary" size="small" onClick={() => {
+                                    chatStore.AppendRoleMessage({
+                                      role: "user",
+                                      content: "确认",
+                                    }, true);
+                                  }}>确认</Button>
                                 </Space>
                               </div>
                             }
