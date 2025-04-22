@@ -111,6 +111,7 @@ import BottomConfirm from "./bottomConfirm";
 import { SessionJSON } from "./xsea/localJSON";
 import Next from "./next";
 import { nanoid } from "nanoid";
+import { Button, Space } from "antd";
 
 const localStorage = safeLocalStorage();
 
@@ -2109,6 +2110,21 @@ function _Chat() {
                                 )}
                               </div>
                             )}
+                            {
+                              (
+                                i !== 0 &&
+                                message.role === 'assistant' &&
+                                message.streaming === false &&
+                                message.preview !== true &&
+                                message.content.toString().includes('确认')
+                              ) && <div className={styles.confirm}>
+                                <span></span>
+                                <Space>
+                                  <Button size="small">取消</Button>
+                                  <Button type="primary" size="small">确认</Button>
+                                </Space>
+                              </div>
+                            }
                             {
                               i !== 0 &&
                               i === messages.filter((message) => message.role !== 'system').findLastIndex((message) => message.role === 'assistant') &&
