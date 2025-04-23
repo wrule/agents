@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, Space, Table, Tabs } from 'antd';
 import { jsonrepair } from 'jsonrepair';
 import { HttpType } from './httpZod';
@@ -220,6 +220,8 @@ const CoderHTTPList = (props: { json: string }) => {
     return null;
   }
 
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+
   return <div className={styles.table_wrapper}>
     <Table
       rowKey="id"
@@ -258,6 +260,10 @@ const CoderHTTPList = (props: { json: string }) => {
       dataSource={list}
       rowSelection={{
         type: 'checkbox',
+        selectedRowKeys,
+        onChange: (rowKeys) => {
+          setSelectedRowKeys(rowKeys as string[]);
+        },
       }}
       expandable={{
         expandedRowRender: (row: HttpType) => {
@@ -286,7 +292,7 @@ const CoderHTTPList = (props: { json: string }) => {
     <Space className={styles.controller}>
       <Button size="small" type="primary" onClick={() => {
         // 假设list是包含HttpType对象的数组
-        const jmxContent = generateJMeterCode(list);
+        const jmxContent = generateJMeterCode(list.filter((item) => selectedRowKeys.includes(item.id)));
 
         // 创建Blob对象
         const blob = new Blob([jmxContent], { type: 'application/xml' });
