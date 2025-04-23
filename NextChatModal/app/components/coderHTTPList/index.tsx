@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import React, { useMemo } from 'react';
 import { jsonrepair } from 'jsonrepair';
+import { HttpType } from './httpZod';
 
 const CoderHTTPList = (props: { json: string }) => {
   const list = useMemo(() => {
@@ -25,17 +26,21 @@ const CoderHTTPList = (props: { json: string }) => {
       {
         title: 'Name',
         dataIndex: 'name',
+        width: 150,
+        ellipsis: true,
       },
       {
         title: 'Method',
         dataIndex: 'method',
+        width: 90,
+        ellipsis: true,
       },
       {
         title: 'URL',
-        render: (row) => {
-          return 1;
+        render: (row: HttpType) => {
+          return `${row.protocol}${row.hostname}${row.port ? `:${row.port}` : ''}${row.pathname}`;
         },
-      }
+      },
     ]}
     dataSource={list}
   />;
