@@ -138,7 +138,12 @@ export const CN_MASKS: BuiltinMask[] = [
     avatar: "🌐",
     name: "HTTP编码器",
     agentName: "coder_http",
-    context: [],
+    context: [
+      {
+        role: "assistant",
+        content: "向我发送cURL或者任意代码，我将帮你复现请求",
+      },
+    ],
   },
   {
     avatar: "🧭",
