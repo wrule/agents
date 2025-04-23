@@ -1,7 +1,28 @@
-import { Table } from 'antd';
 import React, { useMemo } from 'react';
+import { Table, Tabs } from 'antd';
 import { jsonrepair } from 'jsonrepair';
 import { HttpType } from './httpZod';
+import styles from './index.module.scss';
+
+const { TabPane } = Tabs;
+
+const NameValueTable = (props: { data: [string, string][] }) => {
+  return <Table
+    columns={[
+      {
+        title: 'Name',
+        dataIndex: 0,
+        ellipsis: true,
+      },
+      {
+        title: 'Value',
+        dataIndex: 1,
+        ellipsis: true,
+      }
+    ]}
+    dataSource={props.data}
+  />;
+}
 
 const CoderHTTPList = (props: { json: string }) => {
   const list = useMemo(() => {
@@ -58,6 +79,26 @@ const CoderHTTPList = (props: { json: string }) => {
     dataSource={list}
     rowSelection={{
       type: 'checkbox',
+    }}
+    expandable={{
+      expandedRowRender: (row: HttpType) => {
+        return <Tabs>
+          <TabPane key="Base" tab="Base">
+          </TabPane>
+          <TabPane key="Params" tab="Params">
+            <NameValueTable data={row.queries ?? []} />
+          </TabPane>
+          <TabPane key="Headers" tab="Headers">
+            <NameValueTable data={row.headers ?? []} />
+          </TabPane>
+          <TabPane key="Body" tab="Body"></TabPane>
+          <TabPane key="ResponseHeaders" tab="ResponseHeaders">
+            <NameValueTable data={row.responseHeaders ?? []} />
+          </TabPane>
+          <TabPane key="ResponseBody" tab="ResponseBody"></TabPane>
+        </Tabs>;
+      },
+      expandedRowClassName: styles.expandedRowClassName,
     }}
   />;
 }

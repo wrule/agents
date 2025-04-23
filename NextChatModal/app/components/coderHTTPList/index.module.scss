@@ -1,0 +1,6 @@
+
+.expandedRowClassName {
+  :global(> .ant-table-cell) {
+    padding: 0 0 0 104px!important;
+  }
+}
