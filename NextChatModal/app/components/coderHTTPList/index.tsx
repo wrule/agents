@@ -199,6 +199,8 @@ const NameValueTable = (props: { data: [string, string][] }) => {
 }
 
 const CoderHTTPList = (props: { json: string }) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+
   const list = useMemo(() => {
     try {
       const json = props.json.trim().replace(/^.*?```json|```.*?$/g, '');
@@ -220,8 +222,6 @@ const CoderHTTPList = (props: { json: string }) => {
   if (list.length < 1) {
     return null;
   }
-
-  const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
 
   return <div className={styles.table_wrapper}>
     <Table
