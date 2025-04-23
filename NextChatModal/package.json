@@ -42,6 +42,7 @@
     "heic2any": "^0.0.4",
     "html-to-image": "^1.11.11",
     "idb-keyval": "^6.2.1",
+    "jsonrepair": "^3.12.0",
     "langchain": "^0.3.15",
     "lodash-es": "^4.17.21",
     "markdown-to-txt": "^2.0.1",
