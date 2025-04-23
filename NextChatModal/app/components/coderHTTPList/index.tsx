@@ -42,7 +42,15 @@ const CoderHTTPList = (props: { json: string }) => {
       {
         title: 'URL',
         render: (row: HttpType) => {
-          const url = `${row.protocol || ''}${row.hostname || ''}${row.port ? `:${row.port}` : ''}${row.pathname || ''}`;
+          const url = `${
+            row.protocol || ''
+          }${
+            row.hostname || ''
+          }${
+            row.port != null ? `:${row.port}` : ''
+          }${
+            (row.pathname || '')
+          }`;
           return <a href={url}>{url}</a>;
         },
       },
