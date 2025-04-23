@@ -19,6 +19,10 @@ const CoderHTTPList = (props: { json: string }) => {
     }
   }, [props.json]);
 
+  if (list.length < 1) {
+    return null;
+  }
+
   return <Table
     bordered
     size="small"
@@ -38,11 +42,15 @@ const CoderHTTPList = (props: { json: string }) => {
       {
         title: 'URL',
         render: (row: HttpType) => {
-          return `${row.protocol || ''}${row.hostname || ''}${row.port ? `:${row.port}` : ''}${row.pathname || ''}`;
+          const url = `${row.protocol || ''}${row.hostname || ''}${row.port ? `:${row.port}` : ''}${row.pathname || ''}`;
+          return <a href={url}>{url}</a>;
         },
       },
     ]}
     dataSource={list}
+    rowSelection={{
+      type: 'checkbox',
+    }}
   />;
 }
 
