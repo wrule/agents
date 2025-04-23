@@ -4,6 +4,7 @@ import { jsonrepair } from 'jsonrepair';
 import { HttpType } from './httpZod';
 import styles from './index.module.scss';
 import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
 
 const { TabPane } = Tabs;
 
@@ -301,7 +302,7 @@ const CoderHTTPList = (props: { json: string }) => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `jmeter-test-plan-${new Date().toISOString().slice(0, 10)}.jmx`;
+        link.download = `jmeter-test-plan-${dayjs().format('MM-DD_HH_mm_ss')}.jmx`;
 
         // 模拟点击下载
         document.body.appendChild(link);
