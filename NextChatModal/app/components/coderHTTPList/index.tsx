@@ -3,6 +3,7 @@ import { Table, Tabs } from 'antd';
 import { jsonrepair } from 'jsonrepair';
 import { HttpType } from './httpZod';
 import styles from './index.module.scss';
+import { nanoid } from 'nanoid';
 
 const { TabPane } = Tabs;
 
@@ -31,7 +32,10 @@ const CoderHTTPList = (props: { json: string }) => {
       const repaired = jsonrepair(json);
       const result = JSON.parse(repaired);
       if (Array.isArray(result)) {
-        return result;
+        return result.map((item) => ({
+          ...item,
+          id: nanoid(),
+        }));
       } else {
         return [];
       }
@@ -45,8 +49,10 @@ const CoderHTTPList = (props: { json: string }) => {
   }
 
   return <Table
+    rowKey="id"
     bordered
     size="small"
+    className={styles.table}
     columns={[
       {
         title: 'Name',
@@ -99,6 +105,9 @@ const CoderHTTPList = (props: { json: string }) => {
         </Tabs>;
       },
       expandedRowClassName: styles.expandedRowClassName,
+    }}
+    pagination={{
+      position: ['bottomLeft'],
     }}
   />;
 }

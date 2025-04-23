@@ -4,3 +4,11 @@
 //     padding: 0 0 0 104px!important;
 //   }
 // }
+
+.table {
+  :global {
+    .ant-pagination {
+      margin-bottom: 0px!important;
+    }
+  }
+}
