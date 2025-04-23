@@ -2019,6 +2019,14 @@ function _Chat() {
                             // }}
                           >
                             {(() => {
+
+                              const isHTTP = session.mask.name === 'HTTP编码器' &&
+                                i !== 0 &&
+                                message.role === 'assistant';
+                              if (isHTTP) {
+                                return null;
+                              }
+
                               // const content = (
                               //   getMessageTextContent(message) ?? ""
                               // ).trim();
