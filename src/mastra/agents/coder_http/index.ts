@@ -4,7 +4,7 @@ import { HttpListInstructions } from './httpZod';
 import main from '../../../models/main';
 
 export const coder_http = new Agent({
-  name: 'http编码器',
+  name: 'HTTP编码器',
   instructions: `
 # 你是一个JSON输出程序
 
