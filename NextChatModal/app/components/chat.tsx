@@ -112,6 +112,7 @@ import { SessionJSON } from "./xsea/localJSON";
 import Next from "./next";
 import { nanoid } from "nanoid";
 import { Button, Space } from "antd";
+import CoderHTTPList from "./coderHTTPList";
 
 const localStorage = safeLocalStorage();
 
@@ -2075,6 +2076,12 @@ function _Chat() {
                                 );
                               }
                             })()}
+                            {
+                              session.mask.name === 'HTTP编码器' &&
+                              i !== 0 &&
+                              message.role === 'assistant' &&
+                              <CoderHTTPList json={message.content.toString()} />
+                            }
                             {getMessageImages(message).length == 1 && (
                               <img
                                 className={styles["chat-message-item-image"]}
