@@ -38,7 +38,7 @@ const CoderHTTPList = (props: { json: string }) => {
       {
         title: 'URL',
         render: (row: HttpType) => {
-          return `${row.protocol}${row.hostname}${row.port ? `:${row.port}` : ''}${row.pathname}`;
+          return `${row.protocol || ''}${row.hostname || ''}${row.port ? `:${row.port}` : ''}${row.pathname || ''}`;
         },
       },
     ]}
