@@ -207,9 +207,9 @@ const CoderHTTPList = (props: { json: string }) => {
       const repaired = jsonrepair(json);
       const result = JSON.parse(repaired);
       if (Array.isArray(result)) {
-        return result.map((item) => ({
+        return result.map((item, index) => ({
           ...item,
-          id: nanoid(),
+          id: index.toString(),
         }));
       } else {
         return [];
@@ -291,7 +291,7 @@ const CoderHTTPList = (props: { json: string }) => {
       }}
     />
     <Space className={styles.controller}>
-      <Button size="small" type="primary" onClick={() => {
+      <Button disabled={selectedRowKeys.length < 1} size="small" type="primary" onClick={() => {
         // 假设list是包含HttpType对象的数组
         const jmxContent = generateJMeterCode(list.filter((item) => selectedRowKeys.includes(item.id)));
 
