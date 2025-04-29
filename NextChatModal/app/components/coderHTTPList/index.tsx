@@ -223,6 +223,16 @@ const CoderHTTPList = (props: { json: string }) => {
     return null;
   }
 
+  const postMessage = (msg: any) => {
+    // console.log("postMessage", msg);
+    window.top?.postMessage(msg, "*");
+  };
+
+  const postMarkdown = (text: string) => {
+    localStorage.ai_code = text;
+    postMessage({ type: "code", text });
+  };
+
   return <div className={styles.table_wrapper}>
     <Table
       rowKey="id"
@@ -291,6 +301,12 @@ const CoderHTTPList = (props: { json: string }) => {
       }}
     />
     <Space className={styles.controller}>
+      <Button disabled={selectedRowKeys.length < 1} size="small" onClick={() => {
+                // 假设list是包含HttpType对象的数组
+                const jmxContent = generateJMeterCode(list.filter((item) => selectedRowKeys.includes(item.id)));
+
+        postMarkdown(jmxContent);
+      }}>导出到脚本</Button>
       <Button disabled={selectedRowKeys.length < 1} size="small" type="primary" onClick={() => {
         // 假设list是包含HttpType对象的数组
         const jmxContent = generateJMeterCode(list.filter((item) => selectedRowKeys.includes(item.id)));
@@ -313,7 +329,7 @@ const CoderHTTPList = (props: { json: string }) => {
           document.body.removeChild(link);
           URL.revokeObjectURL(url);
         }, 0);
-      }}>导出JMX</Button>
+      }}>下载JMX</Button>
     </Space>
   </div>;
 }
