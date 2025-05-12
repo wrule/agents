@@ -95,6 +95,7 @@ async function toolExecute<T>(name: string, t: T, callback: (t: T) => Promise<To
   try {
     result = await callback(t);
   } catch (error: any) {
+    console.log('错误消息为', error.message);
     result = {
       success: false,
       prompt: `调用错误消息为：${error.message ?? '未知错误'}，请向用户解释，并引导用户正确操作`,
