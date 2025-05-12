@@ -77,7 +77,7 @@ export const fuzzySearch = async (query: string, type: XSeaType, cookie?: string
     ...item.data,
     score: item.score,
   })) ?? [];
-  // console.log('fuzzySearch', query, type, list);
+  console.log('fuzzySearch', query, type, list);
   return list;
 };
 
