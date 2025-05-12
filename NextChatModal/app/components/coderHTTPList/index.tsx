@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { Button, Space, Table, Tabs } from 'antd';
-import { jsonrepair } from 'jsonrepair';
 import { HttpType } from './httpZod';
 import styles from './index.module.scss';
 import { nanoid } from 'nanoid';
@@ -204,7 +203,7 @@ const CoderHTTPList = (props: { json: string }) => {
   const list = useMemo(() => {
     try {
       const json = props.json.trim().replace(/^.*?```json|```.*?$/g, '');
-      const repaired = jsonrepair(json);
+      const repaired = '[]';
       const result = JSON.parse(repaired);
       if (Array.isArray(result)) {
         return result.map((item, index) => ({
