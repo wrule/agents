@@ -102,6 +102,6 @@ async function toolExecute<T>(name: string, t: T, callback: (t: T) => Promise<To
       prompt: `调用错误消息为：${error.message ?? '未知错误'}，请向用户解释，并引导用户正确操作`,
     };
   }
-  console.log(name, '<-');
+  console.log(name, '<-', result);
   return result;
 }
