@@ -72,6 +72,7 @@ export const exactSearch = async (query: string, type: XSeaType, cookie?: string
 };
 
 export const fuzzySearch = async (query: string, type: XSeaType, cookie?: string) => {
+  console.log('fuzzySearch');
   const { data } = await thttp(cookie).post(`xsea/vector/query`, { type, text: query, topK: 50, filterScore: false, filterMap: { } });
   const list: any[] = data.object?.map((item: any) => ({
     ...item.data,
