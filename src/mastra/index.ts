@@ -24,6 +24,7 @@ import { xwind_agent_v1 } from './agents/xwind_agent_v1';
 import { xsea_agent_v5 } from './agents/xsea_agent_v5';
 import { json_http } from './agents/json_http';
 import { coder_http } from './agents/coder_http';
+import { case_gen } from './agents/case_gen';
 
 export const mastra = new Mastra({
   workflows: { weatherWorkflow },
@@ -48,6 +49,7 @@ export const mastra = new Mastra({
     xsea_guide,
     json_http,
     coder_http,
+    case_gen,
   },
   logger: createLogger({
     name: 'Mastra',
